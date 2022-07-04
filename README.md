@@ -1,38 +1,38 @@
-# Serverless architecture
+# サーバーレス・アーキテクチャ
 
-## This workshop is archived and no longer being maintained.  Content is read-only.
+## このワークショップはアーカイブ済みで、メンテナンスされていません。コンテンツは読み取り専用です。
 
-Contoso is rapidly expanding its toll booth management business to operate in a much larger area. As this is not their primary business, which is online payment services, they are struggling with scaling up to meet the upcoming demand to extract license plate information from many new tollbooths, using photos of vehicles uploaded to cloud storage. Currently, they have a manual process where they send batches of images to a 3rd-party who manually transcodes the license plates to CSV files that they send back to Contoso to upload to their online processing system.
+Contoso社では料金所管理事業を急速に拡大し、より広い地域で事業を展開しつつあります。この事業は、同社の主要事業であるオンライン決済サービスではないため、クラウドストレージにアップロードされた車両の写真を使用して、多くの新しい料金所からナンバープレート情報を抽出するという今後の需要に対応するためのスケールアップに苦労しています。現在、同社は画像のバッチをサードパーティーに送り、サードパーティーが手動でナンバープレートをCSVファイルに変換し、Contosoに送り返し、同社のオンライン処理システムにアップロードするという手動プロセスを取っています。
 
-They want to automate this process in a way that is cost-effective and scalable. They believe serverless is the best route for them but do not have the expertise to build the solution.
+彼らは、コスト効率と拡張性の高い方法でこのプロセスを自動化したいと考えています。サーバーレスが最適だと考えていますが、ソリューションを構築するための専門知識は持っていません。
 
-November 2021
+2021年11月
 
-## Target Audience
+## 対象の読者
 
-Application developers
+アプリケーション開発者
 
-## Abstracts
+## 要旨
 
-### Workshop
+### ワークショップ
 
-In this workshop, you learn about setting up and configuring a serverless architecture within Azure using a combination of Azure Functions, Azure Logic Apps, Azure Event Grid, Azure Cosmos DB, and Azure Data Lake Storage. The focus is on removing server management from the equation, breaking down the solution into smaller components that are individually scalable, and allowing the customer to only pay for what they use.
+このワークショップでは、Azure Functions、Azure Logic Apps、Azure Event Grid、Azure Cosmos DB、およびAzure Data Lake Storageを組み合わせて使用するAzure内のサーバーレスアーキテクチャのセットアップと構成について学習します。このワークショップでの注力ポイントは、プラットフォームからサーバー管理を取り除き、ソリューションを個別に拡張可能な小さなコンポーネントに分解し、顧客が使用した分だけを支払うことを可能にすることです。
 
-At the end of this workshop, you will be able to break business logic down into discrete components that can independently scale and leverage vision algorithms to detect objects and extract text.  You’ll know how to utilize Cosmos DB as a highly available NoSQL data store, build workflows using Azure Logic Apps, and conditionally send alerts based on operations.  Finally, you’ll have the knowledge to monitor a serverless topology and implement a Continuous Deployment DevOps process to publish changes automatically.
+このワークショップの終わりには、ビジネスロジックを独立して拡張可能な個別のコンポーネントに分解し、画像アルゴリズムを活用してオブジェクトを検出し、テキストを抽出することができるようになります。 Cosmos DBを高可用性NoSQLデータストアとして活用し、Azure Logic Appsを使ってワークフローを構築し、操作に基づき、条件にあわせてアラートを送信する方法を知ることができます。 最後に、サーバーレスのトポロジーを監視し、変更を自動的に公開するための継続的デプロイメントのDevOpsプロセスを実装するための知識を得ることができます。
 
-### Whiteboard Design Session
+### ホワイトボードデザインセッション
 
-In this whiteboard design session, you work with a group to design a solution for processing vehicle photos in near real-time, as they are uploaded to a data lake, using serverless technologies on Azure. The license plate data must be extracted and stored in a highly available NoSQL data store for exporting. The data export process is orchestrated by a serverless Azure component that coordinates exporting new license plate data to file storage and sending notifications as needed. You will also configure a Continuous Deployment process to publish new changes to Function Apps automatically. Finally, the entire processing pipeline will need to be monitored, with particular attention paid to components scaling to meet processing demand.
+このホワイトボードデザインセッションでは、Azure上のサーバーレス技術を使用して、データレイクにアップロードされる車両写真をほぼリアルタイムで処理するソリューションをグループで設計します。ナンバープレートデータを取り出し、エクスポート目的で高可用性NoSQLデータストアに格納する必要があります。データエクスポートのプロセスは、新しいナンバープレートデータをファイルストレージにエクスポートし、必要に応じて通知を送信することを調整するサーバーレスAzureコンポーネントがオーケストレーションします。また、Function Apps に新しい変更を自動的に発行するための Continuous Deployment (CD) プロセスを構成します。最後に、処理パイプライン全体を監視し、特に、処理需要に応じたコンポーネントのスケーリングに注意を払う必要があります。
 
-At the end of this whiteboard design session, you will have greater insight into how best to take advantage of serverless architectures. You will understand better how to design highly scalable and cost-effective solutions that require very little code and virtually no infrastructure compared to traditional hosted web applications and services.
+このホワイトボードデザインセッションが終わると、サーバーレスアーキテクチャを活用する最善の方法について、より深い洞察を得ることができます。従来のホスト型 Web アプリケーションやサービスと比較して、わずかなコードと事実上ゼロのインフラで済む、拡張性とコスト効果の高いソリューションを設計する方法をより深く理解できるようになります。
 
-### Hands-on Lab
+### ハンズオン
 
-In this hands-on lab, you implement an end-to-end solution using a supplied sample based on Microsoft Azure Functions, Azure Cosmos DB, Azure Event Grid, and related services. The scenario will include implementing compute, storage, workflows, and monitoring using various components of Microsoft Azure. You can implement the hands-on lab on your own. However, it is highly recommended to pair up with other members at the lab to model a real-world experience and to allow each member to share their expertise for the overall solution.
+このハンズオンでは、Microsoft Azure Functions、Azure Cosmos DB、Azure Event Grid、および関連サービスをベースにしたサンプルが提供されていますので、これらを使用してエンドツーエンドのソリューションを実装します。シナリオでは、Microsoft Azure のさまざまなコンポーネントを使用して、VM、ストレージ、ワークフロー、監視を実装します。ハンズオンは、各自で実施できますが、実体験をモデル化し、ソリューション全体のために各メンバーが専門知識を共有するために、他のメンバーとペアを組んで実施されることを強くお勧めします。
 
-At the end of the hands-on-lab, you will have confidence in designing, developing, and monitoring a serverless solution that is resilient, scalable, and cost-effective.
+ハンズオンが終了すると、弾力性、拡張性、コスト効率に優れたサーバーレスソリューションの設計、開発、監視に自信を持つことができます。
 
-## Azure services and related products
+## Azureサービスや関連製品
 
 - [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview)
 - [Azure Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/what-are-cognitive-services)
@@ -44,26 +44,26 @@ At the end of the hands-on-lab, you will have confidence in designing, developin
 - [Azure Logic Apps](https://docs.microsoft.com/azure/logic-apps/logic-apps-overview)
 - [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
 
-## Azure solution
+## Azureソリューション
 
 Cloud-Native Apps
 
-## Related references, resources, and material
+## 参考情報
 
-- [Serverless Web Application Reference Architecture](https://docs.microsoft.com/azure/architecture/reference-architectures/serverless/web-app)
-- [Serverless event processing using Azure Functions Reference Architecture](https://docs.microsoft.com/azure/architecture/reference-architectures/serverless/event-processing)
+- [サーバーレス Web アプリケーション 参照アーキテクチャ](https://docs.microsoft.com/azure/architecture/reference-architectures/serverless/web-app)
+- [サーバーレスなイベント処理](https://docs.microsoft.com/azure/architecture/reference-architectures/serverless/event-processing)
 - [MCW](https://microsoftcloudworkshop.com/)
 
-## Help & Support
+## サポート
 
-We welcome feedback and comments from Microsoft SMEs & learning partners who deliver MCWs.
+MCW (Microsoft Cloud Workshop) を配信するMicrosoftのSME (Subject Matter Expert) ならびにラーニングパートナーの皆様からのご意見、ご感想をお待ちしております。
 
-**_Having trouble?_**
+**_トラブル時は_**
 
-- First, verify you have followed all written lab instructions (including the Before the Hands-on lab document).
-- Next, submit an issue with a detailed description of the problem.
-- Do not submit pull requests. Our content authors will make all changes and submit pull requests for approval.
+- まず、記載のすべてのハンズオンの指示 (「実習の前に」のドキュメントを含む) に従っていることを確認します。
+- 続いて、問題の詳細を記述したIssueを送信してください。
+- プルリクエストは出さないでください。コンテンツ作成者がすべての変更を行い、プルリクエストを出し、承認を得る流れです。
 
-If you are planning to present a workshop, _review and test the materials early_! We recommend at least two weeks prior.
+ワークショップの開催を予定している場合は、_早めに資料のレビューとテストを行ってください_。 少なくとも2週間前を推奨します。
 
-### Please allow 5 - 10 business days for review and resolution of issues.
+### Issueのレビューと解決には5～10営業日ほど要します。
