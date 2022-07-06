@@ -1,255 +1,249 @@
 ![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/main/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
-Serverless architecture
+サーバーレス・アーキテクチャ
 </div>
 
 <div class="MCWHeader2">
-Whiteboard design session student guide
+ホワイトボード・デザインセッション ガイド（ワークショップ参加者向け）
 </div>
 
 <div class="MCWHeader3">
-November 2021
+2021年11月
 </div>
 
-Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
+本書に記載されている情報は、URLやその他のインターネット上のウェブサイトを含め、予告なく変更されることがあります。特に断りのない限り、ここに記載されている会社、組織、製品、ドメイン名、電子メールアドレス、ロゴ、人物、場所、イベントの例は架空のものであり、実在の会社、組織、製品、ドメイン名、電子メールアドレス、ロゴ、人物、場所、イベントとの関連を意図したり推論したりするものではありません。適用されるすべての著作権法を遵守することは、ユーザーの責任です。著作権に基づく権利を制限することなく、マイクロソフトの書面による明示的な許可がない限り、本書のいかなる部分も、いかなる形式または手段 (電子的、機械的、複写、記録、その他) で、あるいはいかなる目的においても、複製、検索システムへの保存または導入、転送することを禁じます。
 
-Microsoft may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. Except as expressly provided in any written license agreement from Microsoft, the furnishing of this document does not give you any license to these patents, trademarks, copyrights, or other intellectual property.
+マイクロソフトは、本書の主題を対象とする特許、特許出願、商標、著作権、またはその他の知的財産権を有している場合があります。マイクロソフトの書面によるライセンス契約において明示的に規定されている場合を除き、本書の提供は、これらの特許、商標、著作権、またはその他の知的財産に対するいかなるライセンスもお客様に与えるものではありません。
 
-The names of manufacturers, products, or URLs are provided for informational purposes only, and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third-party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
+メーカー名、製品名、URL は情報提供のみを目的としており、マイクロソフトは、これらのメーカーまたはマイクロソフトのテクノロジーによる製品の使用に関して、明示的、黙示的、法定的を問わず、いかなる表明および保証も行いません。メーカーや製品を掲載することは、マイクロソフトがそのメーカーや製品を推奨していることを意味するものではありません。また、第三者のサイトへのリンクが張られていることがあります。そのようなサイトはマイクロソフトの管理下にはなく、マイクロソフトは、リンク先のサイトのコンテンツ、リンク先のサイトに含まれるリンク、またはそのようなサイトの変更もしくは更新について、一切の責任を負いません。マイクロソフトは、リンク先サイトから受信するウェブキャスティングまたはその他の形式の伝送について責任を負いません。マイクロソフトは、これらのリンクをお客様の便宜のためにのみ提供しており、リンクを掲載することは、マイクロソフトが当該サイトまたはそこに含まれる製品を推奨していることを意味するものではありません。
 
 © 2021 Microsoft Corporation. All rights reserved.
 
-Microsoft and the trademarks listed at <https://www.microsoft.com/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are the property of their respective owners.
+マイクロソフトと <https://www.microsoft.com/legal/intellectualproperty/Trademarks/Usage/General.aspx> に記載の商標は、マイクロソフトグループの商標です。その他の商標は各所有者に帰属します。
 
 **Contents**
 
 <!-- TOC -->
 
-- [Serverless architecture whiteboard design session student guide](#serverless-architecture-whiteboard-design-session-student-guide)
-  - [Abstract and learning objectives](#abstract-and-learning-objectives)
-  - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
-    - [Customer situation](#customer-situation)
-    - [Customer needs](#customer-needs)
-    - [Customer objections](#customer-objections)
-    - [Infographic for common scenarios](#infographic-for-common-scenarios)
-  - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
-  - [Step 3: Present the solution](#step-3-present-the-solution)
-  - [Wrap-up](#wrap-up)
-  - [Additional references](#additional-references)
+- [サーバーレス・アーキテクチャ ホワイトボード・デザインセッション ガイド](#サーバーレス・アーキテクチャ-ホワイトボード・デザインセッション-ガイド)
+  - [要旨ならびに学習の目的](#要旨ならびに学習の目的)
+  - [Step 1: ケーススタディのレビュー](#step-1-ケーススタディのレビュー)
+    - [顧客の状況](#顧客の状況)
+    - [顧客のニーズ](#顧客のニーズ)
+    - [顧客からの反論](#顧客からの反論)
+    - [よくあるシナリオの図示](#よくあるシナリオの図示)
+  - [Step 2: PoCソリューションの設計](#step-2-PoCソリューションの設計)
+  - [Step 3: ソリューションの提示](#step-3-ソリューションの提示)
+  - [まとめ](#まとめ)
+  - [参考情報](#参考情報)
 
 <!-- /TOC -->
+# サーバーレス・アーキテクチャ ホワイトボード・デザインセッション ガイド
 
-# Serverless architecture whiteboard design session student guide
+## 要旨ならびに学習の目的
 
-## Abstract and learning objectives
+このホワイトボード・デザインセッションでは、Azureのサーバーレス・テクノロジーを使用して、データレイクにアップロードされる車両写真をほぼリアルタイムで処理するソリューションをグループで設計します。ナンバープレートデータを取り出し、エクスポート目的で高可用性NoSQLデータストアに格納する必要があります。データエクスポートのプロセスは、新しいナンバープレートデータをファイルストレージにエクスポートし、必要に応じて通知を送信することを調整するサーバーレスAzureコンポーネントがオーケストレーションします。また、Function Apps に新しい変更を自動的に発行するための Continuous Deployment (CD) プロセスを構成します。最後に、処理パイプライン全体を監視し、特に、処理需要に応じたコンポーネントのスケーリングに注意を払う必要があります。
 
-In this whiteboard design session, you work with a group to design a solution for processing vehicle photos in near real-time, as they are uploaded to a data lake, using serverless technologies on Azure. The license plate data must be extracted and stored in a highly available NoSQL data store for exporting. The data export process is orchestrated by a serverless Azure component that coordinates exporting new license plate data to file storage and sending notifications as needed. You will also configure a Continuous Deployment process to publish new changes to Function Apps automatically. Finally, the entire processing pipeline will need to be monitored, with particular attention paid to components scaling to meet processing demand.
+このホワイトボード・デザインセッションが終了すると、サーバーレスアーキテクチャを活用する最善の方法について、より深い洞察を得ることができます。従来のホスト型 Web アプリケーションやサービスと比較して、わずかなコードと実質的にゼロのインフラで、拡張性とコスト効率に優れたソリューションを設計する方法をより深く理解することができます。
 
-At the end of this whiteboard design session, you will have greater insight into how best to take advantage of serverless architectures. You will understand better how to design highly scalable and cost-effective solutions that require very little code and virtually no infrastructure compared to traditional hosted web applications and services.
-
-## Step 1: Review the customer case study
+## Step 1: ケーススタディのレビュー
 
 **Outcome**
 
-Analyze your customer's needs.
+顧客ニーズの分析　(約15分)
 
-Timeframe: 15 minutes
+セッションの全参加者を集め、ファシリテーター/SMEがケーススタディの概要と技術的なヒントを紹介します。
 
-Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
+1. チームメンバーやトレーナーとの顔合わせ
 
-1. Meet your team members and trainer.
+2. 学習者用ガイドのStep 1～3を読んでおく
 
-2. Read all directions for steps 1-3 in the student guide.
+3. チームで以下のケーススタディを検討する
 
-3. As a team, review the following customer case study.
+### 顧客の状況
 
-### Customer situation
+Contoso Ltd.は2011年にテキサス州ヒューストンで設立され、多くの顧客にカスタムソフトウェア開発ソリューションを提供しています。カスタムソフトウェア開発に加え、Eコマースから医療・金融サービスまで、いくつかの業界向けの請求・決済ソフトウェアスイートを開発しています。最近、新たな市場機会として有料道路のブース管理を追加し、ホームオフィスの近くで車両追跡と料金請求の処理を行うようになりました。この新しいビジネスベンチャーは、Contosoの課金サービスのポートフォリオに追加されたマイナーなものであったため、カスタムビルドの料金所ソフトウェアスイートの車両処理部分に大きなリソースを割いていません。このソフトウェア群の中で最も機能が豊富なのは、既存の支払い管理システムで、管理対象の料金所を通過後にドライバーに請求書を送るように拡張されています。請求書には、タイムスタンプ、料金所の場所、料金所を通過したときの車両の写真が含まれています。
 
-Contoso Ltd. was founded in 2011 in Houston, Texas, and provides custom software development solutions for many clients. In addition to custom software development, they have also developed a financial billing and payment suite of software aimed at several vertical markets, from e-commerce to medical and financial services. They have recently added toll road booth management as a new market opportunity to handle vehicle tracking and toll billing near their home office. Since this new business venture was a minor addition to their impressive billing services portfolio, they have not dedicated significant resources to the vehicle processing portion of their custom-built TollBooth software suite. The most feature-rich component of this software suite is their existing payment management system that has been expanded to send bills to drivers after passing through any number of the managed toll booths. The bill includes a date/time stamp, toll booth location, and a photo of the vehicle as it passed through the booth.
+Contosoは、わずかな数のローカル料金所を処理するTollBoothソフトウェアのためにわずかなリソースを割り当てていたため、ナンバープレートを識別し、そのデータを課金ソフトウェアに送信するために手動プロセスを使用していました。車両が料金所を通過する際、中解像度の画像を撮影してナンバープレート番号と文字を特定し、Contosoは最終的にそれを使って顧客を調べ、請求書を作成します。Contosoは、この画像を定期的にパッケージ化してサードパーティベンダーに送り、ベンダーが手作業でナンバープレートを特定し、そのリストをContosoに送り返します。この時点で、Contosoは1,000件のトランザクションを一括して収集し、FTPサーバーでホストされているCSVファイルに情報を保存し、下流の会計システムがナンバープレート情報を抽出し、顧客に請求書を発行しています。
 
-Because Contoso applied so few resources to the TollBooth software, which handles just a handful of local toll booths, they have been using a manual process to identify license plates and send that data to their billing software. As a vehicle passes through a toll booth, a medium resolution image is taken to determine its license plate numbers/characters, which Contoso ultimately uses to look up and bill the customer. They periodically package and send those images to a third-party vendor, who manually identifies the license plate numbers and sends the list back to Contoso when they are done. At this point, Contoso collects batches of 1,000 transactions, saves the information to a CSV file hosted by an FTP server, where their downstream accounting system extracts the license plate information and bills the customer.
+Contosoは最近、テキサス州全域の料金所を管理するという予想外の大型契約を獲得し、その結果、カバー率が2500%にまで広がりました。さらに、オクラホマ州、ニューメキシコ州でも料金所サービスを提供する方向で交渉中です。このような急成長によるメリットは明らかですが、同社はそれに伴う需要に応えられないことを懸念しています。同社の課金ソフトウェアは当初から開発の中心であり、他の市場にも進出し、大規模なトランザクションやデータ処理に対応できることを証明してきました。しかし、Contoso社は、TollBoothインフラのナンバープレート処理部分をどれだけ迅速に自動化できるか、また、自動化されたソリューションが需要に応じて拡張できるか、特に予期せぬトラフィック急増時に対応できるかを懸念しています。
 
-Contoso has recently been awarded a large but unexpected contract to manage toll booths across most of the state of Texas, resulting in a 2500% increase in coverage. Additionally, it is in talks with Oklahoma and New Mexico to provide toll booth services in those states. Despite the obvious benefits of such rapid growth, the company is concerned that it will be unable to meet the demand that comes with it. They are confident that their billing software can handle the load, as it has been the primary focus of development from the start and has expanded into other markets, proving its ability to handle large-scale transactions and data processing. However, Contoso is concerned about how rapidly they can automate the license plate processing portion of their TollBooth infrastructure while ensuring that the automated solution can scale to meet demand, particularly during unexpected traffic spikes.
+Contoso Ltd.のCIOであるAbby Burrisはこのように言っています。
 
-"What we need is a lightweight, powerful method that quickly pulls in vehicle photos as they are uploaded and intelligently detect the license plate numbers, all while efficiently handling spikes in traffic," says Abby Burris, CIO, Contoso Ltd. "Most importantly, we do not want to manage long-lived application instances. We want to minimize our cost during slow traffic periods and need something our developers can quickly integrate into our existing infrastructure without a lot of training. Our primary goal is to rapidly replace this manual processing pipeline while continuing to devote our development resources to our core billing platform services."
+__「私たちが必要としているのは、アップロードされた車両の写真を素早く取り込み、ナンバープレートをインテリジェントに検出する軽量で強力な方法です。最も重要なことは、長期間のアプリケーションインスタンスを管理したくないということです。また、開発者がトレーニングを受けることなく、既存のインフラに迅速に統合できるものが必要です。私たちの第一の目標は、この手動処理パイプラインを迅速に置き換える一方で、課金プラットフォームのコアサービスに開発リソースを割き続けることです。」__
 
-Abby says that she has been following the relatively new serverless computing movement and believes that serverless architecture's benefits bring a good match for what they hope to achieve in this project. The fewer infrastructure responsibilities for the already maxed out IT team, the better. However, she is unsure whether it is possible to locally develop the serverless components and automate the deployment process using CI/CD DevOps practices like they can with their more traditional web applications.
+Abbyは、比較的新しいサーバーレス・コンピューティングの動きを追っており、サーバーレス・アーキテクチャの利点は、このプロジェクトで実現したいことにマッチしていると考えているようです。すでに最大限の能力を発揮しているITチームにとって、インフラのお守りの責任は少ないほど良いのです。しかし、従来のWebアプリケーションのように、サーバーレスコンポーネントをローカルで開発し、CI/CD DevOpsの手法でデプロイプロセスを自動化することが可能かどうかはわかっていないようです。
 
-Contoso does not have any machine learning experts or data scientists on staff, so they want to understand better their options for using a ready-made machine learning service to perform license plate recognition tasks on images. They prefer this route rather than teaching their staff to create and train advanced machine learning models properly and then incurring the cost of hosting a machine learning service to conduct this single task.
+Contoso には機械学習の専門家やデータサイエンティストがいないため、既製の機械学習サービスを使用して画像上でナンバープレート認識タスクを実行する選択肢について、よりよく理解したいと考えています。高度な機械学習モデルを適切に作成・訓練するようスタッフに教え、この単一タスクのために機械学習サービスのホスティングコストを負担するよりも、この方法を希望しているのです。
 
-Contoso wants to store captured vehicle photos in cloud storage for retrieval via custom web and mobile applications. These photos will need to be accessible by the downstream billing service for inclusion on customer bills. Any images containing license plates that the ready-made machine learning service cannot automatically detect will need to be marked as such and accessed later on for manual validation. Similarly, as photos are successfully processed for license plate detection, the plate information needs to be saved to a database, along with the capture date/time and toll booth Id. Contoso has a customer service department that can monitor the queue of photos marked for manual validation and enter the license plates into a web-based form to be exported along with the automatically processed license plate data.
+Contosoは、撮影した車両の写真をクラウドストレージに保存し、カスタムのウェブアプリケーションやモバイルアプリケーションから検索できるようにしたいと考えています。これらの写真は、顧客の請求書に記載するために、下流の課金サービスからアクセスできる必要があります。機械学習サービスで自動検出できないナンバープレートを含む画像は、そのようにマークしておき、後でアクセスして手動で確認する必要があります。同様に、写真のナンバープレート検出が成功すると、ナンバープレート情報を撮影日時、料金所IDとともにデータベースに保存する必要があります。Contosoにはカスタマーサービス部門があり、手動検証用にマークされた写真のキューを監視し、ナンバープレートをウェブベースのフォームに入力して、自動処理されたナンバープレートデータと一緒にエクスポートすることができます。
 
-The process to export license plate data also needs to be automated. Contoso would like an automated workflow that runs on a scheduled interval to extract new license plate data received since the last export and save it into a CSV file that gets ingested by the billing software. They already have the CSV ingestion process automated, so no changes are required beyond saving the file. Their FTP server would need to be modified to point to the cloud storage container instead of its local file system, which is a simple process that is out of scope for the automation task. The export interval should be set to one hour but provide the flexibility to increase or decrease the period as needed. This interval is based on the automated file ingestion process used by the billing system.
+ナンバープレートデータをエクスポートするプロセスも自動化する必要があります。Contosoは、前回のエクスポート以後に受信した新しいナンバープレートデータを抽出し、課金ソフトウェアに取り込まれるCSVファイルに保存するために、スケジュールされた間隔で実行される自動ワークフローを希望しています。彼らはすでにCSV取り込みプロセスを自動化しているため、ファイルを保存する以上の変更は必要ありません。FTPサーバーは、ローカルファイルシステムではなく、クラウドストレージコンテナを指すように変更する必要がありますが、これは自動化タスクの範囲外の簡単な処理です。エクスポート間隔は1時間に設定する必要がありますが、必要に応じて期間を延長したり短縮したりできるようにします。この時間間隔は、課金システムで使用される自動ファイル取り込みプロセスに基づいています。
 
-Customer service has requested that an alert email be sent to a specific monitoring address if, at any point, the automated export does not complete due to no data. Given the export interval and the average number of vehicles that pass through the toll booths during any given hour, having no data to export would be the exception, not the rule. The alert would provide them with the peace of mind that they could go through internal support channels to investigate the license processing pipeline to address any issues promptly, without being inundated by too many unnecessary alert notifications. They are using Office 365 for their email services.
+カスタマー・サービスは、データがないために自動エクスポートが完了しない場合、特定の監視用アドレスに警告メールを送信するよう要請しています。エクスポートの間隔と、1時間に料金所を通過する車の平均台数を考えると、エクスポートするデータがないのは例外的なことで、ルールではありません。このアラートによって、不要なアラート通知に煩わされることなく、社内のサポートチャネルを通じてライセンス処理パイプラインを調査し、問題があれば迅速に対処できるという安心感を得ることができるでしょう。メールサービスにはOffice 365を利用しています。
 
-In addition to the email alert notifications, Contoso would like to have a centralized monitoring dashboard to watch the automated process in real-time and drill down into historical telemetry later on if needed. This dashboard will help them keep an eye on the various Azure components, watching for any bottlenecks or weak points in their overall solution. The monitoring dashboard should also allow them to add custom alert notifications to IT staff if anything goes wrong.
+電子メールによるアラート通知に加えて、Contoso社は、自動化されたプロセスをリアルタイムで監視し、必要に応じて過去のテレメトリのドリルダウンのための集中監視ダッシュボードを持つことを希望しています。このダッシュボードは、Azureのさまざまなコンポーネントを監視し、ソリューション全体のボトルネックや弱点がないかを確認するために役立ちます。また、監視ダッシュボードには、何か問題が発生した場合にITスタッフに通知するためのカスタムアラートを追加できるようにする必要があります。
 
-"Our directors want to explore where we can take the notion of a serverless architecture and see if there truly are long-term performance and cost benefits," says Burris. "With the unexpected windfall of the toll booths contract, they want to make sure we have a tested strategy we can fall back on in the future when our IT and development teams are called upon once again to achieve the impossible."
+Burris氏は以下のように述べています。
+__「当社の役員は、サーバーレスアーキテクチャの概念を取り入れ、本当に長期的なパフォーマンスとコストのメリットがあるかどうかを確認したいと考えています。有料道路料金所の契約という予期せぬ利益を得たことで、将来的にITと開発チームが再び不可能を可能にするよう求められたときに、頼れるテスト済みの戦略があることを確認したいのです」__
 
-As a stretch goal, Contoso would like to know that the license processing pipeline they have implemented is extensible to any number of future scenarios that are made possible once a license plate has been successfully processed. One scenario they have in mind is how the pipeline could support more advanced analytics. Contoso is looking for the capability to process data in a streaming fashion and process historical license plate capture events in a batch fashion (e.g., that could scale to analyze the historical data in the 10's of terabytes). They are curious if these analytic scenarios could also be implemented using a serverless architecture.
+Contoso社は、ストレッチゴールとして、彼らが実装した免許証処理パイプラインが、ナンバープレートの処理に成功した時点で可能となる将来のシナリオに拡張可能であることを知りたいと考えています。彼らが考えているシナリオの1つは、パイプラインがより高度な分析をサポートする方法です。Contosoは、ストリーミングでデータを処理し、バッチで過去のナンバープレート捕捉イベントを処理する機能を求めています（例えば、10テラバイト単位の過去のデータを分析できるようなスケーラビリティを持つもの）。これらの分析シナリオを、サーバーレスアーキテクチャを使用して実装できるかどうかに興味があります。
 
-### Customer needs
+### 顧客のニーズ
 
-1. Replace its manual process with a reliable, automated solution using serverless components.
+1. 手作業のプロセスをサーバーレスコンポーネントを使う信頼性のある自動化ソリューションに置き換えたい
 
-2. Take advantage of a machine learning service that would accurately detect license plate numbers without needing artificial intelligence expertise.
+2. 正確にナンバープレートを読み取る、AIの訓練が不要な機械学習サービスを使いたい
 
-3. Provide a mechanism to manually enter license plate data from images that failed processing with the automated system.
+3. 自動化システムで処理に失敗した画像に対して、手作業でナンバープレートデータを入力できるようにしたい
 
-4. Have a solution that can scale to any number of cars that pass through all toll booths, handling unforeseen traffic conditions that cause unexpected spikes in processed images.
+4. 画像処理に予期せぬスパイクが発生するような予測できない交通状況にも耐えるよう、すべての料金所を通過する無数の車にスケール可能なソリューションであってほしい
 
-5. Establish an automated workflow that periodically exports processed license plate data on a regular interval and sends an alert email when no items are exported.
+5. 定期的に処理済みライセンスプレートデータをエクスポートする自動化ワークフローを確立し、エクスポートデータがゼロ件の場合にアラートを発行できるようにしたい
 
-6. Would like to develop the serverless components locally and establish an automated deployment pipeline from source control.
+6. サーバーレスコンポーネントをローカルで開発し、ソース管理システムからの自動化されたデプロイメントパイプラインを確立したい
 
-7. Use a monitoring dashboard that can provide a real-time view of serverless components, historical telemetry data for deeper analysis and supports custom alerts.
+7. サーバーレスコンポーネントやより深い分析のための履歴テレメトリデータのリアルタイムビューを提供し、カスタムアラートをサポートする監視ダッシュボードを使いたい
 
-8. Design an extensible solution that could support serverless batch and real-time analytics, as well as other scenarios in the future.
+8. サーバーレスバッチ分析やリアルタイム分析、将来はその他のシナリオもサポートする、拡張性のあるソリューションを設計したい
 
-### Customer objections
+### 顧客からの懸念・異論・反論
 
-1. We are concerned about how individual serverless components will be able to "talk" to each other and reliably pass messages through the pipeline.
+1. 個々のサーバーレスコンポーネントがどのように互いに「会話」し、パイプラインを通じて確実にメッセージを受け渡すことができるかを懸念しています。
 
-2. Will a serverless architecture that can infinitely scale put us at risk for substantial monthly bills?
+2. 無限に拡張できるサーバーレスアーキテクチャは、私たちに毎月の多額の請求のリスクをもたらすのでしょうか？
 
-3. How do we make sure that erroneous image processing does not make specific toll bills fall through the cracks or, even worse, send an invoice to the wrong person?
+3. 誤った画像処理によって、特定の有料道路の請求書が漏れてしまったり、最悪の場合、間違った相手に請求書を送ってしまったりしないようにするには、どうすればよいでしょうか？
 
-4. We are considering creating an API to allow our customers to retrieve information about their bills and photos that captured their vehicle but are concerned about unauthorized access and the possibility of a denial of service attack due to an excessive number of requests. Is there an Azure service that would enable us to implement a secure API that we can also monitor and manage, protecting our APIs from unauthorized access and excessive requests?
+4. 請求書に関する情報や車両を撮影した写真を取得できるお客様用APIの作成を検討していますが、不正なアクセスや過剰なリクエストによるサービス拒否攻撃の可能性が懸念されます。不正アクセスや過剰なリクエストからAPIを守る、監視や管理もできるセキュアなAPIを実装できるAzureのサービスはないでしょうか。
 
-5. What is our best option to protect application secrets, such as connection strings, from being viewed by unauthorized users in the portal?
+5. 接続文字列などのアプリケーションの機密情報を、ポータルで権限のないユーザーに見られないようにするには、どのような方法がありますか？
 
-6. There appears to be some functional overlap between Azure Functions and Logic Apps. Can you help us to understand better when to use each and for what?
+6. Azure FunctionsとLogic Appsの間に機能的な重複があるように見えます。それぞれをどのような用途で使用すればよいのでしょうか。
 
-7. During our research on serverless architectures, we have read about the possibility of increased latency due to cold starts. Will this be an issue with Azure Functions?
+7. サーバーレスアーキテクチャについて調べていると、コールドスタートによるレイテンシーの増加の可能性があることがわかりました。これはAzure Functionsで問題になりますか。
 
-### Infographic for common scenarios
+### よくあるシナリオの図示
 
 ![The Common Scenario diagram begins with an Internet icon on the left. Arrows point from this icon to an Azure Data Lake Storage (ADLS) Gen2 icon and an Azure API Management icon. The ADLS Gen2 icon points to an Azure Functions icon, which points to a second Azure Functions icon (via an Event Grid arrow) and a second ADLS Gen2 icon. This ADLS Gen2 icon then points and ends at a Logic Apps icon. The Azure API Management icon points to two separate Azure Functions icons, which point to an Azure Cosmos DB icon. The Azure Cosmos DB icon then points to and ends at a Power BI icon.](media/common-scenarios.png 'Common Scenario diagram')
 
-## Step 2: Design a proof of concept solution
+## Step 2: PoCソリューションの設計
 
 **Outcome**
 
-Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
-
-Timeframe: 60 minutes
+ソリューションを設計し、15分間のチョークトーク形式でターゲットとなる顧客層に発表するための準備をしてください (60分)。
 
 **Business needs**
 
-Directions: With your team, answer the following questions and be prepared to present your solution to others:
+Directions: チームで、以下の質問に答え、自分の解決策を他の人に発表する準備をしてください。
 
-1. Who will you present this solution to? Who is your target customer audience? Who are the decision makers?
+1. このソリューションを誰に紹介しますか？対象となる顧客は誰ですか？意思決定者は誰ですか？
 
-2. What customer business needs do you need to address with your solution?
+2. そのソリューションで解決すべき顧客のビジネスニーズは何か？
 
 **Design**
 
-Directions: With your team, respond to the following questions:
+Directions: チームで、以下の質問に答えてください。
 
-_High-level architecture_
+_ハイレベルアーキテクチャ_
 
-1. Without getting into the details (the following sections will address these), diagram your initial vision for handling the top-level requirements for the license plate processing serverless components, OCR capabilities, data export workflow, and monitoring plus DevOps.
+1. 詳細には触れませんが（次のセクションで説明します）、ナンバープレート処理のサーバーレスコンポーネント、OCR機能、データエクスポートワークフロー、監視とDevOpsに関するトップレベルの要件を処理するための最初のビジョンを図にします。
 
-_License plate processing serverless components_
+_ナンバープレート・サーバーレスコンポーネント_
 
-1. Which Azure messaging service would you recommend using to orchestrate event-driven activities between the serverless components?
+1. サーバーレスコンポーネント間のイベント駆動型アクティビティをオーケストレーションするために、どのAzureメッセージングサービスの使用を推奨しますか？
 
-2. What Azure service would you suggest Contoso use to execute custom business logic code when an event is triggered?
+2. イベントトリガー時にカスタムビジネスロジックコードを実行するために、Contosoが使用することを推奨するAzureサービスは何ですか？
 
-3. Which pricing tier for the service would you recommend that would automatically scale to handle demand while charging only for work performed?
+3. 実行された作業に対してのみ課金し、需要に対応するために自動的に拡張するサービスで、どの価格体系 (Pricing Tier) を推奨しますか？
 
-4. How do you ensure that downstream components, such as machine learning APIs, databases, and file stores, are not overloaded by the potential high load created when your serverless components dynamically scale?
+4. サーバーレスコンポーネントが動的に拡張することで高負荷になる場合があります。その際、機械学習API、データベース、ファイルストアなどの下流コンポーネントが過負荷にならないようにするには、どうすればよいでしょうか。
 
-5. What Azure service would you recommend for storing the license plate data? Consider options that automatically scale to meet demand and offer bindings to other serverless components that simplify connecting to and storing data within the data store.
+5. ナンバープレートデータの保存には、どのようなAzureサービスを推奨しますか？需要に応じて自動的にスケールし、他のサーバーレスコンポーネントとのバインディングを提供し、データストアへの接続とデータ保存を簡素化するオプションを検討してください。
 
-_License plate OCR_
+_ナンバープレートOCR_
 
-1. What service would you recommend Contoso use to conduct object character recognition (OCR) processing to extract the license plate number from each photo as it enters the system?
+1. Contosoがオブジェクト文字認識 (OCR) 処理を行い、システムに入る各写真からナンバープレートを抽出するために、どのようなサービスを使用することを推奨しますか？
 
-2. How would you integrate the OCR service into your license plate processing flow?
+2. OCRサービスをナンバープレート処理フローにどのように統合しますか？
 
 _Data export workflow_
 
-1. What Azure service would you recommend to create an automated workflow that runs on a regular interval to export processed license plate data and send alerts as needed?
+1. 処理されたナンバープレートデータをエクスポートし、必要に応じてアラートを送信するために、定期的に実行される自動ワークフローを作成するには、どのAzureサービスをお勧めしますか？
 
-2. Which other services would you integrate into your workflow?
+2. あなたのワークフローに統合する他のサービスはどれですか？
 
-_Extensible serverless analytics_
+_拡張可能なサーバーレス分析_
 
-1. Assuming they would like to be able to plug-in more solutions that respond to the event when a license plate has been successfully extracted from an image, how would you extend your solution using Event Grid? Be specific on the system topics, custom topics, and subscriptions at play.
+1. 画像からナンバープレートを正常に抽出したときのイベントに応答する、より多くのソリューションをプラグインできるようにしたいと考えています。その場合、Event Gridを使用してどのようにソリューションを拡張しますか？システムトピック、カスタムトピック、サブスクリプションを具体的に検討してください。
 
-2. What pipeline would you plug-into an Event Grid subscription listening for license plate events that could be used to provide real-time and batch analytics as a serverless solution?
+2. サーバーレスソリューションとしてリアルタイムおよびバッチ分析を提供するために利用可能な、ナンバープレートイベントをリッスンするEvent Gridサブスクリプションにプラグインするパイプラインは何でしょうか？
 
-_Monitoring and DevOps_
+_監視とDevOps_
 
-1. What tools and services would you recommend Contoso use to develop the serverless components locally, synchronize with a source code repository, and implement continuous deployment?
+1. Contosoがサーバレスコンポーネントをローカルで開発し、ソースコードリポジトリと同期し、継続的なデプロイメントを実装するために、どのようなツールやサービスを使用するように勧めますか？
 
-2. How would you monitor all the executing serverless components in real-time from a single dashboard?
+2. 実行中のすべてのサーバーレスコンポーネントを、単一のダッシュボードからリアルタイムで監視するには、どうすればよいでしょうか？
 
-3. Does your monitoring solution support exploring historical telemetry and configuring alerts?
+3. モニタリングソリューションは、過去のテレメトリデータの探索とアラートの設定をサポートしていますか？
 
 **Prepare**
 
-Directions: As a team:
+Directions: チームとして以下のことができるようにしてください:
 
-1. Identify any customer needs that are not addressed with the proposed solution.
+1. 提案されたソリューションで対応できない顧客ニーズを特定する。
 
-2. Identify the benefits of your solution.
+2. 提案するソリューションの利点を挙げる。
 
-3. Determine how you will respond to the customer's objections.
+3. 顧客からの反対意見への対応を決める。
 
-Prepare a 15-minute chalk-talk style presentation to the customer.
+15 分間のチョークトークのスタイルで、顧客にプレゼンテーションしてください。
 
-## Step 3: Present the solution
+## Step 3: ソリューションの提示
 
 **Outcome**
 
-Present a solution to the target customer audience in a 15-minute chalk-talk format.
-
-Timeframe: 30 minutes
+15 分間のチョークトーク形式で、顧客に対して解決策を提示してください (30分) 。
 
 **Presentation**
 
 Directions:
 
-1. Pair with another team.
+1. 他のチームとペアを組んでください。
 
-2. One group is the Microsoft team, the other is the customer.
+2. 一方のグループがマイクロソフトのチーム、もう一方が顧客のチームとします。
 
-3. The Microsoft team presents their proposed solution to the customer.
+3. マイクロソフトチームが顧客チームに対し解決策を提示します。
 
-4. The customer makes one of the objections from the list of objections.
+4. 顧客チームは前述の異議リストの中から1つ異議を申し立ててください。
 
-5. The Microsoft team responds to the objection.
+5. マイクロソフトチームはその反対意見に対応してください。
 
-6. The customer team gives feedback to the Microsoft team.
+6. 顧客チームはマイクロソフトチームにフィードバックをしてください。
 
-7. Switch roles and repeat Steps 2-6.
+7. 役回りを入れ替えて、2～6を繰り返しましょう。
 
-## Wrap-up
+## まとめ
 
-Timeframe: 15 minutes
+ブレイクアウト前のグループに戻って、ファシリテーター/SMEがケーススタディの好ましい解決策について発表するのを聞いてください (15分) 。
 
-Directions: Reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
-
-## Additional references
+## 参考情報
 
 |                 |           |
 | --------------- | --------- |
 | **Description** | **Links** |
-| Introduction to Azure Functions                     | <https://docs.microsoft.com/azure/azure-functions/functions-overview> |
-| What is Azure Logic Apps?                           | <https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-overview> |
-| About Azure Cosmos DB                               | <https://docs.microsoft.com/azure/cosmos-db/introduction> |
-| Choose between Azure services that deliver messages | <https://docs.microsoft.com/azure/event-grid/compare-messaging-services> |
-| Monitor Azure Functions using Application Insights  | <https://docs.microsoft.com/azure/azure-functions/functions-monitoring> |
-| What is Azure Event Grid?                           | <https://docs.microsoft.com/azure/event-grid/overview> |
-| Azure Event Grid bindings for Azure Functions       | <https://docs.microsoft.com/azure/azure-functions/functions-bindings-event-grid> |
-| Call Azure Functions from logic apps                | <https://docs.microsoft.com/azure/logic-apps/logic-apps-azure-functions> |
-| Azure Cosmos DB + Azure Functions                   | <https://docs.microsoft.com/azure/cosmos-db/serverless-computing-database> |
-| Continuous deployment for Azure Functions           | <https://docs.microsoft.com/azure/azure-functions/functions-continuous-deployment> |
-| Code and test Azure Functions locally               | <https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local> |
-| About Azure Key Vault                               | <https://docs.microsoft.com/azure/key-vault/key-vault-overview> |
-| Use Key Vault references for Azure Functions        | <https://docs.microsoft.com/azure/app-service/app-service-key-vault-references> |
-| What is Computer Vision?                            | <https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview> |
+| Azure Functions の概要                     | <https://docs.microsoft.com/azure/azure-functions/functions-overview> |
+| Azure Logic Apps とは                           | <https://docs.microsoft.com/azure/logic-apps/logic-apps-overview> |
+| Azure Cosmos DB の概要                              | <https://docs.microsoft.com/azure/cosmos-db/introduction> |
+| Azure メッセージング サービスの中から選択する - Azure Event Grid、Event Hubs、および Service Bus | <https://docs.microsoft.com/azure/event-grid/compare-messaging-services> |
+| Azure Functions を監視する  | <https://docs.microsoft.com/azure/azure-functions/functions-monitoring> |
+| Azure Event Grid とは                           | <https://docs.microsoft.com/azure/event-grid/overview> |
+| Azure Functions における Azure Event Grid のバインド       | <https://docs.microsoft.com/azure/azure-functions/functions-bindings-event-grid> |
+| Azure Functions を使用してコードを作成し、Azure Logic Apps のワークフローから呼び出す               | <https://docs.microsoft.com/azure/logic-apps/logic-apps-azure-functions> |
+| Azure Cosmos DB と Azure Functions を使用したサーバーレス データベース コンピューティング                   | <https://docs.microsoft.com/azure/cosmos-db/serverless-computing-database> |
+| Azure Functions の継続的なデプロイ          | <https://docs.microsoft.com/azure/azure-functions/functions-continuous-deployment> |
+| Azure Functions をローカルでコーディングしてテストする             | <https://docs.microsoft.com/azure/azure-functions/functions-develop-local> |
+| Azure Key Vault について                              | <https://docs.microsoft.com/azure/key-vault/key-vault-overview> |
+| App Service と Azure Functions の Key Vault 参照を使用する      | <https://docs.microsoft.com/azure/app-service/app-service-key-vault-references> |
+| Computer Vision とは                      | <https://docs.microsoft.com/azure/cognitive-services/computer-vision/overview> |
