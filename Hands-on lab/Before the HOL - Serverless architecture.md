@@ -62,9 +62,9 @@
 
    ![The values specified above are entered into the Create a resource group Basics tab.](media/create-resource-group.png "Create resource group")
 
-4. **レビュー + 作成** を選択します。
+4. **確認および作成**を選択します。
 
-5. **レビュー + 作成** タブで、検証完了のメッセージが出たことを確認してから、 **作成** を選択します。
+5. **確認および作成**タブで、検証完了のメッセージが出たことを確認してから、 **作成** を選択します。
 
 ### Task 2: ARMテンプレートを使ったハンズオンリソースのプロビジョニング
 
@@ -131,11 +131,11 @@
 
    ![The Custom deployment blade is displayed, and the information above is entered on the Custom deployment blade.](media/azure-custom-deployment.png "Custom deployment blade")
 
-6. **レビュー + 作成** を選択して、カスタムデプロイを最終確認します。
+6. **確認および作成**を選択して、カスタムデプロイを最終確認します。
 
    > **注意**: ARMテンプレートはリソース名の後ろにハイフンに続く13桁の文字列を追加します。この文字列はリソース名のグローバルでの一意性を保証するために付加しています。このハンズオンでは、リソース参照時には、この付加される文字列を無視してください。
 
-7. レビュー + 作成の画面で、 _検証が完了しました_ のメッセージmessage is displayed and then select **Create** to begin the custom deployment.
+7. 確認および作成の画面で、 _検証が完了しました_ のメッセージを確認してから、**作成**を選択してカスタムデプロイを開始します。
 
    > **注意**: カスタムARMテンプレートのデプロイにはおよそ5分ほどかかります。
 

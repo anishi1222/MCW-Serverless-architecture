@@ -26,9 +26,9 @@
 **Contents**:
 
 - [手作業によるリソースデプロイ・セットアップガイド](#手作業によるリソースデプロイ・セットアップガイド)
-  - [Requirements](#requirements)
-  - [Task 1: Provision an Azure Data Lake Storage Gen2 account](#task-1-provision-an-azure-data-lake-storage-gen2-account)
-  - [Task 2: Provision the TollBooth Function App](#task-2-provision-the-tollbooth-function-app)
+  - [必要なもの](#必要なもの)
+  - [Task 1: Azure Data Lake Storage Gen2 アカウントのプロビジョニング](#task-1-Azure-Data-Lake-Storage-Gen2-アカウントのプロビジョニング)
+  - [Task 2: 料金所Function Appのプロビジョニング](#task-2-料金所Function-Appのプロビジョニング)
   - [Task 3: Provision the Events Function App](#task-3-provision-the-events-function-app)
   - [Task 4: Provision an Event Grid topic](#task-4-provision-an-event-grid-topic)
   - [Task 5: Provision and configure an Azure Cosmos DB account](#task-5-provision-and-configure-an-azure-cosmos-db-account)
@@ -44,153 +44,155 @@
 
 <!-- /TOC -->
 
-# 手作業によるリソースデプロイ・セットアップガイド
+# 手作業によるリソースデプロイ・セットアップガイド (約30分)
 
-**Duration**: 30 minutes
+このガイドでは、before the hands-on labガイドのタスク 2 (ARMテンプレートを使ったハンズオンリソースのプロビジョニング) を手動で実行する手順を説明します。以下のステップバイステップの手順で、ARM テンプレートが作成するソースを手動でプロビジョニングおよび設定していきます。
 
-This guide provides instructions for manually performing Task 2 (Run ARM template to provision lab resources) of the before the hands-on lab guide. The step-by-step directions below manually provision and configure the resources created by the ARM template.
+クリーンアップを容易にするために、すべてのリソースで同じリソース グループを使用していることを確認します。
 
-Ensure all resources use the same resource group for easier cleanup.
+> **重要**: 多くのAzureリソースでは、グローバルで一意な名前を必要とします。これらの手順全体で、"SUFFIX"という文字がリソース名の中に出てきますが、このSUFFIXを使い、一意な名前のリソースになるようにしてください（例：社員番号、エイリアスなど）。
 
-> **Important**: Many Azure resources require globally unique names. Throughout these steps, you will see the word "SUFFIX" as part of resource names. You should replace this with your Microsoft alias, initials, or other value to ensure uniquely named resources.
+## 必要なもの
 
-## Requirements
-
-- Microsoft Azure subscription (non-Microsoft subscription)
-- Local machine or a virtual machine configured with (**complete the day before the lab!**):
-  - Visual Studio Community 2019 or greater
+- Microsoft Azureのサブスクリプション
+- ローカルマシンもしくは構成済みの仮想マシン (**ハンズオン当日までに完了しておいてください!**):
+  - Visual Studio Community 2019 もしくはそれ以後のVisual Studio
     - <https://www.visualstudio.com/vs/>
   - Azure development workload for Visual Studio 2019
     - <https://docs.microsoft.com/azure/azure-functions/functions-develop-vs#prerequisites>
   - .NET Core 3.1
     - <https://www.microsoft.com/net/download/windows>
-- Office 365 account. If required, you can sign up for an Office 365 trial at:
-  - <https://portal.office.com/Signup/MainSignup15.aspx?Dap=False&QuoteId=79a957e9-ad59-4d82-b787-a46955934171&ali=1>
-- GitHub account. You can create a free account at <https://github.com>.
+- Office 365のアカウント。お持ちでないなら、 [トライアル環境のサインアップ](https://portal.office.com/Signup/MainSignup15.aspx?Dap=False&QuoteId=79a957e9-ad59-4d82-b787-a46955934171&ali=1) が可能です。
+- GitHubのアカウント。 [無料のアカウントを作成](https://github.com/join) できます。
 
-## Task 1: Provision an Azure Data Lake Storage Gen2 account
+## Task 1: Azure Data Lake Storage Gen2 アカウントのプロビジョニング
 
-1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
+1. In the [Azure portal](https://portal.azure.com/) で、 **ポータルメニューの表示** アイコンを選択し、メニューから **+リソースの作成** を選択します。
 
    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. Enter "storage account" into the Search the Marketplace box, select **Storage account** from the results, and then select **Create**.
+2. マーケットプレースの検索フィールドに"ストレージ アカウント"と入力して検索し、その結果から **ストレージ アカウント** を選択します。その後、**作成**を選択します。
 
    !["Storage account" is entered into the Search the Marketplace box. Storage account is selected in the results.](media/create-resource-storage-account.png "Create Storage account")
 
-3. On the Create storage account **Basics** tab, enter the following:
+3. ストレージ アカウント作成の**基本**タブで、以下を入力します。
 
-   **Project Details**:
+   **プロジェクトの詳細**:
 
-   - **Subscription**: Select the subscription you are using for this hands-on lab.
-   - **Resource Group**: Select the hands-on-lab-SUFFIX resource group from the list of existing resource groups.
+   - **サブスクリプション**: このハンズオンで使うサブスクリプションを選択します。
+   - **リソースグループ**: 既存のリソースグループのリストから、**hands-on-lab-SUFFIX**リソースグループを選択します。
 
-   **Instance Details**:
+   **インスタンスの詳細**:
 
-   - **Storage account name**: Enter datalakeSUFFIX.
-   - **Location**: Select the location you are using for resources in this hands-on lab.
-   - **Performance**: Choose **Standard**.
-   - **Account kind**: Select **StorageV2 (general purpose v2)**.
-   - **Replication**: Select **Locally-redundant storage (LRS)**.
+   - **ストレージ アカウント名**: datalakeSUFFIXを入力します。
+   - **地域**: ハンズオンで利用するリージョンを選択します。
+   - **パフォーマンス**: **Standard**（汎用v2アカウント）を選択します。
+   - **冗長性**: **ローカル冗長ストレージ (LRS)**を選択します。
 
    ![On the Create storage account blade, the values specified above are entered into the appropriate fields.](media/storage-create-account-basics.png "Create storage account")
 
-4. Next, select the **Advanced** tab.
+4. 続いて、 **詳細設定** タブに移動します。
 
    ![The Advanced tab is highlighted in the tabs on the Create storage account blade.](media/storage-create-account-tabs.png "Create storage account")
 
-5. On the Advanced tab, select **Enabled** from the **Hierarchical namespace** setting under Data Lake Storage Gen2.
+5. 詳細設定タブでは、Data Lake Storage Gen2の下にある**階層型名前空間**を**有効**にします。
 
    ![The Advanced tab of the Create storage account blade is highlighted and Hierarchical namespace and its enabled setting are selected and highlighted.](media/storage-create-account-advanced.png "Create storage account")
 
-6. Select **Review + create**.
+6. **確認および作成**を選択します。
 
-7. On the **Review + create** blade, ensure the Validation passed message is displayed and then select **Create**.
+7. **確認および作成**の画面では、検証が完了したメッセージが表示されたことを確認してから、**作成**を選択します。
 
-8. After the storage account has completed provisioning, open the storage account by selecting **Go to resource**.
+8. ストレージ アカウントのプロビジョニングが完了してから、**リソースへ移動**を選択してストレージ アカウントを開きます。
 
     ![In the Azure Portal, once the storage account has completed provisioning, a status message is displayed saying Your deployment is complete. Beneath the next steps section, The Go to resource button is highlighted.](media/storage-go-to-resource.png "Go to resource")
 
-9. On the **Storage account** blade, select **Containers** under **Data Lake Storage** in the left-hand navigation menu and then select the **+ Container** button to add a new container.
+9. **ストレージ アカウント**の画面で、左側のナビゲーションメニューにある、**データストレージ**の下の**コンテナー**を選択し、**+ コンテナー**ボタンをクリックして新しいコンテナーを作成します。
 
     ![The Containers menu item is selected and highlighted in the Storage account blade's left-hand menu, and + Container is highlighted on the Containers blade.](media/data-lake-containers.png "Containers")
 
-10. In the New container dialog, enter **images** into the **Name** field, choose **Private (no anonymous access)** for the public access level, then select **Create** to save the container.
+10. 新しいコンテナーの画面で、**名前**のフィールドに**images**と入力し、パブリックアクセスレベルとして **プライベート（匿名アクセスはありません）**を選択します。それから**作成**をクリックしてコンテナーを保存します。
 
     ![In the New container dialog, images is entered into the Name field and highlighted. Private (no anonymous access) is selected for the public access level. The **Create** button is highlighted.](media/data-lake-new-container-images.png 'Containers blade')
 
-11. Repeat step 10 to create another container named **export**.
+11. 手順10を繰り返して**export**という別のコンテナーを作成します。
 
     ![In the New container dialog, images is entered into the Name field and highlighted. Private (no anonymous access) is selected for the public access level. The **Create** button is highlighted.](media/data-lake-new-container-export.png 'Storage and Containers blade')
 
-12. Next, select **Access Keys**, under Settings in the left-hand navigation menu. Then on the **Access keys** blade, select **Show keys** and then select the **Click to copy** button for the **key1 connection string** value.
+12. 続いて、左側のナビゲーションメニューの設定内にある**アクセス キー**を選択します。**アクセス キー**の画面で、**キーの表示**を選択し、 **key1の接続文字列**の値表示フィールドに**クリップボードにコピー**ボタンがあるので、これを選択して**key1の接続文字列**の値をコピーします。
 
     ![In the Storage account blade, under Settings, Access keys is selected. Under Default keys, the copy button next to the key1 connection string is selected.](media/data-lake-access-keys.png 'Storage account blade')
 
-13. Paste the value into a text editor, such as Notepad, for reference in the Key Vault steps below.
+13. クリップボードにコピーした値をメモ帳などのテキストエディターに貼り付け、以後のKey Vaultの手順で利用できるようにします。
 
-## Task 2: Provision the TollBooth Function App
+## Task 2: 料金所Function Appのプロビジョニング
 
-1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
+1. [Azure portal](https://portal.azure.com/)で、**ポータルメニューの表示**アイコンを選択して、**+リソースの作成**をメニューから選択します。
 
     ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. Enter "function app" into the **Search the marketplace** box and select **Function App** from the results.
+2. **マーケットプレースの検索**フィールドに**"**関数アプリ**と入力して検索し、その結果から **関数アプリ** を選択します。
 
     ![Function app is highlighted in the search box, and the Function App row is highlighted in the results below that.](media/create-resource-function-app.png "Azure Portal")
 
-3. On the **Function App** blade, select **Create**.
+3. **関数アプリ**の画面で**作成**を選択します。
 
-4. On the **Create Function App** blade, enter the following:
+4. **関数アプリの作成**画面で、以下の項目を入力します。
 
-   **Project Details**:
+   **プロジェクトの詳細**:
 
-   - **Subscription**: Select the subscription you are using for this hands-on lab.
-   - **Resource Group**: Select the hands-on-lab-SUFFIX resource group from the list of existing resource groups.
+   - **サブスクリプション**: このハンズオンで使うサブスクリプションを選択します。
+   - **リソースグループ**: 既存のリソースグループのリストから、**hands-on-lab-SUFFIX**リソースグループを選択します。
 
-   **Instance Details**:
+   **インスタンスの詳細**:
 
-   - **Function App name:** Enter a globally unique name, such as "TollBoothFunctions-SUFFIX".
-   - **Publish:** Select Code.
-   - **Runtime Stack** Select .NET.
-   - **Version**: Choose 3.1.
-   - **Region:** Select the region you have been using for resources in this hands-on lab.
+   - **関数アプリ名**: グローバルで一意な名前にします（例： "TollBoothFunctions-SUFFIX"）
+   - **公開**: コードを選択します。
+   - **ランタイム スタック**: .NETを選択します。
+   - **バージョン**: 3.1を選択します。
+   - **地域**: ハンズオンで利用するリージョンを選択します。
+
+   **オペレーティングシステム**:
+
+   - **オペレーティングシステム**: Windowsを選択します。
+
+   **プラン**:
+
+   - **プランの種類**: 消費量 (サーバーレス) を選択します。
 
    ![The information above is entered on the Create Function App basics tab.](media/create-function-app-basics-tab.png "Create Function App Settings")
 
-5. Select **Next: Hosting**.
+5. **次: ホスティング**を選択します。
 
-6. On the Hosting tab, set the following configuration:
+6. ホスティングタブで、以下の構成を設定します。
 
-   - **Storage account:** Select the **datalakeSUFFIX** storage account you created in Task 1 above.
-   - **Operating System**: Select Windows.
-   - **Plan type:** Choose Consumption (Serverless).
+   - **ストレージ アカウント**: Task 1で作成した **datalakeSUFFIX** ストレージアカウントを選択します。
 
    ![The information above is entered on the Create Function App hosting tab.](media/create-function-app-hosting-tab.png "Create Function App Settings")
 
-7. Select **Next: Monitoring**, and on the Monitoring tab, enter the following:
+7. ネットワークタブの設定項目はないので、監視タブに移動し、以下の設定をします。
 
-   - **Enable Application Insights**: Select Yes.
-   - **Application Insights**: Select Create new.
+   - **Application Insightsを有効にする**: はいを選択します。
+   - **Application Insights**: 新規作成を選択します。
 
    ![In the Monitoring tab of the Create Function App blade, the form fields are set to the previously defined values.](media/new-functionapp-net-monitoring.png "Function App Monitoring blade")
 
-8. In the **Create new Application Insights** dialog, provide the following information, then select **OK**:
+8. **Application Insights の新規作成**画面で、以下の情報を入力して**OK**を選択します。
 
-   - **Name**: Enter a globally unique value, similar to **appinsights-SUFFIX** (ensure the green checkmark appears).
-   - **Location**: Select the same Azure region you selected for your Function App.
+   - **名前**: グローバルで一意な名前にします（例： **appinsights-SUFFIX** ）。緑色のチェックマークが出ることを確認してください。
+   - **場所**: 関数アプリ用に選択したリージョンと同じAzureリージョンを選択します。
 
     ![The new Application Insights form is configured as described.](media/new-app-insights.png "Create new Application Insights")
 
-9. Select **Review + create**.
+9. **確認および作成**を選択します。
 
    ![The Review + create button is highlighted in the button bar.](media/review-create-button.png "Review + create")
 
-10. Select **Create** to provision the new Function App.
+10. **作成**を選択して新たな関数アプリのプロビジョニングを開始します。
 
-11. When the function app provisioning completes, navigate to it in the Azure portal by opening the **hands-on-lab-SUFFIX** resource group and then select the Azure Function App resource whose name begins with **TollBoothFunctions**.
+11. 関数アプリのプロビジョニングが完了したら、Azure portalで **hands-on-lab-SUFFIX** リソースグループを開き、**TollBoothFunctions**で始まる名前の関数アプリを選択します。
 
-    > For your Function App to be able to access Key Vault to read the secrets, you must [create a system-assigned managed identity](https://docs.microsoft.com/azure/app-service/overview-managed-identity#adding-a-system-assigned-identity) for the Function App, and [create an access policy in Key Vault](https://docs.microsoft.com/azure/key-vault/key-vault-secure-your-key-vault#key-vault-access-policies) for the application identity.
+    > 関数アプリがKey Vaultにアクセスしてシークレットを読み出せるようにするには、関数アプリの [システム割り当て済みマネージドIDを作成](https://docs.microsoft.com/azure/app-service/overview-managed-identity#adding-a-system-assigned-identity) し、そのマネージドIDに対して [Key Vaultのアクセスポリシーを作成する](https://docs.microsoft.com/azure/key-vault/key-vault-secure-your-key-vault#key-vault-access-policies) 必要があります。
 
     ![In the hands-on-lab-SUFFIX resource group, the TollBoothFunctions Function App is highlighted.](media/resource-group-toll-booth-functions.png 'hands-on-lab-SUFFIX resource group')
 
