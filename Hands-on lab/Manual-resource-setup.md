@@ -36,11 +36,11 @@
   - [Task 7: ロジックアプリの作成](#task-7-ロジックアプリの作成)
   - [Task 8: Azure Key Vaultのプロビジョニング](#task-8-Azure-Key-Vaultのプロビジョニング)
   - [Task 9: 各シークレットのURI取得](#task-9-各シークレットのURI取得)
-  - [Task 10: Configure application settings for the TollBoothFunctions Function App](#task-10-configure-application-settings-for-the-tollboothfunctions-function-app)
-  - [Task 11: Set up a development virtual machine](#task-11-set-up-a-development-virtual-machine)
-  - [Task 12: Connect to the Lab VM](#task-12-connect-to-the-lab-vm)
-  - [Task 13: Disable Internet Explorer Enhanced Security](#task-13-disable-internet-explorer-enhanced-security)
-  - [Task 14: Install required software on the LabVM](#task-14-install-required-software-on-the-labvm)
+  - [Task 10: TollBoothFunctions関数アプリのためのアプリケーション設定の構成](#task-10-TollBoothFunctions関数アプリのためのアプリケーション設定の構成)
+  - [Task 11: 開発用VMのセットアップ](#task-11-開発用VMのセットアップ)
+  - [Task 12: ハンズオンVMへの接続](#task-12-ハンズオンVMへの接続)
+  - [Task 13: Internet Explorerのセキュリティ強化の無効化](#task-13-Internet-Explorerのセキュリティ強化の無効化)
+  - [Task 14: ハンズオンVMへの必要なソフトウェアのインストール](#task-14-ハンズオンVMへの必要なソフトウェアのインストール)
 
 <!-- /TOC -->
 
@@ -274,6 +274,7 @@
    - **リソースグループ**: 既存のリソースグループのリストから、**hands-on-lab-SUFFIX**リソースグループを選択します。
 
    **インスタンスの詳細**:
+
    - **名前**: グローバルで一意な名前にします（例： **eventgridtopic-SUFFIX**）。緑色のチェックマークが出ることを確認してください。
    - **地域**: ハンズオンで利用するリージョンを選択します。
 
@@ -505,27 +506,27 @@
 
 ## Task 9: 各シークレットのURI取得
 
-1. Open your Key Vault instance in the portal.
+1. Azure Portalでキーコンテナー (Key Vault) インスタンスを開きます。
 
-2. Still on the **Secrets** page in Key Vault, select the `computerVisionApiKey` secret.
+2. **シークレット**ページで、`computerVisionApiKey`シークレットを開きます。
 
    ![The computerVisionApiKey secret is highlighted in the secrets list.](media/key-vault-computer-vision-api-key.png "Secrets")
 
-3. On the computerVisionApiKey blade, select the **Current Version** of the secret.
+3. `computerVisionApiKey`の画面で、シークレットの**現在のバージョン**を選択します。
 
     ![The secret's current version is selected.](media/key-vault-secret-current-version.png "Current Version")
 
-4. On the secret version blade, copy the **Secret Identifier** value by selecting the **Copy to clipboard** button.
+4. シークレットのバージョン画面で**クリップボードにコピー**ボタンを選択し、**シークレット識別子**の値をコピーします。
 
     ![The Secret Identifier field is highlighted. Next to this field is a copy button.](media/key-vault-secret-identifier.png "Secret Identifier")
 
-5. Paste the secret identifier value into a text editor, such as Notepad, for later reference.
+5. シークレット識別子の値をメモ帳などのテキストエディターにコピーします。この値は後で利用します。
 
-6. Close the `computerVisionApiKey` blades and return to the **Secrets** page of your Key Vault.
+6. `computerVisionApiKey`の画面を閉じ、Key vaultの**シークレット**のページに戻ります。
 
-7. Repeat steps 2 through 6 above for the other three secrets listed.
+7. 2から6の手順を繰り返して別の3個のシークレットも同様にコピーして、テキストエディターにコピーします。
 
-8. When you are done copying and pasting the secret identifier values, you should have a list similar to the following in your text editor document:
+8. シークレット識別子のコピー＆ペーストが終わると、テキストエディターでは以下のような感じになているはずです。
 
    ```text
    @Microsoft.KeyVault(SecretUri=https://tollboothvault.vault.azure.net/secrets/computerVisionApiKey/ce228a43f40140dd8a9ffb9a25d042ee)
@@ -534,159 +535,159 @@
    @Microsoft.KeyVault(SecretUri=https://tollboothvault.vault.azure.net/secrets/eventGridTopicKey/e310bcd71a72489f89b6112234fed815)
    ```
 
-## Task 10: Configure application settings for the TollBoothFunctions Function App
+## Task 10: TollBoothFunctions関数アプリのためのアプリケーション設定の構成
 
-1. Navigate to the **TollBoothFunctions** Function App resource in the Azure portal by opening the **hands-on-lab-SUFFIX** resource group and then select the Azure Function App resource whose name begins with **TollBoothFunctions**.
+1. Azure Portalで**hands-on-lab-SUFFIX**リソースグループを開いて、**TollBoothFunctions**で始まる名前のAzure関数アプリリソースを選択して、**TollBoothFunctions**関数アプリリソースへと移動します。
 
    ![In the hands-on-lab-SUFFIX resource group, the TollBoothFunctions Function App is highlighted.](media/resource-group-toll-booth-functions.png 'hands-on-lab-SUFFIX resource group')
 
-2. On the Function App blade, select **Configuration** in the left-hand navigation menu.
+2. 関数アプリ画面で、左側のナビゲーションメニューにある**構成**を選択します。
 
     ![In the TollBoothFunctionApp blade on the Overview tab, under Configured features, the Configuration item is selected.](media/function-app-configuration-menu.png 'TollBoothFunctionApp blade')
 
-3. Scroll to the **Application settings** section. Use the **+ New application setting** link to create the following additional key-value pairs (the key names must exactly match those found in the table below). **Be sure to remove the curly braces (`{}`)**.
+3. **アプリケーション設定**へと移動します。**+新しいアプリケーション設定**のリンクを使って以下のKey-Valueペアを追加します (キー名は以下の表の通りである必要があります）。なお、**中括弧(`{}`)は除去してください**。
 
     |                          |           |
     | ------------------------ | --------- |
-    | **Application Key**      | **Value** |
-    | computerVisionApiKey     | Enter `@Microsoft.KeyVault(SecretUri={referenceString})`, where `{referenceString}` is the URI for the **computerVisionApiKey** Key Vault secret |
-    | computerVisionApiUrl     | Computer Vision API endpoint you copied earlier with **vision/v3.0/ocr** appended to the end. Example: `https://eastus.api.cognitive.microsoft.com/vision/v3.0/ocr` |
-    | cosmosDBAuthorizationKey | Enter `@Microsoft.KeyVault(SecretUri={referenceString})`, where `{referenceString}` is the URI for the **cosmosDBAuthorizationKey** Key Vault secret |
-    | cosmosDBCollectionId     | Cosmos DB processed collection id (**Processed**) |
-    | cosmosDBDatabaseId       | Cosmos DB database id (**LicensePlates**) |
+    | **アプリケーション キー**      | **値** |
+    | computerVisionApiKey     | `@Microsoft.KeyVault(SecretUri={referenceString})` ここで `{referenceString}` は**computerVisionApiKey** Key VaultシークレットのURIです。 |
+    | computerVisionApiUrl     | Computer Vision APIエンドポイントに、**vision/v3.0/ocr**を付加してください。【例】 `https://eastus.api.cognitive.microsoft.com/vision/v3.0/ocr` |
+    | cosmosDBAuthorizationKey | `@Microsoft.KeyVault(SecretUri={referenceString})` ここで `{referenceString}` は**cosmosDBAuthorizationKey** Key VaultシークレットのURIです。 |
+    | cosmosDBCollectionId     | Cosmos DBの処理対象コレクションID (**Processed**) |
+    | cosmosDBDatabaseId       | Cosmos DB データベースID (**LicensePlates**) |
     | cosmosDBEndpointUrl      | Cosmos DB URI |
-    | dataLakeConnection | Enter `@Microsoft.KeyVault(SecretUri={referenceString})`, where `{referenceString}` is the URI for the **dataLakeConnectionString** Key Vault secret |
-    | eventGridTopicEndpoint   | Event Grid Topic endpoint |
-    | eventGridTopicKey        | Enter `@Microsoft.KeyVault(SecretUri={referenceString})`, where `{referenceString}` is the URI for the **eventGridTopicKey** Key Vault secret |
-    | exportCsvContainerName   | Data lake CSV export container name (**export**) |
+    | dataLakeConnection | `@Microsoft.KeyVault(SecretUri={referenceString})` ここで `{referenceString}` は**dataLakeConnectionString** Key VaultシークレットのURIです。 |
+    | eventGridTopicEndpoint   | Event Grid Topicエンドポイント |
+    | eventGridTopicKey        | `@Microsoft.KeyVault(SecretUri={referenceString})` ここで `{referenceString}` は**eventGridTopicKey** Key VaultシークレットのURIです。 |
+    | exportCsvContainerName   | Data lakeのCSVエクスポート先のコンテナー名 (**export**) |
 
     ![In the Application Settings section, the previously defined key/value pairs are displayed.](media/application-settings.png 'Application Settings')
 
-4. Select **Save** on the Configuration toolbar to save the application settings changes.
+4. 構成ページのツールバーにある**保存**を選択して、アプリケーション設定の変更を保存します。
 
-## Task 11: Set up a development virtual machine
+## Task 11: 開発用VMのセットアップ
 
-In this task, you provision a virtual machine (VM) in Azure. The VM image used has the latest version of Visual Studio Community 2019 installed.
+このタスクでは、Azureで仮想マシン (VM) をプロビジョニングします。利用するVMイメージには、最新のVisual Studio Community 2019がインストール済みです。
 
-1. In the [Azure portal](https://portal.azure.com/), select the **Show portal menu** icon and then select **+Create a resource** from the menu.
+1. In the [Azure portal](https://portal.azure.com/) で、 **ポータルメニューの表示** アイコンを選択し、メニューから **+リソースの作成** を選択します。
 
    ![The Show portal menu icon is highlighted, and the portal menu is displayed. Create a resource is highlighted in the portal menu.](media/create-a-resource.png "Create a resource")
 
-2. Enter "visual studio 2019" into the Search the Marketplace box and then select **Visual Studio 2019 Latest** from the results.
+2. マーケットプレースの検索フィールドに"visual studio 2019"と入力して検索し、その結果から **visual studio 2019 Latest** を選択します。
 
    !["Visual studio 2019" is entered into the Search the Marketplace box. Visual Studio 2019 latest is selected in the results.](media/create-resource-visual-studio-vm.png "Visual Studio 2019 Latest")
 
-3. On the Visual Studio 2019 Latest blade, select **Visual Studio 2019 Community (latest release) on Windows Server 2019 (x64)** from the Select a software plan drop-down list, and then select **Create**.
+3. Visual Studio 2019 Latestの画面で、**Visual Studio 2019 Community (latest release) on Windows Server 2019 (x64)**をプランのドロップダウンリストから選択し、**作成**を選択します。
 
    ![On the Visual Studio 2019 Latest blade, Visual Studio 2019 Community (latest release) on Windows Server 2019 (x64) is highlighted in the Select a software plan drop-down list.](media/visual-studio-create.png "Visual Studio 2019 Latest")
 
-4. On the Create a virtual machine **Basics** tab, set the following configuration:
+4. 仮想マシンの作成画面の**基本**タブで、 以下の構成を設定します。
 
-   - Project Details:
+   **プロジェクトの詳細**:
 
-     - **Subscription**: Select the subscription you are using for this hands-on lab.
-     - **Resource Group**: Select the **hands-on-lab-SUFFIX** resource group from the list of existing resource groups.
+   - **サブスクリプション**: このハンズオンで使うサブスクリプションを選択します。
+   - **リソースグループ**: 既存のリソースグループのリストから、**hands-on-lab-SUFFIX**リソースグループを選択します。
 
-   - Instance Details:
+   **インスタンスの詳細**:
 
-     - **Virtual machine name**: Enter LabVM.
-     - **Region**: Select the region you are using for resources in this hands-on lab.
-     - **Availability options**: Select no infrastructure redundancy required.
-     - **Image**: Leave Visual Studio 2019 Community (latest release) on Windows Server 2019 (x64) selected.
-     - **Azure Spot instance**: Select No.
-     - **Size**: Accept the default size of Standard_D4s_v3.
+   - **仮想マシン名**: LabVMと入力します。
+   - **地域**: ハンズオンで利用するリージョンを選択します。
+   - **可用性オプション**: "インフラストラクチャ冗長は必要ありません"を選択します。
+   - **イメージ**: デフォルトのままで変更しません（Visual Studio 2019 Community (latest release) on Windows Server 2019 (x64)）
+   - **Azureスポットインスタンス**: デフォルトのままで選択しません。
+   - **サイズ**: デフォルトのサイズ（Standard_D4s_v3）のままにします。
 
-   - Administrator Account:
+   **管理者アカウント**:
 
-     - **Username**: Enter **demouser**.
-     - **Password**: Enter **Password.1!!**
+   - **ユーザー名**: **demouser**を入力します。
+   - **パスワード**: **Password.1!!**を入力します。
 
-   - Inbound Port Rules:
+   **受信ポートの規則**:
 
-     - **Public inbound ports**: Choose Allow selected ports.
-     - **Select inbound ports**: Select RDP (3389) in the list.
+   - **パブリック受信ポート**: "選択したポートを許可する"を選択します。
+   - **受信ポートを選択**: リストからRDP (3389)を選択します。
 
    ![Screenshot of the Basics tab, with fields set to the previously mentioned settings.](media/lab-virtual-machine-basics-tab.png "Create a virtual machine Basics tab")
 
-   > **Note**: Default settings are used for the remaining tabs so that they can be skipped.
+   > **注意**: 残りのタブはデフォルト設定で問題ないので、スキップできます。
+   
+5. **確認および作成**を選択し、構成を検証します。
 
-5. Select **Review + create** to validate the configuration.
-
-6. On the **Review + create** tab, ensure the Validation passed message is displayed, and then select **Create** to provision the virtual machine.
+6. **確認および作成**タブで、検証が完了した旨のメッセージが表示されたことを確認してから、**作成**を選択して、仮想マシンのプロビジョニングを開始します。
 
    ![The Review + create tab is displayed, with a Validation passed message.](media/lab-virtual-machine-review-create-tab.png "Create a virtual machine Review + create tab")
 
-7. It takes approximately 5 minutes for the VM to finish provisioning.
+7. VMのプロビジョニング完了までおよそ5分ほどかかります。
 
-## Task 12: Connect to the Lab VM
+## Task 12: ハンズオンVMへの接続
 
-In this task, you create an RDP connection to your Lab virtual machine (VM).
+このタスクでは、ハンズオンVMへのRDP接続を作成します。
 
-1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the Azure services list.
+1. [Azure portal](https://portal.azure.com)で、Azureサービスリストから**リソースグループ**を選択します。
 
    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
-2. Select the **hands-on-lab-SUFFIX** resource group from the list.
+2. リストから**hands-on-lab-SUFFIX**リソースグループを選択します。
 
    ![The "hands-on-lab-SUFFIX" resource group is highlighted.](media/resource-groups.png "Resource groups list")
 
-3. In the list of resources within your resource group, select the **LabVM Virtual machine** resource.
+3. リソースグループ内のリソースリストで、**LabVM仮想マシン**リソースを選択します。
 
    ![The list of resources in the hands-on-lab-SUFFIX resource group are displayed, and LabVM is highlighted.](media/resource-group-resources-labvm.png "LabVM in resource group list")
 
-4. On your LabVM blade, select **Connect** and **RDP** from the top menu.
+4. LabVMの画面で、トップメニューから**接続**を選択し、続いて**RDP**を選択します。
 
    ![The LabVM blade is displayed, with the Connect button highlighted in the top menu.](media/connect-vm-rdp.png "Connect to Lab VM")
 
-5. On the Connect to virtual machine blade, select **Download RDP File**, then open the downloaded RDP file.
+5. 接続画面で、**RDPファイルのダウンロード**を選択し、ダウンロードしたRDPファイルを開きます。
 
    ![The Connect to virtual machine blade is displayed, and the Download RDP File button is highlighted.](media/connect-to-virtual-machine.png "Connect to virtual machine")
 
-6. Select **Connect** on the Remote Desktop Connection dialog.
+6. リモートデスクトップの画面で、**接続**をクリックします。
 
    ![In the Remote Desktop Connection Dialog Box, the Connect button is highlighted.](media/remote-desktop-connection.png "Remote Desktop Connection dialog")
 
-7. Enter the following credentials when prompted, and then select **OK**:
+7. 以下の資格情報を入力し、**OK**を選択します。
 
-   - **Username**: demouser
-   - **Password**: Password.1!!
+   - **ユーザー名**: demouser
+   - **パスワード**: Password.1!!
 
    ![The credentials specified above are entered into the Enter your credentials dialog.](media/rdc-credentials.png "Enter your credentials")
 
-8. Select **Yes** to connect if prompted that the remote computer's identity cannot be verified.
+8. リモートコンピューターのIDを確認できない旨のメッセージが表示された場合、**はい**を選択して接続します。
 
    ![In the Remote Desktop Connection dialog box, a warning states that the remote computer's identity cannot be verified and asks if you want to continue anyway. At the bottom, the Yes button is highlighted.](media/remote-desktop-connection-identity-verification-labvm.png "Remote Desktop Connection dialog")
 
-## Task 13: Disable Internet Explorer Enhanced Security
+## Task 13: Internet Explorerのセキュリティ強化の無効化
 
-In this task, you disable Internet Explorer Enhanced Security Configuration (IE ESC) on the LabVM.
+このタスクでは、LabVMでInternet Explorerのセキュリティ強化 (IE ESC) の設定を無効化します。
 
-> > **Note**: Sometimes this Visual Studio 2019 Latest image has IE ESC disabled already, and sometimes it does not.
+> > **注意**: このVisual Studio 2019 Latestイメージでは、すでにIE ESCが無効化されている場合があります。
 
-1. Once logged in, launch the **Server Manager**. This should start automatically, but you can access it via the Start menu if it does not.
+1. VMにログインし**Server Manager**を起動します。これは自動的に開始するはずですが、起動しない場合にはスタートメニューからアクセスできます。
 
-2. Select **Local Server**, then select **On** next to **IE Enhanced Security Configuration**.
+2. **Local Server**を選択し、**IE Enhanced Security Configuration**の隣の**On**を選択します。
 
     ![Screenshot of the Server Manager. In the left pane, Local Server is selected. In the right, Properties (For LabVM) pane, the IE Enhanced Security Configuration, which is set to On, is highlighted.](media/windows-server-manager-ie-enhanced-security-configuration.png "Server Manager")
 
-3. In the Internet Explorer Enhanced Security Configuration dialog, select **Off** under both Administrators and Users, and then select **OK**.
+3. Internet Explorer Enhanced Security Configurationの画面で、AdministratorsとUsersの両方の設定で**Off**を選択し、**OK**を選択します。
 
     ![Screenshot of the Internet Explorer Enhanced Security Configuration dialog box, with Administrators set to Off.](media/internet-explorer-enhanced-security-configuration-dialog.png "Internet Explorer Enhanced Security Configuration dialog box")
 
-4. You can close the Server Manager but leave the connection to the LabVM open for the next task.
+4. Server Managerを閉じてかまいませんが、LabVMへの接続は閉じないでおきます（引き続き次のタスクで利用します）。
 
-## Task 14: Install required software on the LabVM
+## Task 14: ハンズオンVMへの必要なソフトウェアのインストール
 
-In this task, you configure the LabVM with the required software and downloads. First, you download and install the Microsoft Edge web browser. Next, you download a copy of the Visual Studio starter solution and unzip it into a folder named `C:\ServerlessMCW`.
+このタスクでは、LabVMに必要なソフトウェアをダウンロードし、構成します。まず、Microsoft Edge Webブラウザをダウンロード、インストールします。続いて、Visual Studioスターターソリューションをダウンロードし、`C:\ServerlessMCW`というディレクトリに展開します。
 
-> **Note**: Some aspects of this lab require using the new Microsoft Edge (Chromium edition) browser. You may find yourself blocked if using Internet Explorer later in the lab, as Internet Explorer is not supported for some specific activities.
+> **注意**: このハンズオンでは、この新しいMicrosoft Edge (Chromium版) Webブラウザを使う必要があります。Internet Explorerは特定のアクティビティではサポートされていないため、ハンズオンの後半でInternet Explorerを使用するとブロックされる可能性があります。
 
-1. To install Microsoft Edge, launch Internet Explorer on the VM and download [Microsoft Edge](https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/0a4291f0-226e-4d0a-a702-7aa901f20ff4/MicrosoftEdgeEnterpriseX64.msi).
+1. Microsoft Edgeをインストールするために、VMでInternet Explorerを起動し、[Microsoft Edge](https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/0a4291f0-226e-4d0a-a702-7aa901f20ff4/MicrosoftEdgeEnterpriseX64.msi)をダウンロードします。
 
-2. Run the downloaded installer and follow the setup instruction.
+2. ダウンロードしたインストーラーを実行して、セットアップ手順に従います。
 
-3. Next, [download a copy of the Serverless Architecture MCW GitHub repo](https://github.com/microsoft/MCW-Serverless-architecture/archive/main.zip).
+3. 続いて[Serverless Architecture MCW GitHubリポジトリのコピーをダウンロードします。](https://github.com/microsoft/MCW-Serverless-architecture/archive/main.zip)
 
-4. Extract the download ZIP file to `C:\ServerlessMCW`.
+4. ダウンロードしたZIPファイルを`C:\ServerlessMCW`に展開します。
 
    ![The Extract Compressed Folders dialog is displayed, with `C:\ServerlessMCW` entered into the extraction location.](media/zip-extract.png "Extract Compressed ZIP")
