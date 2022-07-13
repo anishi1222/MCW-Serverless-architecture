@@ -36,11 +36,11 @@
     - [Task 2: Visual Studioでスターターソリューションを開く](#task-2-Visual-Studioでスターターソリューションを開く)
     - [Task 3: ProcessImage関数アプリの完成](#task-3-ProcessImage関数アプリの完成)
     - [Task 4: Visual Studioから関数アプリを公開する](#task-4-Visual-Studioから関数アプリを公開する)
-  - [演習 2: Create functions in the portal](#演習-2-create-functions-in-the-portal)
-    - [Task 1: Create a function to save license plate data to Azure Cosmos DB](#task-1-create-a-function-to-save-license-plate-data-to-azure-cosmos-db)
-    - [Task 2: Add an Event Grid subscription to the SavePlateData function](#task-2-add-an-event-grid-subscription-to-the-saveplatedata-function)
-    - [Task 3: Add an Azure Cosmos DB output to the SavePlateData function](#task-3-add-an-azure-cosmos-db-output-to-the-saveplatedata-function)
-    - [Task 4: Create a function to save manual verification info to Azure Cosmos DB](#task-4-create-a-function-to-save-manual-verification-info-to-azure-cosmos-db)
+  - [演習 2: Azure Portalで関数を作成する](#演習-2-Azure-Portalで関数を作成する)
+    - [Task 1: ナンバープレートデータをAzure Cosmos DBに保存する関数を作成する](#task-1-ナンバープレートデータをAzure-Cosmos-DBに保存する関数を作成する)
+    - [Task 2: Event GridサブスクリプションをSavePlateData関数に追加する](#task-2-Event-GridサブスクリプションをSavePlateData関数に追加する)
+    - [Task 3: Azure Cosmos DB出力バインドをSavePlateData関数に追加する](#task-3-Azure-Cosmos-DB出力バインドをSavePlateData関数に追加する)
+    - [Task 4: 手作業による検証情報をAzure Cosmos DBに保存する関数を作成する](#task-4-手作業による検証情報をAzure-Cosmos-DBに保存する関数を作成する)
     - [Task 5: Add an Event Grid subscription to the QueuePlateForManualCheckup function](#task-5-add-an-event-grid-subscription-to-the-queueplateformanualcheckup-function)
     - [Task 6: Add an Azure Cosmos DB output to the QueuePlateForManualCheckup function](#task-6-add-an-azure-cosmos-db-output-to-the-queueplateformanualcheckup-function)
   - [演習 3: Monitor your functions with Application Insights](#演習-3-monitor-your-functions-with-application-insights)
@@ -278,90 +278,88 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
     - ご利用の**Subscription**を選択 ①
     - **View**の下の**Resource Group**を選択②
     - **Function Apps** ③で、ご自身の**hands-on-lab-SUFFIX**リソースグループを開き、**TollBoothFunctions-SUFFIX**の関数アプリを選択
-    - **`Run from package file` option ④はチェックを外す**
+    - **`Run from package file` ④のチェックを外す**
 
     ![In the App Service form, Resource Group displays in the View field, and in the tree-view below, the hands-on-lab-SUFFIX folder is expanded, and TollBoothFunctionApp is selected.](media/vs-publish-function2.png 'Publish window')
 
-    > **Important**: We do not want to run from a package file because when we deploy from GitHub later on, the build process will be skipped if the Function App is configured for a zip deployment.
+    > **重要**: パッケージファイルから実行しないのは、後でGitHubからデプロイする際、Function AppがZIPデプロイ用に設定されているとビルドがスキップされるからです。
 
-6. Select **Finish**.  This creates an Azure Function App publish XML file with a `.pubxml` extension.
+6. **Finish** を選択します。 Azure Function App の公開用 XML ファイル（拡張子は `.pubxml`）が作成されます。
 
-7. Select **Publish** to start the process. Watch the Output window in Visual Studio as the Function App publishes. When it is finished, you should see a message that says, `========== Publish: 1 succeeded, 0 failed, 0 skipped ==========`.
+7. **Publish** を選択し、処理を開始します。Visual Studio の Output ウィンドウを見ながら、Function App が公開されるのを確認します。完了すると、`========================================= Publish: 1 成功、0 失敗、0 スキップ ==========` のようなメッセージが確認できるはずです。
 
-    > **Note**: If prompted to update the version of the function on Azure, select **Yes**.
+    > **注意**: 注**：Azure 上の関数のバージョンを更新するように促された場合は、**Yes** を選択します。
 
     ![The Publish button is selected.](media/vs-publish-function3.png "Publish")
 
-8. Using a new tab or instance of your browser, navigate to the [Azure portal](https://portal.azure.com).
+8. ブラウザの新しいタブまたはインスタンスを使用して、 [Azure portal](https://portal.azure.com) を開きます。
 
-9. Open the **hands-on-lab-SUFFIX** resource group, then select the **TollBoothFunctions** Azure Function App, to which you just published.
+9. **hands-on-lab-SUFFIX** リソースグループを開き、先ほど公開した **TollBoothFunctions** 関数アプリを選択します。
 
-10. Select **Functions** (1) in the left-hand navigation menu. You should see both functions you just published from the Visual Studio solution listed (2).
+10. 左側のナビゲーションメニューから **Functions** ①を選択します。Visual Studioソリューションから公開した両方の関数が表示されます②。
 
     ![In the Function Apps blade, in the left tree-view, both TollBoothFunctionApp and Functions (Read Only) are expanded. Beneath Functions (Read Only), two functions ExportLicensePlates and ProcessImage are highlighted.](media/dotnet-functions.png 'TollBoothFunctionApp blade')
 
-11. Now, we need to add an Event Grid subscription to the ProcessImage function, so the function is triggered when new images are added to the data lake storage container.
+11. ここで、ProcessImage 関数に Event Grid サブスクリプションを追加し、新しい画像がデータレイクストレージコンテナに追加されたときにこの関数がトリガーされるようにする必要があります。
 
-    - Select the **ProcessImage** function.
-    - Select **Integration** on the left-hand menu (1).
-    - Select **Event Grid Trigger (eventGridEvent)** (2).
-    - Select **Create Event Grid subscription** (3).
+    - **ProcessImage** 関数を選択
+    - 左側のメニューで **統合** を選択 ①
+    - **Event Grid Trigger (eventGridEvent)** ②を選択
+    - **Event Grid サブスクリプションの作成** ③を選択
 
     ![In the TollboothFunctionApp tree-view, the ProcessImage function is selected. In the code window pane, the Add Event Grid subscription link is highlighted.](media/processimage-add-eg-sub.png 'ProcessImage function')
 
-12. On the **Create Event Subscription** blade, specify the following configuration options:
+12. **イベント サブスクリプションの作成**の画面で、以下の設定を指定します。
 
-    - **Name**: Enter a unique value, similar to **processimagesub** (ensure the green check mark appears).
-    - **Event Schema**: Select **Event Grid Schema**.
-    - **Topic Type**: Select **Storage Accounts (Blob & GPv2)**.
-    - **Subscription**: Select the subscription you are using for this hands-on lab.
-    - **Resource Group**: Select the **hands-on-lab-SUFFIX** resource group from the list of existing resource groups.
-    - **Resource**: Select your data lake storage account. This should be the only account listed and will start with `datalake`.
-    - **System Topic Name**: Enter **processimagesubtopic**.
-    - **Filter to Event Types**: Select only the **Blob Created** from the event types dropdown list.
-    - **Endpoint Type**: Leave `Azure Function` as the Endpoint Type.
-    - **Endpoint**: Leave as `ProcessImage`.
+    - **名前**: **processimagesub**のような一意な名前を入力します (緑色のチェックマークが現れることを確認します)。
+    - **イベントスキーマ**: **イベント グリッド スキーマ**を選択します。
+    - **Topic Type**: **Storage Accounts (Blob & GPv2)**を選択します。
+    - **Subscription**: このハンズオンで利用しているサブスクリプションを選択します。
+    - **Resource Group**: 既存リソースグループから**hands-on-lab-SUFFIX** リソースグループを選択します。
+    - **Resource**: データレイクストレージアカウントを選択します。`datalake`で始まるアカウント1個のみのはずです。
+    - **システムトピック名**: **processimagesubtopic**と入力します。
+    - **イベントの種類のフィルター**: イベントの種類のドロップダウンリストから、**Blob Created**だけを選択します。
+    - **エンドポイントのタイプ**: エンドポイントは `Azure 関数` のままにします。
+    - **エンドポイント**: `ProcessImage`のままにしておきます。
 
     ![In the Create event subscription form, the fields are set to the previously defined values.](media/process-image-sub-topic.png)
 
-13. Select **Create**.
+13. **作成**を選択します。
 
-## 演習 2: Create functions in the portal
+## 演習 2: Azure Portalで関数を作成する (45分)
 
-**Duration**: 45 minutes
-
-In this exercise, you will create two new Azure Functions written in Node.js, using the Azure portal. These will be triggered by Event Grid and output to Azure Cosmos DB to save the results of license plate processing done by the ProcessImage function.
+この演習では、Azure Portalから2個のAzure関数アプリをNode.jsで作成します。これらはEvent Gridでトリガーされ、ProcessImage関数で処理したナンバープレートの結果をAzure Cosmos DBに格納します。
 
 ### 参考情報
 
 |                  |          |
 | ---------------- | -------- |
 | **Description**  | **Link** |
-| Create your first function in the Azure portal | <https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-function-app-portal> |
-| Store unstructured data using Azure Functions and Azure Cosmos DB | <https://docs.microsoft.com/azure/azure-functions/functions-integrate-store-unstructured-data-cosmosdb> |
+| Azure Portal で初めての関数を作成する | <https://docs.microsoft.com/azure/azure-functions/functions-create-function-app-portal> |
+| Azure Functions と Azure Cosmos DB を使用して非構造化データを格納する | <https://docs.microsoft.com/azure/azure-functions/functions-integrate-store-unstructured-data-cosmosdb> |
 
-### Task 1: Create a function to save license plate data to Azure Cosmos DB
+### Task 1: ナンバープレートデータをAzure Cosmos DBに保存する関数の作成
 
-In this task, you will create a new Node.js function triggered by Event Grid that outputs successfully processed license plate data to Azure Cosmos DB.
+このタスクでは、Event Grid をトリガーとして、正常に処理されたナンバープレートデータを Azure Cosmos DB に出力する Node.js 関数を新規に作成します。
 
-1. Using a new tab or instance of your browser, navigate to the [Azure portal](https://portal.azure.com).
+1. ブラウザの新しいタブまたはインスタンスを使用して、[Azure Portal](https://portal.azure.com) に移動します。
 
-2. Open the **hands-on-lab-SUFFIX** resource group and select the Azure Function App whose name begins with **TollBoothEvents**.
+2. **hands-on-lab-SUFFIX** リソースグループを開き、**TollBoothEvents** で始まる名前の Azure関数アプリを選択します。
 
-3. Select **Functions** in the left-hand menu, then select **+ Create**.
+3. 左側のメニューから **関数** を選択し、**+作成** を選択します。
 
     ![In the Function Apps blade, the TollBoothEvents application is selected. In the Overview tab, the + Create function button is selected.](media/functions-new.png 'TollBoothEvents blade')
 
-4. On the **Create function** form:
+4. **関数の作成**フォームで以下のように設定します。
 
-   - Enter `event grid` into the **Select a template** filter box (1).
-   - Select the **Azure Event Grid trigger** template (2).
-   - Enter `SavePlateData` into the **New Function** name field (3).
-   - Select the **Create** button (4).
+   - Enter `event grid` into the **テンプレートの選択**フィルターに、`event grid` を入力 ①
+   - **Azure Event Grid trigger** テンプレートを選択 ②
+   - **新しい関数**に `SavePlateData` という名前を入力 ③
+   - **作成** ボタンを選択 ④
 
     ![In the Create Function form, event grid is entered into the filter box, the Azure Event Grid trigger template is selected and highlighted, and SavePlateData is entered in the Name field and highlighted.](media/new-function-save-plate-data.png "Create Function form")
 
-5. On the **SavePlateData** Function blade, select **Code + Test** from the left-hand menu and replace the code in the new `SavePlateData` function's `index.js` file with the following:
+5. **SavePlateData** 関数の画面で、左側のメニューから **コードとテスト** を選択し、新しい `SavePlateData` 関数の `index.js` ファイル内のコードを以下のものに置き換えます。
 
     ```javascript
     module.exports = function(context, eventGridEvent) {
@@ -381,60 +379,60 @@ In this task, you will create a new Node.js function triggered by Event Grid tha
 
     ![The function code is displayed.](media/saveplatedata-code.png "SavePlateData Code + Test")
 
-6. Select **Save**.
+6. **保存**を選択します。
 
-### Task 2: Add an Event Grid subscription to the SavePlateData function
+### Task 2: Event GridサブスクリプションをSavePlateData関数に追加する
 
-In this task, you will add an Event Grid subscription to the SavePlateData function. This will ensure that the events sent to the Event Grid topic containing the savePlateData event type are routed to this function.
+このタスクでは、SavePlateData関数にEvent Gridサブスクリプションを追加します。これにより、savePlateDataイベントタイプを含む Event Gridトピックに送信されたイベントが、この関数にルーティングされるようになります。
 
-1. With the SavePlateData function open, select **Integration** in the left-hand menu, select **Event Grid Trigger (eventGridEvent)**, then select **Create Event Grid subscription**.
+1. SavePlateData関数を開いた状態で、左メニューの**統合**を選択した後、**Event Grid Trigger（eventGridEvent）**を選択し、続いて**Event Gridサブスクリプションの作成**を選択します。
 
     ![In the SavePlateData blade code window, the Add Event Grid subscription link is selected.](media/saveplatedata-add-eg-sub.png 'SavePlateData blade')
 
-2. On the **Create Event Subscription** blade, specify the following configuration options:
+2. **イベント サブスクリプションの作成**の画面で、以下の構成を指定します。
 
-    - **Name**: Enter a unique value, similar to **saveplatedatasub** (ensure the green checkmark appears).
-    - **Event Schema**: Select **Event Grid Schema**.
-    - **Topic Type**: Select **Event Grid Topics**.
-    - **Subscription**: Select the subscription you are using for this hands-on lab.
-    - **Resource Group**: Select the **hands-on-lab-SUFFIX** resource group from the list of existing resource groups.
-    - **Resource**: Select your Event Grid Topic. This should be the only service listed and will start with `eventgridtopic-`.
-    - **Event Types**: Select **Add Event Type** and enter `savePlateData` for the new event type value. This will ensure this Event Grid type only triggers this function.
-    - **Endpoint Type**: Leave `Azure Function` as the Endpoint Type.
-    - **Endpoint**: Leave as `SavePlateData`.
+    - **名前**: **saveplatedatasub**のような一意の名前を指定します（緑色のチェックマークが現れることを確認します）。
+    - **イベントスキーマ**: **イベントグリッドスキーマ**を選択します。
+    - **Topic Type**: **Event Grid Topics**を選択します。
+    - **Subscription**: このハンズオンで利用しているサブスクリプションを選択します。
+    - **Resource Group**: 既存リソースグループから**hands-on-lab-SUFFIX** リソースグループを選択します。
+    - **Resource**: Event Grid Topicを選択します。`eventgridtopic-`で始まるサービス1個のみのはずです。
+    - **イベントの種類**: **イベントの種類の追加**を選択して、新たなイベントタイプとして`savePlateData` を入力します。これにより、このEventの種類でのみこの関数が呼び出されるようになります。
+    - **エンドポイントのタイプ**: `Azure関数`のままにします。
+    - **エンドポイント**: Leave as `SavePlateData`のままにします。
 
     ![In the Create Event Subscription blade, fields are set to the previously defined values.](media/saveplatedata-eg-sub.png "Create Event Subscription")
 
-3. Select **Create** and then close the Edit Trigger dialog.
+3. **作成**を選択し、トリガーの編集画面を閉じます。
 
-### Task 3: Add an Azure Cosmos DB output to the SavePlateData function
+### Task 3: Azure Cosmos DB出力バインドをSavePlateData関数に追加する
 
-In this task, you will add an Azure Cosmos DB output binding to the SavePlateData function, enabling it to save its data to the Processed collection.
+このタスクでは、SavePlateData 関数に Azure Cosmos DB 出力バインディングを追加し、Processed コレクションへのデータ保存を可能にします。
 
-1. While still on the **SavePlateData** Integration blade, select **+ Add output** under `Outputs`.
+1. **SavePlateData**関数の統合画面で、`出力`の下の **+出力の追加** を選択します。
 
-2. In the **Create Output** blade:
+2. **出力の作成** 画面で、以下の設定をします。
 
-   - Select the `Azure Cosmos DB` for **Binding Type** (1).
-   - Beneath the Cosmos DB account connection drop down, select the **New** link (2).
-   - Choose the connection whose name begins with `cosmosdb-` (3).  
-   - Select **OK** (4).
+   - **バインドの種類**として `Azure Cosmos DB` を選択 ①
+   - Cosmos DB account connectionのドロップダウンリストの下にある、**New**のリンクを選択 ②
+   - `cosmosdb-`で始まる名前の接続を選択 ③  
+   - **OK**を選択 ④
 
     ![The Add Output link is highlighted with an arrow pointing to the highlighted binding type in the Create Output blade.](media/function-output-binding-type.png "Create Output")
 
-3. Specify the following additional configuration options in the Create Output form:
+3. 以下の追加設定項目を出力の作成画面で指定します。
 
-    - **Document parameter name**: Leave set to `outputDocument`.
-    - **Database name**: Enter `LicensePlates`.
-    - **Collection name**: Enter `Processed`.
+    - **Document parameter name**: `outputDocument`のままにしておきます。
+    - **Database name**: `LicensePlates`と入力します。
+    - **Collection name**: `Processed`と入力します。
 
-4. Select **OK**.
+4. **OK**を選択します。
 
     ![Under Azure Cosmos DB output the following field values display: Document parameter name, outputDocument; Collection name, Processed; Database name, LicensePlates; Azure Cosmos DB account connection, cosmosdb_DOCUMENTDB.](media/saveplatedata-cosmos-integration.png 'Azure Cosmos DB output section')
 
-5. Close the `SavePlateData` function.
+5. `SavePlateData`関数を閉じます。
 
-### Task 4: Create a function to save manual verification info to Azure Cosmos DB
+### Task 4: 手作業による検証情報をAzure Cosmos DBに保存する関数を作成する
 
 In this task, you will create another new function triggered by Event Grid and outputs information about photos that need to be manually verified to Azure Cosmos DB.  This is in the Azure Function App that starts with **TollBoothEvents**.
 
