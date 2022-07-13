@@ -26,35 +26,35 @@
 
 <!-- TOC -->
 
-- [Serverless architecture hands-on lab step-by-step](#serverless-architecture-hands-on-lab-step-by-step)
-  - [Abstract and learning objectives](#abstract-and-learning-objectives)
-  - [Overview](#overview)
-  - [Solution architecture](#solution-architecture)
-  - [Requirements](#requirements)
-  - [Exercise 1: Develop and publish the photo processing and data export functions](#exercise-1-develop-and-publish-the-photo-processing-and-data-export-functions)
-    - [Task 1: Connect to the Lab VM](#task-1-connect-to-the-lab-vm)
-    - [Task 2: Open the starter solution in Visual Studio](#task-2-open-the-starter-solution-in-visual-studio)
-    - [Task 3: Finish the ProcessImage function](#task-3-finish-the-processimage-function)
-    - [Task 4: Publish the Function App from Visual Studio](#task-4-publish-the-function-app-from-visual-studio)
-  - [Exercise 2: Create functions in the portal](#exercise-2-create-functions-in-the-portal)
+- [サーバーレス・アーキテクチャ ハンズオン手順](#サーバーレス・アーキテクチャ-ハンズオン手順)
+  - [ハンズオンの目的](#ハンズオンの目的)
+  - [概要](#概要)
+  - [ソリューション アーキテクチャ](#ソリューション-アーキテクチャ)
+  - [必要なもの](#必要なもの)
+  - [演習 1: 画像処理関数アプリとデータエクスポート関数アプリを開発し発行する](#演習-1-画像処理関数アプリとデータエクスポート関数アプリを開発し発行する)
+    - [Task 1: ハンズオンVMに接続する](#task-1-ハンズオンVMに接続する)
+    - [Task 2: Visual Studioでスターターソリューションを開く](#task-2-Visual-Studioでスターターソリューションを開く)
+    - [Task 3: ProcessImage関数アプリの完成](#task-3-ProcessImage関数アプリの完成)
+    - [Task 4: Visual Studioから関数アプリを公開する](#task-4-Visual-Studioから関数アプリを公開する)
+  - [演習 2: Create functions in the portal](#演習-2-create-functions-in-the-portal)
     - [Task 1: Create a function to save license plate data to Azure Cosmos DB](#task-1-create-a-function-to-save-license-plate-data-to-azure-cosmos-db)
     - [Task 2: Add an Event Grid subscription to the SavePlateData function](#task-2-add-an-event-grid-subscription-to-the-saveplatedata-function)
     - [Task 3: Add an Azure Cosmos DB output to the SavePlateData function](#task-3-add-an-azure-cosmos-db-output-to-the-saveplatedata-function)
     - [Task 4: Create a function to save manual verification info to Azure Cosmos DB](#task-4-create-a-function-to-save-manual-verification-info-to-azure-cosmos-db)
     - [Task 5: Add an Event Grid subscription to the QueuePlateForManualCheckup function](#task-5-add-an-event-grid-subscription-to-the-queueplateformanualcheckup-function)
     - [Task 6: Add an Azure Cosmos DB output to the QueuePlateForManualCheckup function](#task-6-add-an-azure-cosmos-db-output-to-the-queueplateformanualcheckup-function)
-  - [Exercise 3: Monitor your functions with Application Insights](#exercise-3-monitor-your-functions-with-application-insights)
+  - [演習 3: Monitor your functions with Application Insights](#演習-3-monitor-your-functions-with-application-insights)
     - [Task 1: Use the Live Metrics Stream to monitor functions in real-time](#task-1-use-the-live-metrics-stream-to-monitor-functions-in-real-time)
     - [Task 2: Observe your functions dynamically scaling when resource-constrained](#task-2-observe-your-functions-dynamically-scaling-when-resource-constrained)
-  - [Exercise 4: Explore your data in Azure Cosmos DB](#exercise-4-explore-your-data-in-azure-cosmos-db)
+  - [演習 4: Explore your data in Azure Cosmos DB](#演習-4-explore-your-data-in-azure-cosmos-db)
     - [Task 1: Use the Azure Cosmos DB Data Explorer](#task-1-use-the-azure-cosmos-db-data-explorer)
-  - [Exercise 5: Create the data export workflow](#exercise-5-create-the-data-export-workflow)
+  - [演習 5: Create the data export workflow](#演習-5-create-the-data-export-workflow)
     - [Task 1: Create the Logic App](#task-1-create-the-logic-app)
-  - [Exercise 6: Configure continuous deployment for your Function App](#exercise-6-configure-continuous-deployment-for-your-function-app)
+  - [演習 6: Configure continuous deployment for your Function App](#演習-6-configure-continuous-deployment-for-your-function-app)
     - [Task 1: Add git repository to your Visual Studio solution and deploy to GitHub](#task-1-add-git-repository-to-your-visual-studio-solution-and-deploy-to-github)
     - [Task 2: Configure your Function App to use your GitHub repository for continuous deployment](#task-2-configure-your-function-app-to-use-your-github-repository-for-continuous-deployment)
     - [Task 3: Finish your ExportLicensePlates function code and push changes to GitHub to trigger deployment](#task-3-finish-your-exportlicenseplates-function-code-and-push-changes-to-github-to-trigger-deployment)
-  - [Exercise 7: Rerun the workflow and verify data export](#exercise-7-rerun-the-workflow-and-verify-data-export)
+  - [演習 7: Rerun the workflow and verify data export](#演習-7-rerun-the-workflow-and-verify-data-export)
     - [Task 1: Rerun Upload Images](#task-1-rerun-upload-images)
     - [Task 2: Run the Logic App](#task-2-run-the-logic-app)
     - [Task 3: View the exported CSV file](#task-3-view-the-exported-csv-file)
@@ -64,171 +64,168 @@
 
 <!-- /TOC -->
 
-# Serverless architecture hands-on lab step-by-step
+# サーバーレス・アーキテクチャ ハンズオン手順
 
-## Abstract and learning objectives
+## ハンズオンの目的
 
-In this hands-on lab, you implement an end-to-end solution using a supplied sample based on Microsoft Azure Functions, Azure Cosmos DB, Azure Event Grid, and related services. The scenario will include implementing compute, storage, workflows, and monitoring using various components of Microsoft Azure. You can implement the hands-on lab on your own. However, it is highly recommended to pair up with other members at the lab to model a real-world experience and to allow each member to share their expertise for the overall solution.
+このハンズオンでは、Microsoft Azure Functions、Azure Cosmos DB、Azure Event Grid、および関連サービスをベースに、提供されたサンプルを使用してエンドツーエンドのソリューションを実装します。シナリオでは、Microsoft Azure のさまざまなコンポーネントを使用して、コンピュート、ストレージ、ワークフロー、およびモニタリングを実装する予定です。このハンズオンは各自のペースで実施できますが、ラボで他のメンバーとペアを組んで、実体験をモデル化し、ソリューション全体のために各メンバーが専門知識を共有することを強くお勧めします。
 
-At the end of the hands-on lab, you will have confidence in designing, developing, and monitoring a serverless solution that is resilient, scalable, and cost-effective.
+ハンズオンが終了すると、弾力性、拡張性、コスト効率の高いサーバーレスソリューションの設計、開発、監視に自信を持つことができます。
 
-## Overview
+## 概要
 
-Contoso is rapidly expanding its toll booth management business to operate in a much larger area. As this is not their primary business, which is online payment services, they struggle with scaling up to meet the upcoming demand to extract license plate information from many new tollbooths, using photos of vehicles uploaded to cloud storage. Currently, they have a manual process where they send batches of images to a 3rd-party who manually transcodes the license plates to CSV files that they send back to Contoso to upload to their online processing system.
+Contoso社では料金所管理事業を急速に拡大し、より広い地域で事業を展開しつつあります。この事業は、同社の主要事業であるオンライン決済サービスではないため、クラウドストレージにアップロードされた車両の写真を使用して、多くの新しい料金所からナンバープレート情報を抽出するというプロセスについて、今後の需要に対応するためのスケールアップに苦労しています。現在、同社は多数の画像をバッチ的にサードパーティーに送り、サードパーティーが手動でナンバープレートをCSVファイルに変換し、Contosoに送り返し、同社のオンライン処理システムにアップロードするという手動プロセスを取っています。
 
-They want to automate this process in a way that is cost-effective and scalable. They believe serverless is the best route for them but do not have the expertise to build the solution.
+彼らは、コスト効率と拡張性の高い方法でこのプロセスを自動化したいと考えています。サーバーレスが最適だと考えていますが、ソリューションを構築するための専門知識は持っていません。
 
-## Solution architecture
+## ソリューション アーキテクチャ
 
-Below is a diagram of the solution architecture you will build in this lab. Please study this carefully to understand the whole of the solution as you are working on the various components.
+以下は、このハンズオンで構築するソリューションアーキテクチャの図です。これをよく読んで、さまざまなコンポーネントに取り組みながら、ソリューションの全体像を理解してください。
 
 ![The Solution diagram is described in the text following this diagram.](media/preferred-solution.png 'Solution diagram')
 
-The solution begins with vehicle photos being uploaded to an **Azure Data Lake Storage Gen2** container as they are captured. An **Azure Event Grid** subscription is created against the data lake storage container. When a new blob is created, an event is triggered that calls the photo processing **Azure Function** endpoint, which in turn sends the photo to the **Computer Vision API** service to extract the license plate data. If processing is successful and the license plate number is returned. The function submits a new Event Grid event, along with the data, to an Event Grid topic with an event type called `savePlateData`. However, if the processing was unsuccessful, the function submits an Event Grid event to the topic with an event type called `queuePlateForManualCheckup`. Two separate functions are configured to trigger when new events are added to the Event Grid topic. Each filtering on a specific event type saves the relevant data to the appropriate **Azure Cosmos DB** collection for the outcome, using the Cosmos DB output binding. A **Logic App** that runs on a 15-minute interval executes an Azure Function via its HTTP trigger, responsible for obtaining new license plate data from Cosmos DB and exporting it to a new CSV file saved to Blob storage. If no new license plate records are found to export, the Logic App sends an email notification to the Customer Service department via their Office 365 subscription. **Application Insights** is used to monitor all Azure Functions in real-time as data is being processed through the serverless architecture. This real-time monitoring allows you to observe dynamic scaling first-hand and configure alerts when certain events take place. **Azure Key Vault** is used to securely store secrets, such as connection strings and access keys. Key Vault is accessed by the Function Apps through an access policy within Key Vault, assigned to each Function App's system-assigned managed identity.
+このソリューションでは、撮影された車両の写真を、**Azure Data Lake Storage Gen2**コンテナにアップロードします。データレイクストレージコンテナに対して、**Azure Event Grid** サブスクリプションを作成します。新しい blob が作成されると、写真処理の **Azure Function** エンドポイントを呼び出すイベントが呼び出され、次に写真が **Computer Vision API** サービスに送信されてナンバープレートデータを抽出します。処理が成功し、ナンバープレート番号が取得できた場合、関数アプリはデータと共に新しいEvent Gridイベントを、イベントタイプ`savePlateData`で待機しているEvent Gridトピックに発行します。しかしながらナンバープレート番号の取得ができなかった場合、関数アプリは`queuePlateForManualCheckup`と呼ばれるイベントタイプで待機しているEvent Gridトピックに対し、新たなEvent Gridイベントを発行します。新しいイベントがイベントグリッドトピックに追加されたときに、2つの別々の関数がトリガーされるように設定されています。特定のイベントタイプで各々フィルタリングすると、Cosmos DB 出力バインディングを使用して、出力に合わせた**Azure Cosmos DB** コレクションに関連するデータが保存されます。15分間隔で実行される**Logic App**は、HTTPトリガーでAzure Functionを実行し、Cosmos DBから新しいナンバープレートデータを取得し、Blobストレージに保存された新しいCSVファイルにエクスポートする役割を担います。エクスポート対象の新しいナンバープレートレコードが見つからない場合、Logic AppはOffice 365サブスクリプションを使ってカスタマーサービス部門にメール通知を送信します。**Application Insights** は、サーバーレスアーキテクチャでデータを処理しているときに、すべての Azure Functions をリアルタイム監視するために使用します。このリアルタイム監視により、動的なスケールを直接観察し、特定のイベントが発生したときにアラートを構成できます。**Azure Key Vault** は、接続文字列やアクセスキーなどのシークレットを安全に保管するために使用します。Key Vaultは、各機能アプリのシステムに割り当てられたマネージドIDに対して設定したKey Vault内のアクセスポリシーを通じて、関数アプリからアクセスします。
 
-## Requirements
+## 必要なもの
 
-- Microsoft Azure subscription (non-Microsoft subscription).
-- Local machine or a Virtual Machine (VM) configured with (**complete the day before the lab!**):
-  - Visual Studio Community 2019 or greater.
+- Microsoft Azureのサブスクリプション
+- 以下のソフトウェアが構成済みのローカルマシンもしくは仮想マシン (VM) (**ハンズオン前日には構成しておいてください!**):
+  - Visual Studio Community 2019 もしくはそれ以後
     - <https://www.visualstudio.com/vs/>
-  - Azure development workload for Visual Studio.
+  - Visual Studio用のAzure 開発ワークロード
     - <https://docs.microsoft.com/azure/azure-functions/functions-develop-vs#prerequisites>
-  - .NET Core 3.1 SDK.
+  - .NET Core 3.1 SDK
     - <https://www.microsoft.com/net/download/windows>
-- Office 365 account. If required, you can sign up for an Office 365 trial at:
-  - <https://portal.office.com/Signup/MainSignup15.aspx?Dap=False&QuoteId=79a957e9-ad59-4d82-b787-a46955934171&ali=1>
-- GitHub account. You can create a free account at <https://github.com>.
+- Office 365のアカウント。お持ちでないなら、 [トライアル環境のサインアップ](https://portal.office.com/Signup/MainSignup15.aspx?Dap=False&QuoteId=79a957e9-ad59-4d82-b787-a46955934171&ali=1) が可能です。  
+- GitHubのアカウント。 [無料のアカウントを作成](https://github.com/join) できます。
 
-## Exercise 1: Develop and publish the photo processing and data export functions
+## 演習 1: 画像処理関数アプリとデータエクスポート関数アプリを開発し発行する (45分)
 
-**Duration**: 45 minutes
+Visual Studio と統合された Azure Functions ツールを使用して、ローカルで関数アプリを開発およびデバッグし、Azure に公開します。スタータープロジェクトソリューションであるTollBoothsには、必要なコードのほとんどが含まれています。Azureにデプロイする前に、不足しているコードを追加します。
 
-Use Visual Studio and its integrated Azure Functions tooling to develop and debug the functions locally and then publish them to Azure. The starter project solution, TollBooths, contains most of the code needed. You will add in the missing code before deploying to Azure.
-
-### Help references
+### 参考情報
 
 |                                       |                                                                        |
 | ------------------------------------- | ---------------------------------------------------------------------- |
 | **Description**                       | **Link**                                                              |
-| Code and test Azure Functions locally | <https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local> |
+| Azure Functions をローカルでコーディングしてテストする | <https://docs.microsoft.com/azure/azure-functions/functions-develop-local> |
 
-### Task 1: Connect to the Lab VM
+### Task 1: ハンズオンVMに接続する
 
-In this task, you create an RDP connection to your Lab virtual machine.
+このタスクでは、ハンズオンVMへのRDP接続を作成します。
 
-1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the Azure services list.
+1. [Azure portal](https://portal.azure.com) で、  **リソースグループ** をAzureサービスリストから選択します。
 
    ![Resource groups is highlighted in the Azure services list.](media/azure-services-resource-groups.png "Azure services")
 
-2. Select the **hands-on-lab-SUFFIX** resource group from the list.
+2. リストから**hands-on-lab-SUFFIX**リソースグループを選択します。
 
    ![The "hands-on-lab-SUFFIX" resource group is highlighted.](media/resource-groups.png "Resource groups list")
 
-3. In the list of resources within your resource group, select the **LabVM Virtual machine** resource.
+3. リソースグループ内のリソースリストで、**LabVM仮想マシン**リソースを選択します。
 
    ![The list of resources in the hands-on-lab-SUFFIX resource group are displayed, and LabVM is highlighted.](media/resource-group-resources-labvm.png "LabVM in resource group list")
 
-4. On your LabVM blade, select **Connect** and **RDP** from the top menu.
+4. LabVMの画面で、トップメニューから**接続**を選択し、続いて**RDP**を選択します。
 
    ![The LabVM blade is displayed, with the Connect button highlighted in the top menu.](media/connect-vm-rdp.png "Connect to Lab VM")
 
-5. On the Connect to virtual machine blade, select **Download RDP File**, then open the downloaded RDP file.
+5. 接続画面で、**RDPファイルのダウンロード**を選択し、ダウンロードしたRDPファイルを開きます。
 
    ![The Connect to virtual machine blade is displayed, and the Download RDP File button is highlighted.](media/connect-to-virtual-machine.png "Connect to virtual machine")
 
-6. Select **Connect** on the Remote Desktop Connection dialog.
+6. リモートデスクトップの画面で、**接続**をクリックします。
 
    ![In the Remote Desktop Connection Dialog Box, the Connect button is highlighted.](media/remote-desktop-connection.png "Remote Desktop Connection dialog")
 
-7. Enter the following credentials when prompted, and then select **OK**:
+7. 以下の資格情報を入力し、**OK**を選択します。
 
-   - **User name**: demouser
-   - **Password**: Password.1!!
+   - **ユーザー名**: demouser
+   - **パスワード**: Password.1!!
 
    ![The credentials specified above are entered into the Enter your credentials dialog.](media/rdc-credentials.png "Enter your credentials")
 
-8. Select **Yes** to connect if prompted that the remote computer's identity cannot be verified.
+8. リモートコンピューターのIDを確認できない旨のメッセージが表示された場合、**はい**を選択して接続します。
 
    ![In the Remote Desktop Connection dialog box, a warning states that the remote computer's identity cannot be verified and asks if you want to continue anyway. At the bottom, the Yes button is highlighted.](media/remote-desktop-connection-identity-verification-labvm.png "Remote Desktop Connection dialog")
 
-### Task 2: Open the starter solution in Visual Studio
+### Task 2: Visual Studioでスターターソリューションを開く
 
-1. On the LabVM, open File Explorer and navigate to `C:\ServerlessMCW\MCW-Serverless-architecture-main\Hands-on lab\lab-files\src\TollBooth`.
+1. 接続したLabVMで、ファイルエクスプローラを開いて、`C:\ServerlessMCW\MCW-Serverless-architecture-main\Hands-on lab\lab-files\src\TollBooth`に移動します。
 
-    > **Note:** Ensure the files are located under `C:\ServerlessMCW\`. If the files are located under a longer root path, such as  `C:\Users\workshop\Downloads\`, you will encounter build issues in later steps: `The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and the directory name must be less than 248 characters`.
+    > **注意**: ファイルが `C:\ServerlessMCW\` 以下にあることを確認してください。ファイルが長いルートパスの配下にある場合（例： `C:\Users\workshop\Downloads\`) 後の作業で `The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and the directory name must be less than 248 characters`　という問題がビルド時に発生します。
 
-2. From the **TollBooth** folder opened in step 1, open the Visual Studio Solution by double-clicking the `TollBooth.sln` file.
+2. 手順1で開いた **TollBooth**フォルダーの `TollBooth.sln` ファイルをダブルクリックして、Visual Studio Solutionを開きます。
 
     ![In the TollBooth folder in File Explorer, TollBooth.sln is highlighted.](media/file-explorer-toll-booth-sln.png "File Explorer")
 
-3. If prompted about how to open the file, select **Visual Studio 2019**, and then select **OK**.
+3. ファイイルの開き方に関するプロンプトが現れたら、 **Visual Studio 2019** を選択し、**OK**をクリックします。
 
    ![Visual Studio 2019 is highlighted in the How do you want to open this file? dialog.](media/solution-file-open-with.png "Visual Studio 2019")
 
-4. Sign in to Visual Studio using your Azure account credentials.
+4. ご自身のAzureアカウント資格情報でVisual Studioにサインインします。
 
    ![The Sign in button is highlighted on the Visual Studio Welcome screen.](media/visual-studio-sign-in.png "Visual Studio 2019")
 
-5. If prompted with a security warning, uncheck **Ask me for every project in this solution**, and then select **OK**.
+5. セキュリティ警告が出る場合、 **Ask me for every project in this solution** のチェックを外して **OK**を選択します。
 
-6. Notice the solution contains the following projects:
+6. ソリューションに以下の2プロジェクトが含まれていることを確認します。
 
    - `TollBooth`
    - `UploadImages`
 
-   > **Note**: The UploadImages project is used for uploading a handful of car photos for testing the scalability of the serverless architecture.
+   > **注意**: UploadImagesプロジェクトは、クルマの写真をアップロードし、サーバーレスアーキテクチャの拡張をテストするために利用します。
 
    ![The two projects listed above are highlighted in Solution Explorer.](media/visual-studio-solution-explorer-projects.png 'Solution Explorer')
 
-7. To validate connectivity to your Azure subscription from Visual Studio, open **Cloud Explorer** from the **View** menu and ensure that you can connect to your Azure subscription.
+7. Visual StudioからAzureサブスクリプションへの接続を確認するため、**Cloud Explorer**を**View**メニューから開き、Azureサブスクリプションに接続できることを確認します。
 
    ![In Cloud Explorer, the list of Azure subscriptions is shown. A single subscription is highlighted and expanded in the list.](media/vs-cloud-explorer.png 'Cloud Explorer')
 
-   > **Note**: You may need to select the account icon and log in with your Azure account before seeing the resources below your subscription.
+   > **注意**: Azureサブスクリプションのリソースを確認する前に、アカウントアイコンを選択してAzureアカウントでログインする必要がある可能性があります。
 
-8. Return to the open File Explorer window and navigate back to the **src** subfolder. From there, open the **license plates** subfolder. It contains sample license plate photos used for testing out the solution. One of the images is guaranteed to fail OCR processing, which is meant to show how the workload is designed to handle such failures. The UploadImages project uses the **copyfrom** folder as a basis for the 1,000-photo upload option for testing scalability.
+8. ファイルエクスプローラで **src** サブフォルダに移動します。ここで、 **license plates** サブフォルダを開きます。このフォルダにはソリューションのテスト用にサンプルのナンバープレートの写真が入っています。このうち1枚の写真はOCR処理に失敗するもので、このような障害を扱うようにワークロードがどのように設計されているかを示すためのものです。UploadImagesプロジェクトは、拡張性をテストするために、1000枚の写真をアップロードするために**copyfrom**フォルダを使います。
 
-### Task 3: Finish the ProcessImage function
+### Task 3: ProcessImage関数アプリの完成
 
-A few components within the starter project must be completed, which are marked as `TODO` in the code. The first set of `TODO` items we address are in the `ProcessImage` function. We will update the `FindLicensePlateText` class that calls the Computer Vision service and the `SendToEventGrid` class, which is responsible for sending processing results to the Event Grid topic you created earlier.
+スタータープロジェクトの一部のコンポーネントを完成させる必要があります。これらはコード内で `TODO` としてマークされています。最初の `TODO` アイテムは `ProcessImage` 関数の中にあります。Computer Vision サービスを呼び出す `FindLicensePlateText` クラスと、処理結果を先に作成した Event Grid トピックに送信するための `SendToEventGrid` クラスをアップデートします。
 
-> **Note**: **Do not** update the version of any NuGet package. This solution is built to function with the NuGet package versions currently defined within. Updating these packages to newer versions could cause unexpected results.
+> **注意**: NuGet パッケージのバージョンは**更新しないでください**。このソリューションは、現在定義されている NuGet パッケージのバージョンで機能するように構築されています。これらのパッケージを新しいバージョンに更新すると、予期しない結果を引き起こす可能性があります。
 
-1. From the Visual Studio **View** menu, select **Task List**.
+1. Visual Studioの **View** メニューから **Task List** を選択します。
 
     ![The Visual Studio Menu displays, with View and Task List selected.](media/vs-task-list-link.png 'Visual Studio Menu')
 
-2. There, you will see a list of `TODO` tasks, where each task represents one line of code that needs to be completed.
+2. `TODO`タスクのリストが表示されます。各タスクは、完了する必要があるコードの1行を表しています。
 
     ![A list of TODO tasks, including their description, project, file, and line number are displayed.](media/vs-task-list.png 'TODO tasks')
 
-    > **Note**: If the TODO ordering is out of order, select **Description** to sort it in a logical order.
+    > **注意**: TODOがソートされていない場合は、**Description**を選択して並べ替えてください。
 
-3. In the Visual Studio Solution Explorer, expand the **TollBooth** project and double-click `ProcessImage.cs` to open the file.
+3. Visual Studio ソリューションエクスプローラーで、**TollBooth** プロジェクトを展開し、`ProcessImage.cs`をダブルクリックして、ファイルを開きます。
 
-    > Notice the Run method is decorated with the **FunctionName** attribute, which sets the name of the Azure Function to `ProcessImage`. This is triggered by HTTP requests sent to it from the Event Grid service. You tell Event Grid that you want to get these notifications at your function's URL by creating an event subscription, which you will do in a later task, in which you subscribe to blob-created events. The function's trigger watches for new blobs being added to the images container of the data lake storage account that was created by the ARM template in the Before the hands-on lab guide. The data passed to the function from the Event Grid notification includes the URL of the blob. That URL is, in turn, passed to the input binding to obtain the uploaded image from data lake storage.
+    > Run メソッドには **FunctionName** 属性が付加されており、Azure Function の名前が `ProcessImage` に設定されていることに注意してください。この関数アプリは、Event Grid サービスから送られてくる HTTP リクエストをトリガーとして実行されます。イベントサブスクリプションを作成することで、関数アプリのURLで通知を受け取りたいことをEvent Gridに伝えます。この設定は後のタスクで行います（Blob作成イベントをサブスクライブする）。この関数アプリのトリガーは、「Before the hands-on lab guide」のARMテンプレートで作成されたデータレイクストレージアカウントのimagesコンテナーに追加される新しいBlobを監視します。Event Grid通知から関数アプリに渡されるデータには、BlobのURLが含まれています。このURLを入力バインディングに渡し、データレイクストレージからアップロードされた画像を取得します。
 
     ![The ProcessImage.cs file is highlighted within the TollBooth project in the Visual Studio Solution Explorer.](media/visual-studio-solution-explorer-process-image.png "Solution Explorer")
 
-4. In the **Task List** pane at the bottom of the Visual Studio window, double-click the `TODO 1` item, which will take you to the first `TODO` task.
+4. Visual Studioの下部にある**Task List**ペインで、`TODO 1`をダブルクリックします。これで最初の`TODO`タスクに移動できます。
 
     ![TODO 1 is highlighted in the Visual Studio Task List.](media/visual-studio-task-list-todo-1.png "Task List")
 
-5. Update the code on the line below the `TODO 1` comment, using the following code:
+5. `TODO 1` のコメントの下の行のコードを、以下のコードで更新します。
 
     ```csharp
     // **TODO 1: Set the licensePlateText value by awaiting a new FindLicensePlateText.GetLicensePlate method.**
     licensePlateText = await new FindLicensePlateText(log, _client).GetLicensePlate(licensePlateImage);
     ```
 
-6. Double-click `TODO 2` in the Task List to open the `FindLicensePlateText.cs` file.
+6. タスクリストの `TODO 2` をダブルクリックし、 `FindLicensePlateText.cs` ファイルを開きます。
 
-    > This class is responsible for contacting the Computer Vision service's Read API to find and extract the license plate text from the photo using OCR. Notice that this class also shows how you can implement a resilience pattern using [Polly](https://github.com/App-vNext/Polly), an open-source .NET library that helps you handle transient errors. This is useful for ensuring that you do not overload downstream services, in this case, the Computer Vision service. This will be demonstrated later when visualizing the Function's scalability.
-
+    > このクラスは、Computer VisionサービスのRead APIに接続して、OCRを使用して写真からナンバープレートテキストを検索・抽出する役割を担っています。このクラスは、過渡的なエラーを処理するのに役立つオープンソースの.NETライブラリである[Polly](https://github.com/App-vNext/Polly)を使用して、resilienceパターンを実装する方法を示していることにも注目してください。これは、下流のサービス（この場合はComputer Visionサービス）に過負荷をかけないようにするために有用です。このことは、後でFunctionのスケーラビリティを可視化するときに実証します。
+    
     ![TODO 2 is highlighted in the Visual Studio Task List.](media/visual-studio-task-list-todo-2.png "Task List")
 
-7. The following code represents the completed task in FindLicensePlateText.cs:
+7. 以下のコードは、FindLicensePlateText.csのタスクが完了したことを表しています。
 
     ```csharp
     // TODO 2: Populate the below two variables with the correct AppSettings properties.
@@ -236,52 +233,52 @@ A few components within the starter project must be completed, which are marked 
     var apiKey = Environment.GetEnvironmentVariable("computerVisionApiKey");
     ```
 
-8. Double-click `TODO 3` in the Task List to open `SendToEventGrid.cs`.
+8. タスクリストの `TODO 3` をダブルクリックし、 `SendToEventGrid.cs`を開きます。
 
-    > This class is responsible for sending an Event to the Event Grid topic, including the event type and license plate data. Event listeners will use the event type to filter and act on the events they need to process. Please make a note of the event types defined here (the first parameter passed into the Send method), as they will be used later when creating new functions in the second Function App you provisioned earlier.
+    > このクラスは、イベントタイプとナンバープレートデータを含むEventをEvent Gridトピックに送信する役割を担います。イベントリスナーは、イベントタイプを使用して、処理する必要のあるイベントをフィルタリングして処理します。ここで定義されたイベントタイプ（Send メソッドに渡される最初のパラメータ）は、後でプロビジョニングした 2 つ目の Function App で新しい関数を作成するときに使用されるので、メモしておいてください。
 
     ![TODO 3 is highlighted in the Visual Studio Task List.](media/visual-studio-task-list-todo-3.png "Task List")
 
-9. Use the following code to complete `TODO 3` in `SendToEventGrid.cs`:
+9. 以下のコードを使って `SendToEventGrid.cs`の`TODO 3`を完成させます。
 
     ```csharp
     // TODO 3: Modify send method to include the proper eventType name value for saving plate data.
     await Send("savePlateData", "TollBooth/CustomerService", data);
     ```
 
-10. `TODO 4` is  a few lines down from step 9 in the `else` block in `SendLicensePlateData(LicensePlateData data)`.  Use the following code to complete `TODO 4` in `SendToEventGrid.cs`:
+10. `TODO 4` は、`SendLicensePlateData(LicensePlateData data)` の `else` ブロックです。 次のコードで `SendToEventGrid.cs` の `TODO 4` を完成させてください。
 
     ```csharp
     // TODO 4: Modify send method to include the proper eventType name value for queuing plate for manual review.
     await Send("queuePlateForManualCheckup", "TollBooth/CustomerService", data);
     ```
 
-    > **Note**: `TODOs` 5, 6, and 7 will be completed in later steps of the guide.
+    > **注意**: `TODOs` 5、6、7はこのガイドの後で完成させます。
 
-### Task 4: Publish the Function App from Visual Studio
+### Task 4: Visual Studioから関数アプリを公開する
 
-In this task, you will publish the Function App from the starter project in Visual Studio to the existing Function App you provisioned in Azure.
+このタスクでは、Visual Studio のスターター プロジェクトから、Azure にプロビジョニングした既存の Function App に Function App を公開します。
 
-1. Navigate to the **TollBooth** project using the Solution Explorer of Visual Studio.
+1. Visual Studioのソリューションエクスプローラーを使用して、**TollBooth**プロジェクトに移動します。
 
-2. Right-click the **TollBooth** project and select **Publish** from the context menu.
+2. **TollBooth** プロジェクトを右クリックし、コンテキストメニューから **Publish** を選択します。
 
     ![In Solution Explorer, the TollBooth is selected, and within its context menu, the Publish item is selected.](media/image39.png "Solution Explorer")
 
-3. In the Publish window, select **Azure**, then select **Next**.
+3. Publishウィンドウで、**Azure**を選択し、**Next**を選択します。
 
     ![In the Pick a publish target window, the Azure Functions Consumption Plan is selected in the left pane. The Select Existing radio button is selected in the right pane, and the Run from package file (recommended) checkbox is unchecked. The Create Profile button is also selected.](media/vs-publish-function.png 'Publish window')
 
-4. Select **Azure Function App (Windows)** for the specific target, then select **Next**.
+4. ターゲットとして**Azure Function App (Windows)**を選択し、**Next**を選択します。
 
     ![The specific target screen of the Publish dialog is shown with the Azure Function App (Windows) item selected and the Next button highlighted.](media/vs-publish-specific-target.png "Publish specific target")
 
-5. In the **Publish** dialog:
+5. **Publish** ダイアログでは
 
-    - Select your **Subscription** (1).
-    - Select **Resource Group** under **View** (2).
-    - In the **Function Apps** box (3), expand your **hands-on-lab-SUFFIX** resource group. Select the Function App whose name ends with **Functions**.
-    - **Uncheck the `Run from package file` option** (4).
+    - ご利用の**Subscription**を選択 ①
+    - **View**の下の**Resource Group**を選択②
+    - **Function Apps** ③で、ご自身の**hands-on-lab-SUFFIX**リソースグループを開き、**TollBoothFunctions-SUFFIX**の関数アプリを選択
+    - **`Run from package file` option ④はチェックを外す**
 
     ![In the App Service form, Resource Group displays in the View field, and in the tree-view below, the hands-on-lab-SUFFIX folder is expanded, and TollBoothFunctionApp is selected.](media/vs-publish-function2.png 'Publish window')
 
@@ -329,13 +326,13 @@ In this task, you will publish the Function App from the starter project in Visu
 
 13. Select **Create**.
 
-## Exercise 2: Create functions in the portal
+## 演習 2: Create functions in the portal
 
 **Duration**: 45 minutes
 
 In this exercise, you will create two new Azure Functions written in Node.js, using the Azure portal. These will be triggered by Event Grid and output to Azure Cosmos DB to save the results of license plate processing done by the ProcessImage function.
 
-### Help references
+### 参考情報
 
 |                  |          |
 | ---------------- | -------- |
@@ -518,13 +515,13 @@ In this task, you will add an Azure Cosmos DB output binding to the QueuePlateFo
 
 4. Close the **QueuePlateForManualCheckup** function.
 
-## Exercise 3: Monitor your functions with Application Insights
+## 演習 3: Monitor your functions with Application Insights
 
 **Duration**: 15 minutes
 
 Application Insights can be integrated with Azure Function Apps to provide robust monitoring for your functions. In this exercise, you examine telemetry in the Application Insights account that you created when provisioning the Function Apps. Since you associated the Application Insights account with the Function Apps when creating them, the Application Insights telemetry key was added to the Function App configuration for you.
 
-### Help references
+### 参考情報
 
 |                 |          |
 | --------------- | -------- |
@@ -615,7 +612,7 @@ In this task, you will change the Computer Vision API to the Free tier. This wil
 
 6. Navigate back to the **Computer Vision** resource in the Azure portal and set the pricing tier back to **S1 Standard**.
 
-## Exercise 4: Explore your data in Azure Cosmos DB
+## 演習 4: Explore your data in Azure Cosmos DB
 
 **Duration**: 15 minutes
 
@@ -623,7 +620,7 @@ In this exercise, you will use the Azure Cosmos DB Data Explorer in the portal t
 
 > **Note:** Ensure that your IP address has been added to the IP list under the **Firewall settings** in your Azure Cosmos DB account. If not, you will not see the License Plates data within Azure Cosmos DB. You completed this step in the Before the hands-on lab guide.
 
-### Help references
+### 参考情報
 
 |                       |                                                           |
 | --------------------- | :-------------------------------------------------------: |
@@ -670,13 +667,13 @@ In this exercise, you will use the Azure Cosmos DB Data Explorer in the portal t
 
     ![In the Query window, the previously defined SQL query displays. Under Results, the number 669 is highlighted.](media/cosmos-query-results.png 'Query 1 tab')
 
-## Exercise 5: Create the data export workflow
+## 演習 5: Create the data export workflow
 
 **Duration**: 30 minutes
 
 In this exercise, you create a new Logic App for your data export workflow. This Logic App will execute periodically and call your ExportLicensePlates function, then conditionally send an email if there were no records to export.
 
-### Help references
+### 参考情報
 
 |                 |           |
 | --------------- |---------- |
@@ -762,13 +759,13 @@ In this exercise, you create a new Logic App for your data export workflow. This
 
     ![The Disable button is selected on the TollBoothLogic Logic app blade toolbar menu.](media/image97.png 'TollBoothLogic blade')
 
-## Exercise 6: Configure continuous deployment for your Function App
+## 演習 6: Configure continuous deployment for your Function App
 
 **Duration**: 40 minutes
 
 In this exercise, configure your Function App that contains the ProcessImage function for continuous deployment. You will first set up a GitHub source code repository and then set that as the Function App's deployment source.
 
-### Help references
+### 参考情報
 
 |                 |           |
 | --------------- | ----------|
@@ -967,7 +964,7 @@ In this exercise, configure your Function App that contains the ProcessImage fun
 
     ![The latest deployment is displayed in the Deployment Center.](media/functionapp-dc-latest.png 'Deployment Center')
 
-## Exercise 7: Rerun the workflow and verify data export
+## 演習 7: Rerun the workflow and verify data export
 
 **Duration**: 10 minutes
 
