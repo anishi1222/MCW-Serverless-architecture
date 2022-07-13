@@ -253,7 +253,7 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
     await Send("queuePlateForManualCheckup", "TollBooth/CustomerService", data);
     ```
 
-    > **注意**: `TODOs` 5、6、7はこのガイドの後で完成させます。
+    > **注意**: `TODO` 5、6、7はこのガイドの後で完成させます。
 
 ### Task 4: Visual Studioから関数アプリを公開する
 
@@ -269,7 +269,7 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
 
     ![In the Pick a publish target window, the Azure Functions Consumption Plan is selected in the left pane. The Select Existing radio button is selected in the right pane, and the Run from package file (recommended) checkbox is unchecked. The Create Profile button is also selected.](media/vs-publish-function.png 'Publish window')
 
-4. ターゲットとして**Azure Function App (Windows)**を選択し、**Next**を選択します。
+4. ターゲットとして **Azure Function App (Windows)** を選択し、**Next**を選択します。
 
     ![The specific target screen of the Publish dialog is shown with the Azure Function App (Windows) item selected and the Next button highlighted.](media/vs-publish-specific-target.png "Publish specific target")
 
