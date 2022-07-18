@@ -34,33 +34,33 @@
   - [演習 1: 画像処理関数アプリとデータエクスポート関数アプリを開発し発行する](#演習-1-画像処理関数アプリとデータエクスポート関数アプリを開発し発行する)
     - [Task 1: ハンズオンVMに接続する](#task-1-ハンズオンVMに接続する)
     - [Task 2: Visual Studioでスターターソリューションを開く](#task-2-Visual-Studioでスターターソリューションを開く)
-    - [Task 3: ProcessImage関数アプリの完成](#task-3-ProcessImage関数アプリの完成)
+    - [Task 3: ProcessImage関数アプリを完成させる](#task-3-ProcessImage関数アプリを完成させる)
     - [Task 4: Visual Studioから関数アプリを公開する](#task-4-Visual-Studioから関数アプリを公開する)
   - [演習 2: Azure Portalで関数を作成する](#演習-2-Azure-Portalで関数を作成する)
     - [Task 1: ナンバープレートデータをAzure Cosmos DBに保存する関数を作成する](#task-1-ナンバープレートデータをAzure-Cosmos-DBに保存する関数を作成する)
     - [Task 2: Event GridサブスクリプションをSavePlateData関数に追加する](#task-2-Event-GridサブスクリプションをSavePlateData関数に追加する)
     - [Task 3: Azure Cosmos DB出力バインドをSavePlateData関数に追加する](#task-3-Azure-Cosmos-DB出力バインドをSavePlateData関数に追加する)
     - [Task 4: 手作業による検証情報をAzure Cosmos DBに保存する関数を作成する](#task-4-手作業による検証情報をAzure-Cosmos-DBに保存する関数を作成する)
-    - [Task 5: Add an Event Grid subscription to the QueuePlateForManualCheckup function](#task-5-add-an-event-grid-subscription-to-the-queueplateformanualcheckup-function)
-    - [Task 6: Add an Azure Cosmos DB output to the QueuePlateForManualCheckup function](#task-6-add-an-azure-cosmos-db-output-to-the-queueplateformanualcheckup-function)
-  - [演習 3: Monitor your functions with Application Insights](#演習-3-monitor-your-functions-with-application-insights)
-    - [Task 1: Use the Live Metrics Stream to monitor functions in real-time](#task-1-use-the-live-metrics-stream-to-monitor-functions-in-real-time)
-    - [Task 2: Observe your functions dynamically scaling when resource-constrained](#task-2-observe-your-functions-dynamically-scaling-when-resource-constrained)
-  - [演習 4: Explore your data in Azure Cosmos DB](#演習-4-explore-your-data-in-azure-cosmos-db)
-    - [Task 1: Use the Azure Cosmos DB Data Explorer](#task-1-use-the-azure-cosmos-db-data-explorer)
-  - [演習 5: Create the data export workflow](#演習-5-create-the-data-export-workflow)
-    - [Task 1: Create the Logic App](#task-1-create-the-logic-app)
-  - [演習 6: Configure continuous deployment for your Function App](#演習-6-configure-continuous-deployment-for-your-function-app)
-    - [Task 1: Add git repository to your Visual Studio solution and deploy to GitHub](#task-1-add-git-repository-to-your-visual-studio-solution-and-deploy-to-github)
-    - [Task 2: Configure your Function App to use your GitHub repository for continuous deployment](#task-2-configure-your-function-app-to-use-your-github-repository-for-continuous-deployment)
-    - [Task 3: Finish your ExportLicensePlates function code and push changes to GitHub to trigger deployment](#task-3-finish-your-exportlicenseplates-function-code-and-push-changes-to-github-to-trigger-deployment)
-  - [演習 7: Rerun the workflow and verify data export](#演習-7-rerun-the-workflow-and-verify-data-export)
-    - [Task 1: Rerun Upload Images](#task-1-rerun-upload-images)
-    - [Task 2: Run the Logic App](#task-2-run-the-logic-app)
-    - [Task 3: View the exported CSV file](#task-3-view-the-exported-csv-file)
-  - [After the hands-on lab](#after-the-hands-on-lab)
-    - [Task 1: Delete the resource group in which you placed your Azure resources](#task-1-delete-the-resource-group-in-which-you-placed-your-azure-resources)
-    - [Task 2: Delete the GitHub repo](#task-2-delete-the-github-repo)
+    - [Task 5: Event GridサブスクリプションをQueuePlateForManualCheckup関数に追加する](#task-5-Event-GridサブスクリプションをQueuePlateForManualCheckup関数に追加する)
+    - [Task 6: Azure Cosmos DB出力バインドをQueuePlateForManualCheckup関数に追加する](#task-6-Azure-Cosmos-DB出力バインドをQueuePlateForManualCheckup関数に追加する)
+  - [演習 3: Application Insightsで関数アプリを監視する](#演習-3-Application-Insightsで関数アプリを監視する)
+    - [Task 1: ライブ メトリックを使ってリアルタイムに関数アプリを監視する](#task-1-ライブ-メトリックを使ってリアルタイムに関数アプリを監視する)
+    - [Task 2: リソース制約がある場合に関数アプリが動的にスケールする様子を観察する](#task-2-リソース制約がある場合に関数アプリが動的にスケールする様子を観察する)
+  - [演習 4: Azure Cosmos DBでデータを調査する](#演習-4-Azure-Cosmos-DBでデータを調査する)
+    - [Task 1: Azure Cosmos DB データエクスプローラーを使用する](#task-1-Azure-Cosmos-DB-データエクスプローラーを使用する)
+  - [演習 5: データエクスポートワークフローを作成する](#演習-5-データエクスポートワークフローを作成する)
+    - [Task 1: ロジックアプリを作成する](#task-1-ロジックアプリを作成する)
+  - [演習 6: 関数アプリの継続的デプロイを構成する](#演習-6-関数アプリの継続的デプロイを構成する)
+    - [Task 1: gitリポジトリにVisual Studioのソリューションを追加し、GitHubに展開する](#task-1-gitリポジトリにVisual-Studioのソリューションを追加し、GitHubに展開する)
+    - [Task 2: 関数アプリがGitHubリポジトリを使用して継続的にデプロイされるように設定する](#task-2-関数アプリがGitHubリポジトリを使用して継続的にデプロイされるように設定する)
+    - [Task 3: ExportLicensePlates 関数のコードを完成させ、変更を GitHub にプッシュしてデプロイを開始する](#task-3-ExportLicensePlates-関数のコードを完成させ、変更を-GitHub-にプッシュしてデプロイを開始する)
+  - [演習 7: ワークフローを再実行し、データエクスポートを確認する](#演習-7-ワークフローを再実行し、データエクスポートを確認する)
+    - [Task 1: 画像のアップロードを再実行する](#task-1-画像のアップロードを再実行する)
+    - [Task 2: ロジックアプリを実行する](#task-2-ロジックアプリを実行する)
+    - [Task 3: エクスポートされたCSVファイルを見る](#task-3-エクスポートされたCSVファイルを見る)
+  - [ハンズオン終了後](#ハンズオン終了後)
+    - [Task 1: Azureリソースを配置したリソースグループを削除する](#task-1-Azureリソースを配置したリソースグループを削除する)
+    - [Task 2: GitHubリポジトリを削除する](#task-2-GitHubリポジトリを削除する)
 
 <!-- /TOC -->
 
@@ -99,7 +99,9 @@ Contoso社では料金所管理事業を急速に拡大し、より広い地域�
 - Office 365のアカウント。お持ちでないなら、 [トライアル環境のサインアップ](https://portal.office.com/Signup/MainSignup15.aspx?Dap=False&QuoteId=79a957e9-ad59-4d82-b787-a46955934171&ali=1) が可能です。  
 - GitHubのアカウント。 [無料のアカウントを作成](https://github.com/join) できます。
 
-## 演習 1: 画像処理関数アプリとデータエクスポート関数アプリを開発し発行する (45分)
+## 演習 1: 画像処理関数アプリとデータエクスポート関数アプリを開発し発行する
+
+**所要時間**: 45分
 
 Visual Studio と統合された Azure Functions ツールを使用して、ローカルで関数アプリを開発およびデバッグし、Azure に公開します。スタータープロジェクトソリューションであるTollBoothsには、必要なコードのほとんどが含まれています。Azureにデプロイする前に、不足しているコードを追加します。
 
@@ -184,9 +186,9 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
 
    > **注意**: Azureサブスクリプションのリソースを確認する前に、アカウントアイコンを選択してAzureアカウントでログインする必要がある可能性があります。
 
-8. ファイルエクスプローラで **src** サブフォルダに移動します。ここで、 **license plates** サブフォルダを開きます。このフォルダにはソリューションのテスト用にサンプルのナンバープレートの写真が入っています。このうち1枚の写真はOCR処理に失敗するもので、このような障害を扱うようにワークロードがどのように設計されているかを示すためのものです。UploadImagesプロジェクトは、拡張性をテストするために、1000枚の写真をアップロードするために**copyfrom**フォルダを使います。
+8. ファイルエクスプローラで **src** サブフォルダに移動します。ここで、 **license plates** サブフォルダを開きます。このフォルダにはソリューションのテスト用にサンプルのナンバープレートの写真が入っています。このうち1枚の写真はOCR処理に失敗するもので、このような障害を扱うようにワークロードがどのように設計されているかを示すためのものです。UploadImagesプロジェクトは、拡張性をテストするために、1,000枚の写真をアップロードするために**copyfrom**フォルダを使います。
 
-### Task 3: ProcessImage関数アプリの完成
+### Task 3: ProcessImage関数アプリを完成させる
 
 スタータープロジェクトの一部のコンポーネントを完成させる必要があります。これらはコード内で `TODO` としてマークされています。最初の `TODO` アイテムは `ProcessImage` 関数の中にあります。Computer Vision サービスを呼び出す `FindLicensePlateText` クラスと、処理結果を先に作成した Event Grid トピックに送信するための `SendToEventGrid` クラスをアップデートします。
 
@@ -326,7 +328,9 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
 
 13. **作成**を選択します。
 
-## 演習 2: Azure Portalで関数を作成する (45分)
+## 演習 2: Azure Portalで関数を作成する
+
+**所要時間**: 45分
 
 この演習では、Azure Portalから2個のAzure関数アプリをNode.jsで作成します。これらはEvent Gridでトリガーされ、ProcessImage関数で処理したナンバープレートの結果をAzure Cosmos DBに格納します。
 
@@ -352,9 +356,9 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
 
 4. **関数の作成**フォームで以下のように設定します。
 
-   - Enter `event grid` into the **テンプレートの選択**フィルターに、`event grid` を入力 ①
+   - **テンプレートの選択**フィルターに、`event grid` を入力 ①
    - **Azure Event Grid trigger** テンプレートを選択 ②
-   - **新しい関数**に `SavePlateData` という名前を入力 ③
+   - **新しい関数** の名前フィールドに `SavePlateData` という名前を入力 ③
    - **作成** ボタンを選択 ④
 
     ![In the Create Function form, event grid is entered into the filter box, the Azure Event Grid trigger template is selected and highlighted, and SavePlateData is entered in the Name field and highlighted.](media/new-function-save-plate-data.png "Create Function form")
@@ -391,7 +395,7 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
 
 2. **イベント サブスクリプションの作成**の画面で、以下の構成を指定します。
 
-    - **名前**: **saveplatedatasub**のような一意の名前を指定します（緑色のチェックマークが現れることを確認します）。
+    - **名前**: `saveplatedatasub`のような一意の名前を指定します（緑色のチェックマークが現れることを確認します）。
     - **イベントスキーマ**: **イベントグリッドスキーマ**を選択します。
     - **Topic Type**: **Event Grid Topics**を選択します。
     - **Subscription**: このハンズオンで利用しているサブスクリプションを選択します。
@@ -409,14 +413,14 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
 
 このタスクでは、SavePlateData 関数に Azure Cosmos DB 出力バインディングを追加し、Processed コレクションへのデータ保存を可能にします。
 
-1. **SavePlateData**関数の統合画面で、`出力`の下の **+出力の追加** を選択します。
+1. **SavePlateData**関数の統合画面で、**出力**の下の **+出力の追加** を選択します。
 
 2. **出力の作成** 画面で、以下の設定をします。
 
-   - **バインドの種類**として `Azure Cosmos DB` を選択 ①
-   - Cosmos DB account connectionのドロップダウンリストの下にある、**New**のリンクを選択 ②
-   - `cosmosdb-`で始まる名前の接続を選択 ③  
-   - **OK**を選択 ④
+    - **バインドの種類**として `Azure Cosmos DB` を選択 ①
+    - **Cosmos DB account connection**のドロップダウンリストの下にある、**New**のリンクを選択 ②
+    - `cosmosdb-`で始まる名前の接続を選択 ③  
+    - **OK**を選択 ④
 
     ![The Add Output link is highlighted with an arrow pointing to the highlighted binding type in the Create Output blade.](media/function-output-binding-type.png "Create Output")
 
@@ -430,26 +434,26 @@ Visual Studio と統合された Azure Functions ツールを使用して、ロ�
 
     ![Under Azure Cosmos DB output the following field values display: Document parameter name, outputDocument; Collection name, Processed; Database name, LicensePlates; Azure Cosmos DB account connection, cosmosdb_DOCUMENTDB.](media/saveplatedata-cosmos-integration.png 'Azure Cosmos DB output section')
 
-5. `SavePlateData`関数を閉じます。
+5. **SavePlateData**関数を閉じます。
 
 ### Task 4: 手作業による検証情報をAzure Cosmos DBに保存する関数を作成する
 
-In this task, you will create another new function triggered by Event Grid and outputs information about photos that need to be manually verified to Azure Cosmos DB.  This is in the Azure Function App that starts with **TollBoothEvents**.
+このタスクでは、Event Grid をトリガーとして、手作業での確認が必要な写真の情報を Azure Cosmos DB に出力する別の関数を新規作成します。 これは、**TollBoothEvents** で始まる Azure Function App 内にあります。
 
-1. Select **Functions** in the left-hand menu, then select **+ Create**.
+1. 左側のメニューから **関数** を選択し、**+作成** を選択します。
 
     ![In the Function Apps blade, the TollBoothEvents application is selected. In the Overview tab, the + Create button is selected.](media/functions-new.png 'TollBoothEvents blade')
 
-2. On the **Create function** form:
+2. **関数の作成**フォームで以下のように設定します。
 
-   - Enter `event grid` into the **Select a template** filter box (1).
-   - Select the **Azure Event Grid trigger** template (2).
-   - Enter `QueuePlateForManualCheckup` into the **New Function** name field (3).
-   - Select **Create** (4).
+    - **テンプレートの選択**フィルターに、`event grid` を入力 ①
+    - **Azure Event Grid trigger** テンプレートを選択 ②
+    - **新しい関数** の名前フィールドに`QueuePlateForManualCheckup`を入力 ③
+    - **作成** ボタンを選択 ④
 
     ![In the Create function form, event grid is entered into the filter box. The Azure Event Grid trigger template is selected and highlighted, and QueuePlateForManualCheckup is entered in the Name field and highlighted.](media/new-function-manual-checkup.png "Create function form")
 
-3. On the **QueuePlateForManualCheckup** Function blade, select **Code + Test** from the left-hand menu and replace the code in the new `QueuePlateForManualCheckup` function's `index.js` file with the following:
+3. **QueuePlateForManualCheckup** 関数の画面で、左側のメニューから **コードとテスト** を選択し、新しい `QueuePlateForManualCheckup` 関数の `index.js` ファイル内のコードを以下のものに置き換えます。
 
     ```javascript
     module.exports = async function(context, eventGridEvent) {
@@ -467,440 +471,444 @@ In this task, you will create another new function triggered by Event Grid and o
     };
     ```
 
-4. Select **Save**.
+4. **保存**を選択します。
 
-### Task 5: Add an Event Grid subscription to the QueuePlateForManualCheckup function
+### Task 5: Event GridサブスクリプションをQueuePlateForManualCheckup関数に追加する
 
-In this task, you will add an Event Grid subscription to the QueuePlateForManualCheckup function. This will ensure that the events sent to the Event Grid topic containing the queuePlateForManualCheckup event type are routed to this function.
+このタスクでは、QueuePlateForManualCheckup関数にEvent Gridサブスクリプションを追加します。これにより、queuePlateForManualCheckupイベントタイプを含む Event Gridトピックに送信されたイベントが、この関数にルーティングされるようになります。
 
-1. With the **QueuePlateForManualCheckup** function open, select **Integration** (1) in the left-hand menu. Select **Event Grid Trigger (eventGridEvent)** (2). On the Edit Trigger form, select **Create Event Grid subscription** (3).
+1. **QueuePlateForManualCheckup**関数を開いた状態で、①左メニューの**統合**を選択し、②**Event Grid Trigger（eventGridEvent）**を選択して、③続いて**Event Gridサブスクリプションの作成**を選択します。
 
     ![In the QueuePlateForManualCheckup Integration blade, the Create Event Grid subscription link is selected.](media/queueplateformanualcheckup-add-eg-sub.png "QueuePlateForManualCheckup blade")
 
-2. On the **Create Event Subscription** blade, specify the following configuration options:
+2. **イベント サブスクリプションの作成**の画面で、以下の構成を指定します。
 
-    - **Name**: Enter a unique value, similar to `queueplateformanualcheckupsub` (ensure the green check mark appears).
-    - **Event Schema**: Select **Event Grid Schema**.
-    - **Topic Type**: Select **Event Grid Topics**.
-    - **Subscription**: Select the subscription you are using for this hands-on lab.
-    - **Resource Group**: Select the **hands-on-lab-SUFFIX** resource group from the list of existing resource groups.
-    - **Resource**: Select your Event Grid Topic. This should be the only service listed and will start with `eventgridtopic-`.
-    - **Event Types**: Select **Add Event Type** and enter `queuePlateForManualCheckup` for the new event type value. This will ensure this function is only triggered by this Event Grid type.
-    - **Endpoint Type**: Leave `Azure Function` as the Endpoint Type.
-    - **Endpoint**: Leave as `QueuePlateForManualCheckup`.
+    - **名前**: `queueplateformanualcheckupsub`のような一意の名前を指定します（緑色のチェックマークが現れることを確認します）。
+    - **イベントスキーマ**: **イベントグリッドスキーマ**を選択します。
+    - **Topic Type**: **Event Grid Topics**を選択します。
+    - **Subscription**: このハンズオンで利用しているサブスクリプションを選択します。
+    - **Resource Group**: 既存リソースグループから**hands-on-lab-SUFFIX** リソースグループを選択します。
+    - **Resource**: Event Grid Topicを選択します。`eventgridtopic-`で始まるサービス1個のみのはずです。
+    - **イベントの種類**: **イベントの種類の追加**を選択して、新たなイベントタイプとして`queuePlateForManualCheckup` を入力します。これにより、このEventの種類でのみこの関数が呼び出されるようになります。
+    - **エンドポイントのタイプ**: `Azure関数`のままにします。
+    - **エンドポイント**: Leave as `QueuePlateForManualCheckup`のままにします。
 
     ![In the Create Event Subscription blade, fields are set to the previously defined values.](media/manualcheckup-eg-sub.png)
 
-3. Select **Create** and close the Edit Trigger blade.
+3. **作成**を選択し、トリガーの編集画面を閉じます。
 
-### Task 6: Add an Azure Cosmos DB output to the QueuePlateForManualCheckup function
+### Task 6: Azure Cosmos DB出力バインドをQueuePlateForManualCheckup関数に追加する
 
-In this task, you will add an Azure Cosmos DB output binding to the QueuePlateForManualCheckup function, enabling it to save its data to the NeedsManualReview collection.
+このタスクでは、QueuePlateForManualCheckup関数に Azure Cosmos DB 出力バインディングを追加し、NeedsManualReviewコレクションへのデータ保存を可能にします。
 
-1. While still on the **QueuePlateForManualCheckup** Integration blade, select **+ Add output** under **Outputs**.
+1. **QueuePlateForManualCheckup**関数の統合画面で、**出力**の下の **+出力の追加** を選択します。
 
-2. In the **Create Output** form, select the following configuration options in the Create Output form:
+2. **出力の作成** 画面で、以下の設定をします。
 
-    - **Binding Type**: Select `Azure Cosmos DB`.
-    - **Cosmos DB account connection**: Select the **Azure Cosmos DB account connection** you created earlier.
-    - **Document parameter name**: Leave set to `outputDocument`.
-    - **Database name**: Enter `LicensePlates`.
-    - **Collection name**: Enter `NeedsManualReview`.
+   - **バインドの種類**として `Azure Cosmos DB` を選択
+   - **Cosmos DB account connection**は先ほど作成した**Azure Cosmos DB account connection**を選択
+   - **Document parameter name**: `outputDocument`のままにしておきます。
+   - **Database name**: `LicensePlates`と入力します。
+   - **Collection name**: `NeedsManualReview`と入力します。
 
-3. Select **OK**.
+3. **OK**を選択します。
 
     ![In the Azure Cosmos DB output form, the following field values display: Document parameter name, outputDocument; Collection name, NeedsManualReview; Database name, LicensePlates; Azure Cosmos DB account connection, cosmosdb-SUFFIX.](media/manual-checkup-cosmos-integration.png 'Azure Cosmos DB output form')
 
-4. Close the **QueuePlateForManualCheckup** function.
+4. **QueuePlateForManualCheckup**関数を閉じます。
 
-## 演習 3: Monitor your functions with Application Insights
+## 演習 3: Application Insightsで関数アプリを監視する
 
-**Duration**: 15 minutes
+**所要時間**: 15分
 
-Application Insights can be integrated with Azure Function Apps to provide robust monitoring for your functions. In this exercise, you examine telemetry in the Application Insights account that you created when provisioning the Function Apps. Since you associated the Application Insights account with the Function Apps when creating them, the Application Insights telemetry key was added to the Function App configuration for you.
+Application Insights は、Azure Function Apps と統合することで、機能に対する強固な監視を提供することができます。この演習では、Function Apps のプロビジョニング時に作成した Application Insights アカウントのテレメトリーを確認します。Function Apps の作成時に Application Insights アカウントを関連付けたため、Application Insights テレメトリーキーが Function App の設定に追加されています。
 
 ### 参考情報
 
 |                 |          |
 | --------------- | -------- |
 | **Description** | **Link** |
-| Monitor Azure Functions using Application Insights | <https://docs.microsoft.com/azure/azure-functions/functions-monitoring> |
-| Live Metrics Stream: Monitor & Diagnose with 1-second latency | <https://docs.microsoft.com/azure/application-insights/app-insights-live-stream> |
+| Azure Functions を監視する | <https://docs.microsoft.com/azure/azure-functions/functions-monitoring> |
+| Live Metrics: 1 秒の待機時間での監視と診断 | <https://docs.microsoft.com/azure/application-insights/app-insights-live-stream> |
 
-### Task 1: Use the Live Metrics Stream to monitor functions in real-time
+### Task 1: ライブ メトリックを使ってリアルタイムに関数アプリを監視する
 
-1. Open the **appinsights** Application Insights resource from within your lab resource group.
+1. ハンズオンのリソースグループから **appinsights-SUFFIX**のApplication Insights リソースを開きます。
 
     ![The Application Insights instance is highlighted in the resource group.](media/resource-group-application-insights.png "Application Insights")
 
-2. In Application Insights, select **Live Metrics Stream** under **Investigate** in the left-hand navigation menu.
+2. Application Insightsの画面で、左側のナビゲーションメニューの**調査**の下にある**ライブ メトリック**を選択します。
 
     ![In the TollBoothMonitor blade, in the pane under Investigate, Live Metrics Stream is selected. ](media/live-metrics-link.png 'TollBoothMonitor blade')
 
-3. Leave the Live Metrics Stream open and return to the starter app solution in Visual Studio on the LabVM.
+3. ライブ メトリックを開いたままで、LabVMのVisual Studioでスターターアプリソリューションに戻ります。
 
-4. Navigate to the **UploadImages** project using the Solution Explorer of Visual Studio. Right-click on **UploadImages** project and select **Properties**.
+4. Visual Studioのソリューションエクスプローラで**UploadImages**プロジェクトに移動し、**UploadImages**プロジェクトを右クリックして**Properties**を選択します。
 
     ![In Solution Explorer, the UploadImages project is expanded, and Properties is selected from the right-click context menu.](media/vs-uploadimages.png 'Solution Explorer')
 
-5. Select **Debug** in the left-hand menu, then paste the connection string for your Azure Data Lake Storage Gen2 account into the **Application arguments** text field.
+5. 左側のメニューの **Debug** を選択し、Azure Data Lake Storage Gen2アカウントの接続文字列を **Application arguments** テキストフィールドに貼り付けます。
 
-   > **Note**: To obtain the connection string:
+   > **注意**: 接続文字列を取得する方法は以下からどうぞ。
    >
-   > - In the Azure portal, navigate to the **datalake{SUFFIX}** storage account.
-   > - Select **Access keys** from the left menu.
-   > - Copy the **Connection string** value of **key1**.
+   > - Azure portalで、**datalake{SUFFIX}**ストレージアカウントに移動
+   > - 左側のメニューから**アクセス キー**を選択
+   > - **key1**の**接続文字列**の値をコピー
    >  
 
-   Providing this value will ensure that the required connection string is added as an argument each time you run the application. Additionally, the combination of adding the value here and having the `.gitignore` file included in the project directory will prevent the sensitive connection string from being added to your source code repository in a later step.
+   この値を指定すると、アプリケーションを実行するたびに必要な接続文字列が引数として追加されるようになります。さらに、この値を追加して `.gitignore` ファイルをプロジェクトディレクトリに含めることで、後のステップでソースコードリポジトリに機密性の高い接続文字列が追加されるのを防ぐことができます。
 
     ![The Debug menu item and the command line arguments text field are highlighted.](media/vs-command-line-arguments.png "Properties - Debug")
 
-6. Save your changes by selecting the Save icon on the Visual Studio toolbar.
+6. Visual Studioのツールバーにある**Save**アイコンを選択して、変更を保存します。
 
-7. Right-click the **UploadImages** project in the Solution Explorer, select **Debug**, then **Start New Instance** from the context menu.
+7. Visual Studioのソリューションエクスプローラで**UploadImages**を右クリックし、**Debug**を選択後、コンテキストメニューから**Start New Instance**を選択します。
 
     ![In Solution Explorer, the UploadImages project is selected. From the context menu, Debug then Start New Instance is selected.](media/vs-debug-uploadimages.png 'Solution Explorer')
 
-    >**Note:** Ensure the files are located under `C:\ServerlessMCW\`. If the files are located under a longer root path, such as `C:\Users\workshop\Downloads\`, then you will encounter build issues in later steps: `The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and the directory name must be less than 248 characters.`
+    >**注意**: ファイルが `C:\ServerlessMCW` の下に配置されていることを確認します。もしファイルが `C:\Users\workshop\Downloads\` のような長いルートパスの下にある場合、後のステップで `The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and the directory name must be less than 248 characters. (指定されたパス、ファイル名、またはその両方が長すぎます。指定されたパス、ファイル名、またはその両方が長すぎます。完全修飾ファイル名は260文字未満、ディレクトリ名は248文字未満でなければなりません)` というビルドの問題に遭遇します。
 
-8. When the console window appears, enter **1** and press **ENTER**. This action uploads a handful of car photos to the images container of your Blob storage account.
+8. コンソールウィンドウが表示されたら、**1**と入力し、**ENTER**を押してください。この操作により、Blobストレージアカウントの画像コンテナにクルマの写真がアップロードされます。
 
     ![A Command prompt window displays, showing images being uploaded.](media/image69.png 'Command prompt window')
 
-9. Switch back to your browser window with the Live Metrics Stream still open within Application Insights. You should start seeing new telemetry arrive, showing the number of servers online, the incoming request rate, CPU process amount, etc. You can select some of the sample telemetry in the list to the side to view output data.
+9. Application Insights内でライブメトリックを開いた状態のブラウザウィンドウに戻ります。オンラインのサーバーの個数、Request Rate、CPUプロセス量などを示す新しいテレメトリーが到着し始めるはずです。横のリストでサンプルのテレメトリをいくつか選択して、出力データを表示できます。
 
     ![The Live Metrics Stream window displays information for the two online servers. Displaying line and point graphs including incoming requests, outgoing requests, and overall health. To the side is a list of Sample Telemetry information. ](media/image70.png 'Live Metrics Stream window')
 
-10. Leave the Live Metrics Stream window open once again and close the console window for the image upload. Debug the UploadImages project again, then enter **2** and press **ENTER**. This will upload 1,000 new photos.
+10. ライブメトリックスストリームウィンドウを再度開いたままにして、画像アップロードのコンソールウィンドウを閉じます。UploadImagesプロジェクトを再度Debugで開き、**2**を入力し、**ENTER**を押してください。これで、1,000枚の写真が新たにアップロードされます。
 
     ![The Command prompt window displays with image uploading information.](media/image71.png 'Command prompt window')
 
-11. Switch back to the Live Metrics Stream window and observe the activity as the photos are uploaded. You can see the number of servers online, which translates to the number of Function App instances running between both Function Apps. You should also notice things such as a steady cadence for the Request Rate monitor, the Request Duration hovering below \~200ms second, and the Incoming Requests roughly matching the Outgoing Requests.
+11. ライブメトリックの画面に戻り、写真がアップロードされる様子を観察してください。オンラインになっているサーバーの数、つまり両方の関数アプリで実行されている関数アプリインスタンスの数が表示されます。また、Request Rateモニターが一定の周期で推移し、Request Durationが "秒"未満で推移し、Incoming RequestsがOutgoing Requestsとほぼ同じであることに気づくはずです。
 
     ![In the Live Metrics Stream window, two servers are online under Incoming Requests. The Request Rate heartbeat line graph is selected, as is the Request Duration dot graph. Under Overall Health, the Process CPU heartbeat line graph is also selected, the similarities between this graph and the Request Rate graph under Incoming Requests are highlighted for comparison.](media/image72.png 'Live Metrics Stream window')
 
-12. After this has run for a while, close the image upload console window once again, but leave the Live Metrics Stream window open.
+12. しばらくの間この操作を実行した後に、写真アップロードのコンソールウィンドウを再度閉じます。なお、ライブメトリックの画面はそのまま開いておきます。
 
-### Task 2: Observe your functions dynamically scaling when resource-constrained
+### Task 2: リソース制約がある場合に関数アプリが動的にスケールする様子を観察する
 
-In this task, you will change the Computer Vision API to the Free tier. This will limit the number of requests to the OCR service to 10 per minute. Once changed, run the UploadImages console app to upload 1,000 images again. The resiliency policy is programmed into the FindLicensePlateText.MakeOCRRequest method of the ProcessImage function will begin exponentially backing off requests to the Computer Vision API, allowing it to recover and lift the rate limit. This intentional delay will significantly increase the function's response time, causing the Consumption plan's dynamic scaling to kick in, allocating several more servers. You will watch all of this happen in real-time using the Live Metrics Stream view.
+このタスクでは、Computer Vision APIの価格レベルをFreeに変更します。これにより、OCR サービスへのリクエスト数は 1 分あたり 10 件に制限されます。変更後、UploadImagesコンソールアプリを実行し、1,000枚の画像を再度アップロードします。ProcessImage関数のFindLicensePlateText.MakeOCRRequestメソッドにプログラムされたresiliencyポリシーが、Computer Vision APIへのリクエストを指数関数的にバックオフし始め、その結果、レート制限が収まり影響を受けなくすることができるようになります。この意図的な遅延により、関数の応答時間が大幅に増加し、Consumptionプランの動的スケーリングが作動し、さらにいくつかのサーバーが割り当てられます。ライブメトリックビューを使用して、このすべてがリアルタイムで起こる様子を確認します。
 
-1. Open your Computer Vision API service by opening the **hands-on-lab-SUFFIX** resource group and then selecting the resource that starts with **computervision-**.
+1. **hands-on-lab-SUFFIX**リソースグループを開き、**computervision-**で始まるリソースを選択して、Computer Vision APIサービスを開きます。
 
     ![The computervision Computer vision resource is highlighted in the list of services in the resource group.](media/resource-group-computer-vision-resource.png "Resource group")
 
-2. Select **Pricing tier** under **Resource Management** in the menu. Select the **F0 Free** pricing tier, then choose **Select**.
+2. メニューの**リソース 管理**にある**価格レベル**を選択します。**F0 Free**価格レベルを選択し**適用**を選択します。
 
-    > **Note**: If you already have an **F0** free pricing tier instance, you will not be able to create another one.
+    > **注意**: すでに**F0 Free**価格レベルインスタンスを有している場合、別のものを作成できません。
 
     ![In the Cognitive Services blade, under Resource Management, the Pricing tier item is selected. In the Choose your pricing tier blade, the F0 Free option is selected.](media/image73.png 'Choose your pricing tier blade')
 
-3. Switch to Visual Studio, debug the **UploadImages** project again, then enter **2** and press **ENTER**. This will upload 1,000 new photos.
+3. Visual Studioに切り替えて、**UploadImages**プロジェクトを再度Debugで開き、**2**を入力して**ENTER**を押します。これで1,000枚の新たな写真がアップロードされます。
 
     ![The Command prompt window displays image uploading information.](media/image71.png 'Command Prompt window')
 
-4. Switch back to the Live Metrics Stream window and observe the activity as the photos are uploaded. After running for a couple of minutes, you should start to notice a few things. The Request Duration will begin to increase over time. As this happens, you should notice more servers being brought online. Each time a server is brought online, you should see a message in the Sample Telemetry stating that it is "Generating 2 job function(s)", followed by a Starting Host message. You should also see messages logged by the resilience policy that the Computer Vision API server is throttling the requests. This is known by the response codes sent back from the service (429). A sample message is "Computer Vision API server is throttling our requests. Automatically delaying for 16000ms".
+4. ライブメトリックの画面に戻り、写真がアップロードされる様子を観察してください。数分間実行した後、いくつかのことに気がつくはずです。リクエストの処理時間は時間経過とともに増加し始めます。この現象が発生すると、オンラインになるサーバーの数が増えていることに気づくはずです。サーバーがオンラインになるたびに、Sample Telemetry に "Generating 2 job function(s)" というメッセージが表示され、その後に Starting Host というメッセージが表示されるはずです。また、Computer Vision API サーバーがリクエストを制限していることを示す、resiliencyポリシーが記録するメッセージも表示されるはずです。これは、サービスから送り返されるレスポンスコード（429）でわかります。メッセージのサンプルは、"Computer Vision API server is throttling our requests. Automatically delaying for 16000ms" です。
 
-    > **Note**: If you select a sample telemetry item and cannot see its details, drag the resize bar at the bottom of the list up to resize the details pane.
+    > **注意**: サンプルテレメトリを選択してその詳細を確認できない場合、リストの下にあるサイズ変更バーを動かして、詳細ペインのサイズを変更してください。
 
     ![In the Live Metrics Stream window, 11 servers are now online.](media/image74.png 'Live Metrics Stream window')
 
-5. After this has run for some time, close the UploadImages console to stop uploading photos.
+5. しばらく実行した後、UploadImagesコンソールを閉じて、写真のアップロードを停止します。
 
-6. Navigate back to the **Computer Vision** resource in the Azure portal and set the pricing tier back to **S1 Standard**.
+6. Azure Portalの **Computer Vision** リソースに戻り、価格階層を **S1 Standard** に設定します。
 
-## 演習 4: Explore your data in Azure Cosmos DB
+## 演習 4: Azure Cosmos DBでデータを調査する
 
-**Duration**: 15 minutes
+**所要時間**: 15分
 
-In this exercise, you will use the Azure Cosmos DB Data Explorer in the portal to view saved license plate data.
+この演習では、ポータルのAzure Cosmos DBデータエクスプローラーを使用して、保存されたナンバープレートデータを表示します。
 
-> **Note:** Ensure that your IP address has been added to the IP list under the **Firewall settings** in your Azure Cosmos DB account. If not, you will not see the License Plates data within Azure Cosmos DB. You completed this step in the Before the hands-on lab guide.
+> **注意**: Azure Cosmos DB アカウントの **ファイアウォール設定** の IP リストに自分の IP アドレスが追加されていることを確認します。そうでない場合、Azure Cosmos DB 内の License Plates データは表示されません。この作業は、ハンズオンガイドの Before the hands で完了しているはずです。
 
 ### 参考情報
 
 |                       |                                                           |
 | --------------------- | :-------------------------------------------------------: |
 | **Description**       |                         **Links**                         |
-| About Azure Cosmos DB | <https://docs.microsoft.com/azure/cosmos-db/introduction> |
+| Azure Cosmos DB の概要 | <https://docs.microsoft.com/azure/cosmos-db/introduction> |
 
-### Task 1: Use the Azure Cosmos DB Data Explorer
+### Task 1: Azure Cosmos DB データエクスプローラーを使用する
 
-1. In the [Azure portal](https://portal.azure.com), navigate to the **hands-on-lab-SUFFIX** resource group.
+1. [Azure portal](https://portal.azure.com)で、 **hands-on-lab-SUFFIX**リソースグループに移動します。
 
-   > You can get to the resource group by selecting **Resource groups** under **Azure services** on the Azure portal home page and then select the resource group from the list. If there are many resource groups in your Azure account, you can filter the list for **hands-on-lab** to reduce the resource groups listed.
+   > Azure Portalホームページの**Azureサービス**の下にある**リソースグループ**を選択し、リストからリソースグループを選択すると、リソースグループに移動できます。Azureアカウントに多くのリソースグループがある場合、**hands-on-lab**のリストをフィルタリングして、リストされるリソースグループをフィルタリングできます。
 
-2. On your resource group blade, select the **cosmosdb** Azure Cosmos DB account resource in the resource group's list of services available.
+2. リソースグループの画面で、リソースグループ内で利用可能なサービス一覧から **cosmosdb** Azure Cosmos DB アカウントのリソースを選択します。
 
    ![The Azure Cosmos DB account resource is highlighted in the list of services in the resource group.](media/resource-group-cosmos-db-account.png "Resources")
 
-3. On the Cosmos DB blade, select **Data Explorer** from the left-hand navigation menu.
+3. Cosmos DBの画面で、左側のナビゲーションメニューから**データ エクスプローラー**を選択します。
 
     ![In the Data Explorer blade, Data Explorer is selected from the left menu.](media/data-explorer-link.png 'Data Explorer')
 
-4. Expand the **LicensePlates** database and then the **Processed** collection and select **Items**. This will list each of the JSON documents added to the collection.
+4. **LicensePlates** データベースを展開し、次に **Processed** コレクションを展開し、**Items** を選択します。これにより、コレクションに追加された各JSONドキュメントが一覧表示されます。
 
-5. Select one of the documents to view its contents. Your functions added the first four properties. The remaining properties are standard and are assigned by Cosmos DB.
+5. ドキュメントを1つ選択し、その内容を表示します。作成した関数アプリが、最初の4つのプロパティを追加しました。残りのプロパティは標準的なもので、Cosmos DBが割り当てています。
 
     ![In the tree-view beneath the LicensePlates Cosmos DB, the Processed collection is expanded with the Items item selected. On the Items tab, a document is selected, and its JSON data is displayed. The first four properties of the document (fileName, licensePlateText, timeStamp, and exported) are displayed along with the standard Cosmos DB properties.](media/data-explorer-processed.png 'Data Explorer')
 
-6. Next, expand the **NeedsManualReview** collection and select **Items**.
+6. 次に**NeedsManualReview**コレクションを展開し、**Items**を選択します。
 
-7. Select one of the documents to view its contents. Notice that the filename is provided, as well as a property named "resolved." While out of scope for this lab, those properties can be used to provide a manual process for reviewing photos and entering license plates.
+7. ドキュメントを1つ選択し、内容を表示します。ファイル名と、"resolved"という名前のプロパティが追加されていることに着目してください。このハンズオンの範囲外ですが、これらのプロパティを使用して、写真のレビューとナンバープレートの入力のための手動プロセスを提供できます。
 
     ![In the tree-view beneath the LicensePlates Cosmos DB, the NeedsManualReview collection is expanded, and the Items item is selected. On the Items tab, a document is selected, and its JSON data is displayed. The first four properties of the document (fileName, licensePlateText, timeStamp, and resolved) are shown along with the standard Cosmos DB properties.](media/data-explorer-needsreview.png 'Data Explorer')
 
-8. Select the ellipses (...) next to the **Processed** collection and select **New SQL Query**.
+8. **Processed**コレクションの横にある楕円 ... を選択し、**New SQL Query**を選択します。
 
     ![In the tree-view beneath the LicensePlates Cosmos DB, the Processed collection is selected. From its right-click context menu, New SQL Query is selected.](media/data-explorer-new-sql-query.png 'Data Explorer')
 
-9. Paste the SQL query below into the query window. This query counts the number of processed documents that have not been exported:
+9. 以下のSQLクエリをクエリウィンドウに貼り付けます。このクエリは、エクスポートされていない処理済み文書の件数をカウントします。
 
     ```sql
     SELECT VALUE COUNT(1) FROM c WHERE c.exported = false
     ```
 
-10. Execute the query and observe the results. In our case, we have 669 processed documents that need to be exported.
+10. このクエリを実行し、結果を観察してみましょう。この例では、エクスポート対象の処理済み文書が669件あります。
 
     ![In the Query window, the previously defined SQL query displays. Under Results, the number 669 is highlighted.](media/cosmos-query-results.png 'Query 1 tab')
 
-## 演習 5: Create the data export workflow
+## 演習 5: データエクスポートワークフローを作成する
 
-**Duration**: 30 minutes
+**所要時間**: 30分
 
-In this exercise, you create a new Logic App for your data export workflow. This Logic App will execute periodically and call your ExportLicensePlates function, then conditionally send an email if there were no records to export.
+この演習では、データエクスポートワークフローのための新しいロジックアプリを作成します。このロジックアプリは定期的に実行されるもので、ExportLicensePlates関数アプリを呼び出し、エクスポートするレコードがない場合、条件付きで電子メールを送信します。
 
 ### 参考情報
 
 |                 |           |
 | --------------- |---------- |
 | **Description** | **Links** |
-| What is Azure Logic Apps? | <https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-overview> |
-| Call Azure Functions from logic apps | <https://docs.microsoft.com/azure/logic-apps/logic-apps-azure-functions> |
+| Azure Logic Apps とは | <https://docs.microsoft.com/azure/logic-apps/logic-apps-overview> |
+| Azure Functions を使用してコードを作成し、Azure Logic Apps のワークフローから呼び出す | <https://docs.microsoft.com/azure/logic-apps/logic-apps-azure-functions> |
 
-### Task 1: Create the Logic App
+### Task 1: ロジックアプリを作成する
 
-1. In the [Azure portal](https://portal.azure.com), navigate to the **hands-on-lab-SUFFIX** resource group.
+1. [Azure portal](https://portal.azure.com)で、 **hands-on-lab-SUFFIX**リソースグループに移動します。
 
-   > You can get to the resource group by selecting **Resource groups** under **Azure services** on the Azure portal home page and then select the resource group from the list. If there are many resource groups in your Azure account, you can filter the list for **hands-on-lab** to reduce the resource groups listed.
+   > Azure Portalホームページの**Azureサービス**の下にある**リソースグループ**を選択し、リストからリソースグループを選択すると、リソースグループに移動できます。Azureアカウントに多くのリソースグループがある場合、**hands-on-lab**のリストをフィルタリングして、リストされるリソースグループをフィルタリングできます。
 
-2. On your resource group blade, select the **logicapp** Logic App resource in the resource group's list of services available.
+2. リソースグループの画面で、リソースグループ内で利用可能なサービス一覧から **logicapp** Logic Appリソースを選択します。
 
-3. In the **Logic App Designer**, scroll through the page until you locate the _Start with a common trigger_ section. Select the **Recurrence** trigger.
+3. **Logic Apps デザイナー**で、_一般的なトリガーで開始する_を見つけるまでページをスクロールし、**繰り返し**トリガーを選択します。
 
     ![The Recurrence tile is selected in the Logic App Designer.](media/logic-app-designer.png 'Logic App Designer')
 
-4. Enter **15** into the **Interval** box, and make sure Frequency is set to **Minute**. This can be set to an hour or some other interval, depending on business requirements.
+4. **間隔**に **15** と入力し、**頻度**が **分** に設定されていることを確認します。これは、ビジネス要件に応じて、1時間または他の間隔に設定することができます。
 
-5. Select **+ New step**.
+5. **+新しいステップ**を選択します。
 
     ![Under Recurrence, the Interval field is set to 15, and the + New step button is selected.](media/image83.png 'Logic App Designer Recurrence section')
 
-6. Enter `Functions` in the filter box, then select the **Azure Functions** connector.
+6. 検索フィールドに`関数`と入力し、**Azure Functions**コネクターを選択します。
 
     ![Under Choose an action, Functions is typed in the search box. Under Connectors, Azure Functions is selected.](media/logic-app-choose-operation-functions.png 'Logic App Designer Choose an action section')
 
-7. Select your **TollBoothFunctions** Function App.
+7. **TollBoothFunctions**関数アプリを選択します。
 
     ![Under Azure Functions, in the search results list, Azure Functions (TollBoothFunctions) is selected.](media/logic-app-function-app-action.png 'Logic App Designer Azure Functions section')
 
-8. Select the **ExportLicensePlates** function from the list.
+8. **ExportLicensePlates**関数をリストから選択します。
 
     ![Under Azure Functions, under Actions (2), Azure Functions (ExportLicensePlates) is selected.](media/logic-app-select-export-function.png 'Logic App Designer Azure Functions section')
 
     > This function does not require any parameters that need to be sent when it gets called.
 
-9. Select **+ New step**, then search for `condition`. Select the **Condition** Control option from the Actions search result.
+9. **+新しいステップ**を選択し、 `条件`でコネクターを選択します。アクションの検索結果から、**条件**制御を選択します。
 
     ![In the logic app designer, in the ExportLicensePlates section, the parameter field is left blank. In the Choose an action box, condition is entered as the search term, and the Condition Control item is selected from the Actions list.](media/logicapp-add-condition.png 'Logic App Designer ExportLicensePlates section')
 
-10. For the **value** field, select the **Status code** parameter. Ensure the operator is set to **is equal to**, then enter **200** in the second value field.
+10. **値の選択**フィールドで、**状態コード**パラメーターを選択します。オペレーターが**次の値に等しい**であることを確認した上で、2番目の値の選択フィールドで、**200**を指定します。
 
-    > **Note**: This evaluates the status code returned from the ExportLicensePlates function, which will return a 200 code when license plates are found and exported. Otherwise, it sends a 204 (NoContent) status code when no license plates were discovered that need to be exported. We will conditionally send an email if any response other than 200 is returned.
+    > **Note**: ExportLicensePlates関数から返されたステータスコードを評価します。これは、ナンバープレートが見つかり、エクスポートされた場合に200コードを返します。そうでない場合、つまりエクスポート対象のナンバープレートが発見されなかったときに、204（NoContent）ステータスコードを送信します。200以外のレスポンスが返された場合は、条件付きで電子メールを送信するようにします。
 
     ![The first Condition field displays Status code. The second, drop-down menu field displays is equal to, and the third field is set to 200.](media/logicapp-condition.png 'Condition fields')
 
-11. We will ignore the If true condition because we don't want to perform an action if the license plates are successfully exported. Select **Add an action** within the **If false** condition block.
+11. ナンバープレートのエクスポートに成功した場合はアクションを実行する必要がないため、**If true**条件を無視します。**If false** 条件ブロック内で **アクションの追加** を選択します。
 
     ![Under the Conditions field is an If true (green checkmark) section and an if false (red x) section. In the If false section, the Add an action button is selected.](media/logicapp-condition-false-add.png 'Logic App Designer Condition fields if true/false ')
 
-12. Enter `Send an email (V2)` in the filter box, then select the **Send an email (V2)** action for Office 365 Outlook.
+12. `メールの送信 (V2)` を検索フィールドに入力し、Office 365 Outlookの**メールの送信 (V2)**を選択します。
 
     ![In the Choose an action box, send an email is entered as the search term. From the Actions list, Office 365 Outlook (end an email (V2) item is selected.](media/logicapp-send-email.png 'Office 365 Outlook Actions list')
 
-13. Select **Sign in** and sign in to your Office 365 Outlook account.
+13. **サインイン**を選択し、ご自身のOffice 365 Outlookアカウントでサインインします。
 
     ![In the Office 365 Outlook - Send an email box, the Sign in button is selected.](media/image93.png 'Office 365 Outlook Sign in prompt')
 
-14. In the Send an email form, provide the following values:
+14. メールの送信フォームで、以下の値を指定します。
 
-     - Enter your email address in the **To** box.
-     - Provide a **Subject**, such as `Toll Booth license plate data export check`.
-     Please enter a message into the **Body** and select the **Status code** from the ExportLicensePlates function to add it to the email body.
+     - **宛先** : ご自身のメールアドレスを入力
+     - **件名** : `Toll Booth license plate data export check` (料金所ナンバープレートデータのエクスポート) のような件名を入力 (日本語可)
+     - **本文** : ExportLicensePlates関数から**状態コード**を選択してメール本文に追加
 
-     >**Note:** If you receive an email with a **204** status code, all of the data has been processed. This is not an error condition. To produce a **200** status code, you will have to slow down the processing and create queued work.
+     >**注意**: ステータスコード**204**のメールを受信した場合、すべてのデータが処理されており、エラー状態ではありません。ステータスコード**200**を出すには、処理を遅くしてキューイングされた状態を作成する必要があります。
 
      ![In the Send an email box, fields are set to the previously defined values.](media/logicapp-send-email-form.png 'Logic App Designer, Send an email fields')
 
-15. Select **Save** in the toolbar to save your Logic App.
+15. ツールバーの **保存** を選択し、Logic App を保存します。
 
-16. Select **Run Trigger** to execute the Logic App. You should start receiving email alerts because the license plate data is not being exported. This is because we need to finish making changes to the ExportLicensePlates function to extract the license plate data from Azure Cosmos DB, generate the CSV file, and upload it to Blob storage.
+16. **トリガーの実行**を選択して、ロジックアプリを実行します。ナンバープレートデータがエクスポートされないため、電子メールアラートを受信し始めるはずです。これは、Azure Cosmos DB からナンバープレートデータを抽出し、CSV ファイルを生成して Blob ストレージにアップロードするよう、ExportLicensePlates 関数の変更を完了する必要があるためです。
 
     ![The Run button is selected on the Logic Apps Designer blade toolbar.](media/logicapp-start.png 'Logic Apps Designer blade')
 
-17. While in the Logic Apps Designer, you will see the run result of each step of your workflow. A green check mark is placed next to each step that successfully executed, showing the execution time to complete. This can be used to see how each step is working, and you can select the executed step and see the raw output.
+17. ロジック アプリ デザイナーでは、ワークフローの各ステップの実行結果が表示されます。正常に実行された各ステップの横に緑色のチェックマークが付き、完了までの実行時間が表示されます。これを使って、各ステップがどのように動作しているかを確認でき、実行されたステップを選択して出力のRAWデータを確認できます。
 
     ![In the Logic App Designer, green check marks display next to Recurrence, ExportLicensePlates, Condition, and Send an email steps of the logic app.](media/image96.png 'Logic App Designer ')
 
-18. The Logic App will continue to run in the background, executing every 15 minutes (or whichever interval you set) until you disable it. To disable the app, go to the **Overview** blade for the Logic App and select the **Disable** button on the taskbar.
+18. ロジックアプリは、無効にするまでバックグラウンドで実行され続け、15分ごと（または設定した間隔ごと）に実行されます。アプリを無効にするには、Logic アプリの **概要**に移動し、タスクバーの **無効** ボタンを選択します。
 
     ![The Disable button is selected on the TollBoothLogic Logic app blade toolbar menu.](media/image97.png 'TollBoothLogic blade')
 
-## 演習 6: Configure continuous deployment for your Function App
+## 演習 6: 関数アプリの継続的デプロイを構成する
 
-**Duration**: 40 minutes
+**所要時間**: 40分
 
-In this exercise, configure your Function App that contains the ProcessImage function for continuous deployment. You will first set up a GitHub source code repository and then set that as the Function App's deployment source.
+この演習では、ProcessImage 関数を含む関数アプリを継続的にデプロイできるように設定します。まず、GitHub のソースコードリポジトリを作成し、Function App のデプロイ元として設定します。
 
 ### 参考情報
 
 |                 |           |
 | --------------- | ----------|
 | **Description** | **Links** |
-| Creating a new GitHub repository | <https://help.github.com/articles/creating-a-new-repository/> |
-| Continuous deployment for Azure Functions | <https://docs.microsoft.com/azure/azure-functions/functions-continuous-deployment> |
+| 新しいリポジトリの作成 | <https://help.github.com/articles/creating-a-new-repository/> |
+| Azure Functions の継続的なデプロイ | <https://docs.microsoft.com/azure/azure-functions/functions-continuous-deployment> |
 
-### Task 1: Add git repository to your Visual Studio solution and deploy to GitHub
+### Task 1: gitリポジトリにVisual Studioのソリューションを追加し、GitHubに展開する
 
-1. Return to the LabVM and in Visual Studio and select the **Git** menu item and then **Settings**.
+1. LabVMに戻り、Visual Studioで**Git**メニュー項目を選択し、**Settings**を選択します。
 
-2. In the **Options** dialog, ensure you are on the **Git Global Settings** tab under Source Control and enter your GitHub user name and email address into the `User name` and `Email` fields and then select **OK**.
+2. **Options** ダイアログで、Source Control の **Git Global Settings** タブが表示されていることを確認し、`User name` と `Email` フィールドに GitHub ユーザー名とメールアドレスを入力し、**OK** を選択します。
 
     ![The Visual Studio Git Global Settings page is displayed with the user name and email fields highlighted.](media/git-global-settings.png "Git Global Settings")
 
-3. Next, we want to set our default branch to `main`.  Select the **View** menu, then select **Terminal**.
+3. 次に、デフォルトブランチを `main` に設定します。 メニューの **View** を選択し、**Terminal** を選択します。
 
-4. In the terminal, run the following command: `git config --global init.defaultbranch main`.  This sets all default branches for new Git repositories to `main`.
+4. ターミナルで、以下のコマンドを実行します。これは新しいGitリポジトリのデフォルトブランチをすべて`main`に設定するものです。
 
-5. Next, look below the Solution Explorer and select the **Git Changes** tab.
+    ```bash
+    git config --global init.defaultbranch main
+    ```
+
+5. 次に、Solution Explorerのタブの横にある **Git Changes** タブを選択します。
 
     ![The Git Changes tab is highlighted below the Solution Explorer pane in Visual Studio.](media/git-changes-tab.png "Git Changes")
 
-6. On the Git Changes panel, select **Create Git Repository...**.
+6. Git Changesパネルで、**Create Git Repository...**を選択します。
 
     ![In Solution Explorer, TollBooth solution is selected. From its right-click context menu, the Create Git Repository item is selected.](media/vs-create-git-repo.png 'Solution Explorer')
 
-7. Select **Sign in...** next to Account under `Create a new GitHub repository`, then select GitHub account.
+7. `Create a new GitHub repository`の下にある、Accountの隣の**Sign in...**を選択し、GitHubアカウントを選択します。
 
     ![The sign in button is highlighted.](media/vs-create-git-repo-sign-in.png "Create a Git repository")
 
-8. In the web page that appears, select **Authorize github** to grant Visual Studio additional permissions to work with your GitHub account.
+8. 表示されたウェブページで、**Authorize github** を選択して、Visual Studio にて GitHub アカウントで作業するための追加権限を付与します。
 
-    > **Note**: If you did not make Microsoft Edge the default browser on the LabVM, the Authorize github button will be disabled. You will need to enter **Default apps** into the Windows Search bar and change the default web browser to Microsoft Edge.
+    > **注意**: Microsoft Edge を LabVM のデフォルトブラウザにしなかった場合、Authorize github ボタンは無効になります。Windows の検索バーに **Default apps** と入力し、デフォルトの Web ブラウザを Microsoft Edge に変更する必要があります。
 
     ![The authorize github button is highlighted.](media/vs-create-git-repo-allow.png "Allow additional permissions")
 
-9. Sign in to your GitHub account. After a few moments, you will see a Success page appear, stating that your authorization was successful. When you see this, go back to Visual Studio.
+9. GitHubのアカウントにサインインします。しばらくすると、認証が成功したことを示す Success ページが表示されます。これが表示されたら、Visual Studioに戻りましょう。
 
     ![The success page is displayed.](media/vs-github-auth-successful.png "Your authorization was successful")
 
-10. On the Create a Git repository dialog, select the browse button next to the **Local path** field to change the directory.
+10. Git リポジトリの作成ダイアログで、**Local path** フィールドの横にあるbrowseボタンを選択して、ディレクトリを変更します。
 
     ![The browse button is highlighted next to the local path for the GitHub repo.](media/create-a-git-repo-browse.png "Change local path")
 
-11. In the Browse dialog, select the `TollBooth` folder with the `TollBooth` folder. This will select only the **TollBooth** project to add to source control and exclude the **UploadImages** project.
+11. Browseダイアログで、`TollBooth`フォルダーの `TollBooth` フォルダーを選択します。これで、ソース管理に追加する **TollBooth** プロジェクトのみが選択され、 **UploadImages** プロジェクトを除外できます。
 
     ![In the Browse dialog, the TollBooth/TollBooth folder is highlighted.](media/browse-tollbooth.png "Browse")
 
-12. Complete the form with the following information:
+12. 以下の情報をフォームに入力します。
 
-    - **Repository Name**: Enter `serverless-architecture-lab`.
-    - **Private**: Uncheck this option.
+    - **Repository Name**: `serverless-architecture-lab`
+    - **Private**: チェックしないでおきます (Public repoとして作成)
 
     ![The form is completed as described.](media/vs-create-git-repo-create.png "Create a Git repository")
 
-13. Select **Create and Push**.
+13. **Create and Push**を選択します。
 
-14. Refresh your GitHub repository page in your browser. You should see that the project files have been added. Navigate to the **TollBooth** folder of your repo. Notice that the local.settings.json file has not been uploaded. That's because the .gitignore file of the TollBooth project explicitly excludes that file from the repository, making sure you don't accidentally share your application secrets.
+14. ブラウザでGitHubのリポジトリページを更新します。プロジェクトファイルが追加されていることを確認できるはずです。リポジトリ内の **TollBooth** フォルダに移動し、local.settings.jsonファイルがアップロードされていないことに着目してください。これは、TollBoothプロジェクトの.gitignoreファイルが、そのファイルをリポジトリから明示的に除外しているためで、誤ってアプリケーションの秘密を共有することがないようにしています。
 
     ![On the GitHub Repository webpage for serverless-architecture-lab, on the Code tab, the project files are displayed.](media/github-repo-page.png 'GitHub Repository page')
 
-### Task 2: Configure your Function App to use your GitHub repository for continuous deployment
+### Task 2: 関数アプリがGitHubリポジトリを使用して継続的にデプロイされるように設定する
 
-1. In the [Azure portal](https://portal.azure.com), navigate to the **hands-on-lab-SUFFIX** resource group.
+1. [Azure Portal](https://portal.azure.com)で、**hands-on-lab-SUFFIX**のリソースグループに移動します。
 
-   > You can get to the resource group by selecting **Resource groups** under **Azure services** on the Azure portal home page and then select the resource group from the list. If there are many resource groups in your Azure account, you can filter the list for **hands-on-lab** to reduce the resource groups listed.
+   > Azure Portalホームページの**Azureサービス**の下にある**リソースグループ**を選択し、リストからリソースグループを選択すると、リソースグループに移動できます。Azureアカウントに多くのリソースグループがある場合、**hands-on-lab**のリストをフィルタリングして、リストされるリソースグループをフィルタリングできます。
 
-2. On your resource group blade, select the **TollBoothFunctions** Function App resource in the resource group's list of services available.
+2. リソースグループの画面で、リソースグループ内で利用可能なサービス一覧から **TollBoothFunctions** 関数アプリリソースを選択します。
 
-3. Select **Deployment Center** under **Deployment** in the left-hand navigation menu.
+3. 左側のナビゲーションメニューで、**デプロイメント**の下にある**デプロイ センター**を選択します。
 
     ![The Platform features tab is displayed, under Code Deployment, Container settings is selected.](media/functionapp-menu-deployment-center-link.png 'TollBoothFunctions blade')
 
-4. Select the **Source** drop-down list and choose **GitHub** from the list.
+4. Select the **ソース**ドロップダウンリストを選択して、リストから **GitHub** を選択します、
 
     ![GitHub is highlighted in the select code source drop-down list.](media/deployment-center-select-code-source.png "Select code source")
 
-5. Select **Authorize** and enter your GitHub credentials.
+5. **認証**を選択して、ご自身のGitHubの資格情報を入力します。
 
     ![The Authorize button is highlighted under GitHub in the Deployment Center.](media/deployment-center-github-authorize.png "GitHub Authorize")
 
-6. On the Authorize Azure App Service page, select **Authorize AzureAppService** and enter your password if prompted.
+6. Authorize Azure App Serviceページで、 **Authorize AzureAppService**を選択します（パスワード入力が求められる場合には、パスワードを入力します）。
 
     ![The Authorize Azure App Service button is highlighted.](media/authorize-azure-app-service.png "Authorize Azure App Service")
 
-7. After your account authorizes, you can configure the following to connect to your GitHub repo:
+7. アカウントの認証後、GitHubリポジトリに接続するための以下の情報を構成します。
 
-    - **Organization**: Select the GitHub account organization in which you created the repo.
-    - **Repository**: Select the **serverless-architecture-lab**, or whatever name you chose for the repo.
-    - **Branch**: Select **main**.
+    - **組織**: リポジトリを作成したGitHubアカウント組織を指定
+    - **リポジトリ**: **serverless-architecture-lab**もしくはリポジトリ名として指定した名前を選択
+    - **ブランチ**: **main**を選択
 
     ![The GitHub settings specified above are entered into the Settings dialog.](media/deployment-center-github-settings.png "GitHub settings")
 
-    > **Note**: There is a current issue where the Build settings are uneditable and set to .NET version 4.0. We will change this to the proper framework version in upcoming steps.
+    > **注意**: 現時点では、Build settingsが編集不可能で、.NETバージョン4.0に設定されているという問題があります。今後のステップで、これを適切なフレームワークのバージョンに変更していきます。
 
-8. Select **Save** from the top toolbar.
+8. 一番上のツールバーの**保存**を選択します。
 
-9. Return to the **serverless-architecture-lab** repository on the GitHub website in a web browser. From the top menu, select **Actions**.
+9. Web ブラウザで GitHub ウェブサイトの **serverless-architecture-lab** リポジトリに戻ります。トップメニューから、**Actions** を選択します。
 
     ![The serverless-architecture-lab repository displays with the Actions menu item highlighted.](media/githubrepo_actionsmenu.png "GitHub repository screen")
 
-10. From beneath the **All workflows** heading, select the **Build and deploy dotnet core app to Azure Function App - TollBoothFunctions-{SUFFIX}**. Select the **main_TollBoothFunctions-{SUFFIX}** link directly below the title.
+10. **All workflows** の下にある **Build and deploy dotnet core app to Azure Function App - TollBoothFunctions-{SUFFIX}** を選択します。タイトルの直下にある **main_TollBoothFunctions-{SUFFIX}** リンクを選択します。
 
     ![The Build and deploy workflow screen is shown with the yml file link highlighted beneath the workflow title.](media/buildanddeployworkflow_landingpage.png "Workflow landing page")
 
-    > **Note**: It is expected that the initial workflow has failed. The incorrect framework is specified in the YML document.
+    > **注意**: 最初のワークフローが失敗するのは想定されていることです。適切でないフレームワークがYAMLドキュメントで指定されていることが原因で発生しているためです。
 
-11. On the YML file screen, select the pencil icon to edit the document inline.
+11. YAMLファイルの画面で、鉛筆アイコンを選択し、ドキュメントをインラインで編集します。
 
     ![The YML file screen displays with the pencil icon highlighted.](media/edit_yml_file_menu_main.png "YML file")
 
-12. On line 14, change the **DOTNET_VERSION** value to **'3.1.x'**. Be sure not to edit the structure of this file, **ONLY** change the value. Then select **Start commit**.
+12. 14行目で、**DOTNET_VERSION**の値を **'3.1.x'** に変更します。ファイルの構造は変えず、**値**だけを変更してください。変更後、**Start commit**を選択します。
 
     ![The YML file screen displays an editor with the DOTNET_VERSION value changed to 3.1.x, the Start commit button is highlighted.](media/yml_edit_dotnetversion_main.png "Editing a YML file")
 
-13. In the **Commit changes** dialog, enter the comment **Changed .NET version**, then select **Commit changes**.
+13. **Commit changes**ダイアログで、**Changed .NET version**のコメントを入れて、**Commit changes**を選択します。
 
     ![The Commit changes dialog displays with the Changed .NET version comment and the Commit changes button highlighted.](media/yml_commit_changes_main.png "Commit changes dialog")
 
-14. Committing the YML file update will trigger a new deployment that will succeed. You can see the status of the currently running or past workflows on the Actions tab of the repository.
+14. YAMLファイルの更新をコミットすると、新しいデプロイメントが成功します。現在実行中のワークフローや過去のワークフローの状況は、リポジトリのActionsタブで確認できます。
 
     ![A successful deployment workflow displays.](media/successful_workflow_execution_main.png "Successful workflow run")
 
-### Task 3: Finish your ExportLicensePlates function code and push changes to GitHub to trigger deployment
+### Task 3: ExportLicensePlates 関数のコードを完成させ、変更を GitHub にプッシュしてデプロイを開始する
 
-1. Return to the LabVM and within Visual Studio navigate to the **TollBooth** project using the Solution Explorer.
+1. LabVMに戻り、Visual Studioのソリューションエクスプローラーを使用して、**TollBooth**プロジェクトに移動します。
 
-2. From the Visual Studio **View** menu, select **Task List**.
+2. Visual Studioの**View**メニューから、**Task List**を選択します。
 
     ![Task List is selected from the Visual Studio View menu.](media/vs-task-list.png 'Visual Studio View menu')
 
-3. In the **Task List** pane at the bottom of the Visual Studio window, double-click the `TODO 5` item, which will take you to the associated `TODO` task.
+3. Visual Studioウィンドウの下部にある**Task List**ペインで、`TODO 5`をダブルクリックすると、関連する`TODO`タスクが表示されます。
 
     ![TODO 5 is highlighted in the Visual Studio Task List.](media/visual-studio-task-list-todo-5.png "Task List")
 
-4. In the **DatabaseMethods.cs** file that is opened, update the code on the line below the `TODO 5` comment, using the following code:
+4. 開いた **DatabaseMethods.cs** ファイルで、`TODO 5` コメントの下の行のコードを、以下のコードで更新してください。
 
     ```csharp
     // TODO 5: Retrieve a List of LicensePlateDataDocument objects from the collectionLink where the exported value is false.
@@ -910,130 +918,134 @@ In this exercise, configure your Function App that contains the ProcessImage fun
         .ToList();
     ```
 
-5. Next, return to the `TODO` list and double-click `TODO 6`.
+5. 続いて`TODO`リストに戻り、`TODO 6`をダブルクリックします。
 
     ![TODO 6 is highlighted in the Visual Studio Task List.](media/visual-studio-task-list-todo-6.png "Task List")
 
-6. This is immediately below the `TODO 5` code you just updated. For this one, delete the line of code below the `// TODO 6` comment.
+6. これは、先ほど更新した `TODO 5` のコードのすぐ下にあります。`//TODO 6`のコメントの下にあるコードの行を削除してください。
 
     ```csharp
     // TODO 6: Remove the line below.
     ```
 
-7. Make sure that you deleted the following line under `TODO 6`: `licensePlates = new List<LicensePlateDataDocument>();`.
+7. `TODO 6`の下にある以下の行を削除したことを確認してください。 
 
-8. Save your changes to the **DatabaseMethods.cs** file.
+    ```csharp
+    licensePlates = new List<LicensePlateDataDocument>();
+    ```
 
-9. Return to the `TODO` list and double-click `TODO 7`.
+8. 変更を **DatabaseMethods.cs** ファイルに保存します。
+
+9. `TODO`リストに戻って、`TODO 7`をダブルクリックします。
 
     ![TODO 7 is highlighted in the Visual Studio Task List.](media/visual-studio-task-list-todo-7.png "Task List")
 
-10. In the **FileMethods.cs** file that is opened, update the code on the line below the `TODO 7` comment, using the following code:
+10. 開いた **FileMethods.cs** ファイルで、`TODO 7` のコメントの下の行のコードを、以下のコードで更新してください。
 
     ```csharp
     // TODO 7: Asynchronously upload the blob from the memory stream.
     await blob.UploadFromStreamAsync(stream);
     ```
 
-11. Save your changes to the **FileMethods.cs** file.
+11. 変更を **FileMethods.cs** ファイルに保存します。
 
-12. Select the **Git** menu in Visual Studio and then select **Commit or Stash...**.
+12. Visual Studio で **Git** メニューを選択し、**Commit or Stash...** を選択します。
 
     ![The Git menu is displayed.](media/vs-commit-or-stash.png "Commit or Stash")
 
-13. Enter a commit message, then select **Commit All**.
+13. コミットメッセージを入力し、**Commit All**を選択します。
 
     ![In the Team Explorer - Changes window, "Finished the ExportLicensePlates function" displays in the message box, and the Commit All button is selected.](media/vs-git-commit-all-main.png 'Team Explorer - Changes window')
 
-14. After committing, select the **Push** button to push your changes to the GitHub repo.
+14. コミット後、**Push**ボタンを選択し、GitHub リポジトリに変更内容をプッシュします。
 
     ![The Push button is highlighted.](media/vs-git-push-main.png "Push changes")
 
-    > **Note**: You may receive a message that your local copy is behind the remote branch.
+    > **注意**: ローカルブランチがリモートブランチより遅れているというメッセージが表示されることがあります。
     > ![Git - Push failed dialog appears.](media/git-push-failed.png)
     >
-    > If you get this, select **Pull then Push** to sync the repos and commit your changes.
+    > このメッセージが表示された場合は、**Pull then Push** を選択してリポジトリを同期し、その後変更をコミットしてください。
 
-15. You should see a message stating that you successfully pushed your changes to the GitHub repository.
+15. GitHub リポジトリへのプッシュが成功した旨のメッセージが表示されるはずです。
 
     ![The message is displayed.](media/vs-git-push-success-main.png "Successfully pushed")
 
-16. Go back to Deployment Center for your Function App in the portal. You should see an entry for the deployment kicked off by this last commit. Check the timestamp on the message to verify that you are looking at the latest one. **Make sure the deployment completes before continuing**.
+16. Azure Portalの関数アプリのデプロイ センターに戻ります。この最後のコミットによって動作したデプロイのエントリが表示されるはずです。メッセージのタイムスタンプを確認し、最新のデプロイをチェックしていることを確認します。**デプロイメントが完了したことを確認してから続けてください**。
 
     ![The latest deployment is displayed in the Deployment Center.](media/functionapp-dc-latest.png 'Deployment Center')
 
-## 演習 7: Rerun the workflow and verify data export
+## 演習 7: ワークフローを再実行し、データエクスポートを確認する
 
-**Duration**: 10 minutes
+**所要時間**: 10分
 
-With the latest code changes in place, run your Logic App and verify that the files are successfully exported.
+最新のコード変更を行った上でロジックアプリを実行し、ファイルが正常にエクスポートされることを確認します。
 
-### Task 1: Rerun Upload Images
+### Task 1: 画像のアップロードを再実行する
 
-1. In Visual Studio, right-click the **UploadImages** project in the Solution Explorer. Select **Debug**, then **Start New Instance** from the context menu.
+1. Visual StudioのSolution Explorerで、**UploadImages**プロジェクトを右クリックし、**Debug**を選択後、コンテキストメニューから **Start New Instance** を選択します。
 
-2. When the console window appears, enter `2` and press **ENTER**. This action uploads a handful of car photos to the images container of your Blob storage account.  This should get data to trigger the ExportLicensePlates function.
+2. コンソールウィンドウが表示されたら、`2`を入力し、**ENTER**を押します。このアクションは、車の写真をBlobストレージアカウントのimagesコンテナにアップロードします。これにより、ExportLicensePlates関数をトリガーするためのデータが得られるはずです。
 
-### Task 2: Run the Logic App
+### Task 2: ロジックアプリを実行する
 
-1. Open your **hands-on-lab-SUFFIX** resource group in the Azure portal, then select your **logicapp** Logic App resource from the list.
+1. Azure Portalで**hands-on-lab-SUFFIX**リソースグループを開き、リストから**logicapp**で始まるロジックアプリのリソースを選択します。
 
-2. From the **Overview** blade, select **Enable** (if you disabled the Logic App previously).
+2. (以前このロジックアプリを無効化していた場合は)**概要**画面で、**有効**を選択します。
 
     ![In the TollBoothLogic Logic app blade, Overview is selected in the left menu, and the Enable enable button is selected in the right pane.](media/image113.png 'TollBoothLogic blade')
 
-3. Now select **Run Trigger**, then select **Run** to execute your workflow immediately.
+3. Now select **トリガーの実行**を選択して、**実行**を選択し、ワークフローを即時起動します。
 
     ![In the TollBoothLogic Logic app blade, Run Trigger and Run are selected.](media/image114.png 'TollBoothLogic blade')
 
-4. Select the **Refresh** button next to the Run Trigger button to refresh your run history. Select the latest run history item. If the expression result for the condition is **true**, then that means the CSV file should've been exported to data lake storage. Be sure to disable the Logic App, so it doesn't keep sending you emails every 15 minutes. Please note that it may take longer than expected to start running in some cases.
+4. トリガーの実行の隣にある**最新の情報に更新**ボタンを選択し、実行履歴を更新します。最新の実行履歴を選択します。状態の表示結果が **成功**であれば、CSVファイルがデータレイクストレージにエクスポートされているはずです。ロジックアプリを無効化するのをお忘れ無く。そうでないと、15分ごとにメールが届いてしまいます。場合によっては、起動に予想以上の時間がかかることがありますので、ご注意ください。
 
     ![In Logic App Designer, in the Condition section, under Inputs, true is highlighted.](media/image115.png 'Logic App Designer ')
 
-### Task 3: View the exported CSV file
+### Task 3: エクスポートされたCSVファイルを見る
 
-1. Open your **hands-on-lab-SUFFIX** resource group in the Azure portal, then select the **datalake** Storage account resource you provisioned to store uploaded photos and exported CSV files.
+1. Azure Portalで**hands-on-lab-SUFFIX**リソースグループを開き、アップロードされた写真とエクスポートされたCSVファイルを保存するためにプロビジョニングした、**datalake**で始まるストレージアカウントリソースを選択します。
 
-2. From the left menu of the storage account, select **Containers**, then choose the **export** container.
+2. ストレージアカウントの左側のメニューから、**コンテナー**を選択し、その中の **export** コンテナーを選択します。
 
     ![The Containers option is selected on the left menu and the export container is highlighted from the container listing.](media/storage-containers.png 'Storage container listing')
 
-3. You should see at least one recently uploaded CSV file. Select the filename to view its properties.
+3. 少なくとも一つ、直近でアップロードされたCSVファイルを確認できるはずです。ファイル名を選択して、そのファイルのプロパティを確認します。
 
     ![In the Export blade, under Name, a .csv file is selected.](media/blob-export.png 'Export blade')
 
-4. Select **Download** in the blob properties window.
+4. Blobプロパティの画面で、**ダウンロード**を選択します。
 
     ![In the Blob properties blade, the Download button is selected.](media/blob-download.png 'Blob properties blade')
 
-5. The CSV file should look similar to the following:
+5. CSVファイルは以下のような感じになっているはずです。
 
     ![A CSV file displays with the following columns: FileName, LicensePlateText, TimeStamp, and LicensePlateFound.](media/csv.png 'CSV file')
 
-6. The ExportLicensePlates function updates all the records it exported by setting the exported value to true. This makes sure that only new records since the last export are included in the next one. Verify this by re-executing the script in Azure Cosmos DB that counts the number of documents in the Processed collection where exported is false. It should return 0 unless you've subsequently uploaded new photos.
+6. ExportLicensePlates 関数は、exportedの値をtrueに設定することで、エクスポートしたすべてのレコードを更新します。これにより、前回のエクスポート以降の新しいレコードのみが、次回のエクスポートに含まれるようになります。Azure Cosmos DB で、Processed コレクション内の exported が false のドキュメント数をカウントするスクリプトを再実行することで、これを確認します。その後、新しい写真をアップロードしていない限り、0が返されるはずです。
 
-## After the hands-on lab
+## ハンズオン終了後
 
-**Duration**: 10 minutes
+**所要時間**: 10分
 
-In this exercise, attendees will delete any Azure resources created in support of the lab.
+この演習では、演習で作成したAzureリソースをすべて削除します。
 
-### Task 1: Delete the resource group in which you placed your Azure resources
+### Task 1: Azureリソースを配置したリソースグループを削除する
 
-1. From the Portal, navigate to your **hands-on-lab-SUFFIX** resource group and select **Delete** in the toolbar at the top.
+1. Azure Portalで**hands-on-lab-SUFFIX**リソース グループに移動し、上部にあるツールバーで **リソースグループの削除**を選択します。
 
-2. Confirm the deletion by re-typing the **resource group name** and selecting **Delete**.
+2. 削除の確認のため、**リソースグループ名**を入力し､**削除**を選択します。このとき、**選択した仮想マシンと仮想マシン スケール セットに対して強制削除を適用する**にチェックを入れておいてください。
 
-3. If you created a different resource group for your virtual machine, be sure to delete that as well.
+3. 仮想マシンに別のリソースグループを作成していた場合、同様にそのリソースグループも削除してください。この場合も、**選択した仮想マシンと仮想マシン スケール セットに対して強制削除を適用する**にチェックを入れておいてください。
 
-### Task 2: Delete the GitHub repo
+### Task 2: GitHubリポジトリを削除する
 
-[Optional] In this task, you delete the GitHub repository you created for this lab.
+[Optional] このタスクでは、このハンズオンのために作成したGitHubリポジトリを削除します。
 
-1. Open <https://www.github.com>, then select your profile icon and select **Your repositories**.
+1. <https://www.github.com>を開き、ご自身のProfileアイコンを選択して、**Your repositories**を選択します。
 
-2. Navigate to your repo and select it.
+2. 削除対象のリポジトリを選択します。
 
-3. Select the **Settings** tab, scroll to the bottom, select **Delete this repository**.
+3. **Settings**タブを選択し、スクロールダウンして、**Delete this repository**を選択します。
 
-You should follow all steps provided _after_ attending the Hands-on lab.
+ハンズオン終了後、この手順をすべて実施されることを推奨します。
